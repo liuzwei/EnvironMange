@@ -6,4 +6,8 @@ package com.area.EnvironMange.common;
 public class InternetURL {
     //登陆接口
     public static String LOGIN_URL = "http://222.135.111.86:9009/Service1.svc/Login";
+
+    //获得建筑物
+    public static String GET_BUILDING_URL = "http://222.135.111.86:9009/Service1.svc/GetBuildings";
+
 }
