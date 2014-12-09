@@ -1,16 +1,16 @@
 package com.area.EnvironMange.model;
 
-
-import java.io.Serializable;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
- * Created by liuzwei on 2014/12/8.
+ * Created by liuzwei on 2014/12/9.
  */
-public class SanitaionAreaAssementItem implements Serializable{
+public class SanitaionAreaAssementItem {
     private String projectID;
     private float fs;
-//    private String AsItemID;
 
+    public SanitaionAreaAssementItem(){}
     public SanitaionAreaAssementItem(String projectID, float fs) {
         this.projectID = projectID;
         this.fs = fs;
@@ -32,11 +32,14 @@ public class SanitaionAreaAssementItem implements Serializable{
         this.fs = fs;
     }
 
-//    public String getAsItemID() {
-//        return AsItemID;
-//    }
-//
-//    public void setAsItemID(String asItemID) {
-//        AsItemID = asItemID;
-//    }
+    public static JSONObject fromObject2Json(SanitaionAreaAssementItem sa){
+        JSONObject object = new JSONObject();
+        try {
+            object.put("projectID",sa.getProjectID());
+            object.put("fs", sa.getFs());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
 }

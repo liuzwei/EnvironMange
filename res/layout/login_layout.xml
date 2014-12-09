@@ -1,26 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/background_login">
+    <!-- padding 内边距   layout_margin 外边距
+  		android:layout_alignParentTop 布局的位置是否处于顶部 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    <RelativeLayout
+            android:id="@+id/login_div"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dip"
+            android:layout_margin="15dip"
+            android:background="@drawable/background_login_div" >
 
-    <EditText
-            android:id="@+id/login_username"
-            android:hint="用户名"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+        <EditText
+                android:id="@+id/login_username"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/login_username_hint"
+                android:singleLine="true"
+                android:inputType="text"/>
+        <!-- 密码 text -->
+        <TextView
+                android:id="@+id/login_password_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/login_username"
+                android:layout_marginTop="3dp"/>
+        <EditText
+                android:id="@+id/login_password"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/login_password_input"
+                android:password="true"
+                android:hint="@string/login_password_hint"
+                android:singleLine="true"
+                android:inputType="textPassword" />
+        <!-- 登录button -->
+        <Button
+                android:gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:id="@+id/login_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/login_password"
+                android:text="@string/login_btn"
+                android:background="@drawable/login_btn_bg" />
+    </RelativeLayout>
 
-    <EditText
-            android:id="@+id/login_password"
-            android:hint="密码"
-            android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    <Button
-            android:id="@+id/login_btn"
-            android:text="登录"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
 </LinearLayout>
