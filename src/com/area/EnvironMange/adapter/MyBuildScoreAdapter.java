@@ -8,18 +8,19 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.model.Building;
+import com.area.EnvironMange.model.MyBuildScore;
 
 import java.util.List;
 
 /**
  * Created by liuzwei on 2014/12/9.
  */
-public class BuildingAdapter extends BaseAdapter  {
+public class MyBuildScoreAdapter extends BaseAdapter  {
     private Context mContext;
-    private List<Building> list;
+    private List<MyBuildScore> list;
     private ViewHolder holder;
     private OnClickContentItemListener onClickContentItemListener;
-    public BuildingAdapter(Context mContext, List<Building> list) {
+    public MyBuildScoreAdapter(Context mContext, List<MyBuildScore> list) {
         this.mContext = mContext;
         this.list = list;
     }
@@ -45,21 +46,25 @@ public class BuildingAdapter extends BaseAdapter  {
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null){
             holder = new ViewHolder();
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.building_item, null);
-            holder.content = (TextView) convertView.findViewById(R.id.building_item_text);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.index_item, null);
+            holder.name = (TextView) convertView.findViewById(R.id.name);
+            holder.score = (TextView) convertView.findViewById(R.id.score);
+            holder.time = (TextView) convertView.findViewById(R.id.time);
             convertView.setTag(holder);
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
-        Building building = list.get(position);
-        holder.content.setText(building.getMC());
-
+        MyBuildScore building = list.get(position);
+        holder.name.setText(building.getName());
+        holder.score.setText(building.getScore());
+        holder.time.setText(building.getDatetime());
         return convertView;
     }
 
-
     class ViewHolder{
-        TextView content;
+        TextView name;
+        TextView score;
+        TextView time;
 
     }
 }

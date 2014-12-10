@@ -4,7 +4,6 @@
       <root url="jar://$PROJECT_DIR$/libs/afinal_0.5.1_bin.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/android-support-v4.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/gson-2.0.jar!/" />
-      <root url="jar://$PROJECT_DIR$/libs/json-lib-2.4-jdk15.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/universal-image-loader-1.9.2.jar!/" />
     </CLASSES>
     <JAVADOC />

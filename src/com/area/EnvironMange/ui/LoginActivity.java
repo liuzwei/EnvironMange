@@ -75,9 +75,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         object.put("pwd", password.getText().toString());
 
         StringEntity entity = new StringEntity(object.toString());
-        AjaxParams params = new AjaxParams();
-        params.put("ID", username.getText().toString());
-        params.put("pwd", username.getText().toString());
+//        AjaxParams params = new AjaxParams();
+//        params.put("ID", username.getText().toString());
+//        params.put("pwd", username.getText().toString());
         getFinalHttp().post(
                 InternetURL.LOGIN_URL,
                 entity,
@@ -87,7 +87,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                     public void onSuccess(Object o) {
                         super.onSuccess(o);
                         if ("true".equals(o.toString())){
-                            startActivity(new Intent(LoginActivity.this, MainBuildingsActivity.class));
+                            startActivity(new Intent(LoginActivity.this, CenterActivity.class));
                         }else {
                             Toast.makeText(mContext, "用户名或密码错误", Toast.LENGTH_SHORT).show();
                         }

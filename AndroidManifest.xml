@@ -23,6 +23,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.MainBuildingsActivity"/>
+        <activity android:name=".ui.MainBuildingsActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation"/>
+        <activity android:name=".ui.FloorSelectActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation"/>
+        <activity android:name=".ui.AreaActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation"/>
+        <activity android:name=".ui.ScoreActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation"/>
+        <activity android:name=".ui.IndexActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation"/>
+        <activity android:name=".ui.CenterActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation"/>
+        <activity android:name=".ui.SettingActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation"/>
     </application>
 </manifest>
