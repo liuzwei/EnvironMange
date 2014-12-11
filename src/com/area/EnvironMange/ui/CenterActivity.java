@@ -2,6 +2,7 @@ package com.area.EnvironMange.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -10,6 +11,7 @@ import com.area.EnvironMange.R;
 import com.area.EnvironMange.adapter.CenterAdapter;
 import com.area.EnvironMange.base.BaseActivity;
 import com.area.EnvironMange.model.Center;
+import com.area.EnvironMange.util.SystemExitUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +26,8 @@ import java.util.List;
 public class CenterActivity extends BaseActivity implements View.OnClickListener {
     private GridView gridView; //展示图片
     CenterAdapter adapter;
+    private long touchTime = 0;
+    private long waitTime = 2000;
     List<HashMap<String,Center>> imagelist = new ArrayList<HashMap<String,Center>>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +73,24 @@ public class CenterActivity extends BaseActivity implements View.OnClickListener
                 }
             }
         });
-    }
 
+        SystemExitUtil.getInstance().addActivity(this);
+    }
+    //再摁退出程序
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN && KeyEvent.KEYCODE_BACK == keyCode){
+            long currentTime = System.currentTimeMillis();
+            if ((currentTime - touchTime) >= waitTime){
+                alert(R.string.exit_str);
+                touchTime = currentTime;
+            }else {
+                SystemExitUtil.getInstance().exit();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
     @Override
     public void onClick(View v) {
         super.onClick(v);

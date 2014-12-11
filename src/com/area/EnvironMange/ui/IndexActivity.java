@@ -3,15 +3,21 @@ package com.area.EnvironMange.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.adapter.BuildingAdapter;
 import com.area.EnvironMange.adapter.MyBuildScoreAdapter;
+import com.area.EnvironMange.adapter.OnClickContentItemListener;
 import com.area.EnvironMange.base.BaseActivity;
 import com.area.EnvironMange.model.Building;
 import com.area.EnvironMange.model.MyBuildScore;
+import com.area.EnvironMange.util.SystemExitUtil;
+import com.area.EnvironMange.widget.MobileDialog;
+import com.area.EnvironMange.widget.SelectTimeDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +28,7 @@ import java.util.List;
  * Time: 14:29
  * 类的功能、说明写在此处.
  */
-public class IndexActivity extends BaseActivity implements View.OnClickListener {
+public class IndexActivity extends BaseActivity implements View.OnClickListener, OnClickContentItemListener {
     private List<MyBuildScore> list = new ArrayList<MyBuildScore>();
     private ListView listView;
     private MyBuildScoreAdapter adapter;
@@ -32,31 +38,38 @@ public class IndexActivity extends BaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mybuildscore_layout);
         initView();
-        list.add(new MyBuildScore("E301","100分","2014-12-10"));
-        list.add(new MyBuildScore("E302","80分","2014-12-10"));
-        list.add(new MyBuildScore("E303","90分","2014-12-10"));
-        list.add(new MyBuildScore("E304","100分","2014-12-10"));
-        list.add(new MyBuildScore("E305","90分","2014-12-10"));
-        list.add(new MyBuildScore("E306","70分","2014-12-10"));
-        list.add(new MyBuildScore("E307","100分","2014-12-10"));
-        list.add(new MyBuildScore("E308","10分","2014-12-10"));
-        list.add(new MyBuildScore("E309","100分","2014-12-10"));
-        list.add(new MyBuildScore("E3010","100分","2014-12-10"));
-        list.add(new MyBuildScore("E3021","80分","2014-12-10"));
-        list.add(new MyBuildScore("E3030","90分","2014-12-10"));
-        list.add(new MyBuildScore("E3040","100分","2014-12-10"));
-        list.add(new MyBuildScore("E3050","90分","2014-12-10"));
-        list.add(new MyBuildScore("E3060","70分","2014-12-10"));
-        list.add(new MyBuildScore("E3071","100分","2014-12-10"));
-        list.add(new MyBuildScore("E3080","10分","2014-12-10"));
-        list.add(new MyBuildScore("E3094","100分","2014-12-10"));
+
+        SelectTimeDialog dialog = new SelectTimeDialog( myBuildScore , this, R.style.dialog1);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.show();
+
+        list.add(new MyBuildScore("办公楼 E301","100分","2014-12-10"));
+        list.add(new MyBuildScore("办公楼 E302","80分","2014-12-10"));
+        list.add(new MyBuildScore("办公楼 E303","90分","2014-12-10"));
+        list.add(new MyBuildScore("办公楼 E304","100分","2014-12-10"));
+        list.add(new MyBuildScore("办公楼 E305","90分","2014-12-10"));
+        list.add(new MyBuildScore("办公楼 E306","70分","2014-12-10"));
+        list.add(new MyBuildScore("办公楼 E307","100分","2014-12-10"));
+        list.add(new MyBuildScore("办公楼 E308","10分","2014-12-10"));
+        list.add(new MyBuildScore("办公楼 E309","100分","2014-12-10"));
+        list.add(new MyBuildScore("办公楼 E3010","100分","2014-12-10"));
+        list.add(new MyBuildScore("音乐楼 E3021","80分","2014-12-10"));
+        list.add(new MyBuildScore("音乐楼 E3030","90分","2014-12-10"));
+        list.add(new MyBuildScore("音乐楼 E3040","100分","2014-12-10"));
+        list.add(new MyBuildScore("音乐楼 E3050","90分","2014-12-10"));
+        list.add(new MyBuildScore("音乐楼 E3060","70分","2014-12-10"));
+        list.add(new MyBuildScore("音乐楼 E3071","100分","2014-12-10"));
+        list.add(new MyBuildScore("音乐楼 E3080","10分","2014-12-10"));
+        list.add(new MyBuildScore("音乐楼 E3094","100分","2014-12-10"));
         adapter.notifyDataSetChanged();
 
+        SystemExitUtil.getInstance().addActivity(this);
     }
 
     private void initView() {
         listView = (ListView) findViewById(R.id.building_lsv);
         adapter = new MyBuildScoreAdapter(mContext, list);
+        adapter.setOnClickContentItemListener(this);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -82,4 +95,18 @@ public class IndexActivity extends BaseActivity implements View.OnClickListener 
     public void onTopMenuPopupButtonClick(View view){
         mainPopMenu.showAsDropDown(view);
     }
+    MyBuildScore myBuildScore = null;
+    @Override
+    public void onClickContentItem(int position, int flag, final Object object) {
+        myBuildScore = list.get(position);
+        switch (flag){
+            case 1:
+                MobileDialog dialog = new MobileDialog( myBuildScore , this, R.style.dialog1);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.show();
+                break;
+
+        }
+    }
+
 }

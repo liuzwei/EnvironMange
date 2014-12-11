@@ -19,11 +19,11 @@ public class MyBuildScoreAdapter extends BaseAdapter  {
     private Context mContext;
     private List<MyBuildScore> list;
     private ViewHolder holder;
-    private OnClickContentItemListener onClickContentItemListener;
     public MyBuildScoreAdapter(Context mContext, List<MyBuildScore> list) {
         this.mContext = mContext;
         this.list = list;
     }
+    private OnClickContentItemListener onClickContentItemListener;
     public void setOnClickContentItemListener(OnClickContentItemListener onClickContentItemListener) {
         this.onClickContentItemListener = onClickContentItemListener;
     }
@@ -43,13 +43,14 @@ public class MyBuildScoreAdapter extends BaseAdapter  {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null){
             holder = new ViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.index_item, null);
             holder.name = (TextView) convertView.findViewById(R.id.name);
             holder.score = (TextView) convertView.findViewById(R.id.score);
             holder.time = (TextView) convertView.findViewById(R.id.time);
+            holder.update = (TextView) convertView.findViewById(R.id.update);
             convertView.setTag(holder);
         }else {
             holder = (ViewHolder) convertView.getTag();
@@ -58,6 +59,12 @@ public class MyBuildScoreAdapter extends BaseAdapter  {
         holder.name.setText(building.getName());
         holder.score.setText(building.getScore());
         holder.time.setText(building.getDatetime());
+        holder.update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickContentItemListener.onClickContentItem(position, 1, null);
+            }
+        });
         return convertView;
     }
 
@@ -65,6 +72,7 @@ public class MyBuildScoreAdapter extends BaseAdapter  {
         TextView name;
         TextView score;
         TextView time;
+        TextView update;
 
     }
 }

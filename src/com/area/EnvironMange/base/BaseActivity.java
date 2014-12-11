@@ -76,11 +76,22 @@ public class BaseActivity extends Activity implements MainPopMenu.OnItemClickLis
                 startActivity(myindex);
                 break;
             case 1://打分
-                Intent main = new Intent(this,MainBuildingsActivity.class );
+                Intent main = new Intent(this, MainBuildingsActivity.class );
                 startActivity(main);
                 break;
             case 2://查询
+                Intent chaxun = new Intent(this, IndexActivity.class);
+                startActivity(chaxun);
                 break;
         }
     }
+
+    /**
+     * 根据资源ID
+     * @param resId
+     */
+    public void alert(int resId){
+        ToastUtil.show(getApplicationContext(), resId);
+    }
+
 }

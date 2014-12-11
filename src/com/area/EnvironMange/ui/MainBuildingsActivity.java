@@ -13,6 +13,7 @@ import com.area.EnvironMange.adapter.OnClickContentItemListener;
 import com.area.EnvironMange.base.BaseActivity;
 import com.area.EnvironMange.common.InternetURL;
 import com.area.EnvironMange.model.Building;
+import com.area.EnvironMange.util.SystemExitUtil;
 import com.google.gson.Gson;
 import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.http.AjaxCallBack;
@@ -39,6 +40,8 @@ public class MainBuildingsActivity extends BaseActivity implements View.OnClickL
         initView();
 
         getBuildings();
+
+        SystemExitUtil.getInstance().addActivity(this);
     }
 
     private void initView(){

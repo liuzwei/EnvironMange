@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.base.BaseActivity;
+import com.area.EnvironMange.util.SystemExitUtil;
 
 /**
  * author: ${zhanghailong}
@@ -25,6 +26,8 @@ public class FloorSelectActivity extends BaseActivity implements View.OnClickLis
         floorone.setOnClickListener(this);
         back = (ImageView) this.findViewById(R.id.back);
         back.setOnClickListener(this);
+
+        SystemExitUtil.getInstance().addActivity(this);
     }
 
     @Override

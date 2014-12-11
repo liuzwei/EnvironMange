@@ -28,7 +28,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/login_username_hint"
-                    android:text="sy001"
+                    android:text="001"
                     android:singleLine="true"
                     android:inputType="text"/>
             <!-- 密码 text -->

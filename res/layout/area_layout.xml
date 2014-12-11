@@ -23,8 +23,8 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="卫生区域"
-                android:textSize="20sp"
+                android:text="办公楼 楼层一 卫生区域"
+                android:textSize="15sp"
                 android:textColor="#FFFFFF"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
@@ -69,7 +69,7 @@
                   android:padding="10dp"
                   android:id="@+id/areatwo"
                   >
-        <TextView android:layout_width="65dp" android:layout_height="wrap_content"
+        <TextView android:layout_width="280dp" android:layout_height="wrap_content"
                   android:text="E302"
                   android:textSize="20sp"
                   android:textColor="#999999"/>
@@ -84,7 +84,7 @@
                   android:orientation="horizontal"
                   android:padding="10dp"
             >
-        <TextView android:layout_width="65dp" android:layout_height="wrap_content"
+        <TextView android:layout_width="280dp" android:layout_height="wrap_content"
                   android:text="E303"
                   android:textSize="20sp"
                   android:textColor="#999999"/>
@@ -99,7 +99,7 @@
                   android:orientation="horizontal"
                   android:padding="10dp"
             >
-        <TextView android:layout_width="65dp" android:layout_height="wrap_content"
+        <TextView android:layout_width="280dp" android:layout_height="wrap_content"
                   android:text="E304"
                   android:textSize="20sp"
                   android:textColor="#999999"/>
@@ -114,7 +114,7 @@
                   android:orientation="horizontal"
                   android:padding="10dp"
             >
-        <TextView android:layout_width="65dp" android:layout_height="wrap_content"
+        <TextView android:layout_width="280dp" android:layout_height="wrap_content"
                   android:text="E305"
                   android:textSize="20sp"
                   android:textColor="#999999"/>
@@ -129,7 +129,7 @@
                   android:orientation="horizontal"
                   android:padding="10dp"
             >
-        <TextView android:layout_width="65dp" android:layout_height="wrap_content"
+        <TextView android:layout_width="280dp" android:layout_height="wrap_content"
                   android:text="E306"
                   android:textSize="20sp"
                   android:textColor="#999999"/>
@@ -144,7 +144,7 @@
                   android:orientation="horizontal"
                   android:padding="10dp"
             >
-        <TextView android:layout_width="65dp" android:layout_height="wrap_content"
+        <TextView android:layout_width="280dp" android:layout_height="wrap_content"
                   android:text="E307"
                   android:textSize="20sp"
                   android:textColor="#999999"/>

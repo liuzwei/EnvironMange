@@ -10,5 +10,5 @@
         <item>打分</item>
         <item>查询</item>
     </string-array>
-
+    <string name="exit_str">Are you sure to exit</string>
 </resources>

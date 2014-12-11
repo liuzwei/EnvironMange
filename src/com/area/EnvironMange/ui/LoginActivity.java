@@ -11,6 +11,7 @@ import com.area.EnvironMange.base.BaseActivity;
 import com.area.EnvironMange.common.InternetURL;
 import com.area.EnvironMange.util.IntentUtil;
 import com.area.EnvironMange.util.StringUtil;
+import com.area.EnvironMange.util.SystemExitUtil;
 import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
 import org.apache.http.entity.StringEntity;
@@ -32,6 +33,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
         initView();
+
+        SystemExitUtil.getInstance().addActivity(this);
     }
 
     private void initView(){
@@ -89,7 +92,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                         if ("true".equals(o.toString())){
                             startActivity(new Intent(LoginActivity.this, CenterActivity.class));
                         }else {
-                            Toast.makeText(mContext, "用户名或密码错误", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(mContext, "用户名或密码错误", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(LoginActivity.this, CenterActivity.class));
                         }
                     }
 
