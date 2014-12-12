@@ -34,20 +34,40 @@ public class CenterActivity extends BaseActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.center_layout);
 
-        for(int i=0;i<3;i++){
+        for(int i=0;i<7;i++){
             if(i == 0){
                 HashMap<String,Center> map1 = new HashMap<String,Center>();
-                map1.put("image", new Center("打分", String.valueOf(R.drawable.indexicon)));
+                map1.put("image", new Center("教学楼区域", String.valueOf(R.drawable.mine)));
                 imagelist.add(map1);
             }
             if(i == 1){
                 HashMap<String,Center> map1 = new HashMap<String,Center>();
-                map1.put("image", new Center("查询", String.valueOf(R.drawable.selecticon)));
+                map1.put("image", new Center("教学公共区域", String.valueOf(R.drawable.mine)));
                 imagelist.add(map1);
             }
             if(i == 2){
                 HashMap<String,Center> map1 = new HashMap<String,Center>();
-                map1.put("image", new Center("设置", String.valueOf(R.drawable.seticon)));
+                map1.put("image", new Center("宿舍区域", String.valueOf(R.drawable.mine)));
+                imagelist.add(map1);
+            }
+            if(i == 3){
+                HashMap<String,Center> map1 = new HashMap<String,Center>();
+                map1.put("image", new Center("户外区域\n", String.valueOf(R.drawable.mine)));
+                imagelist.add(map1);
+            }
+            if(i == 4){
+                HashMap<String,Center> map1 = new HashMap<String,Center>();
+                map1.put("image", new Center("查询未提交成绩", String.valueOf(R.drawable.seticon)));
+                imagelist.add(map1);
+            }
+            if(i == 5){
+                HashMap<String,Center> map1 = new HashMap<String,Center>();
+                map1.put("image", new Center("查询历史成绩", String.valueOf(R.drawable.selecticon)));
+                imagelist.add(map1);
+            }
+            if(i == 6){
+                HashMap<String,Center> map1 = new HashMap<String,Center>();
+                map1.put("image", new Center("修改个人信息", String.valueOf(R.drawable.seticon)));
                 imagelist.add(map1);
             }
         }
@@ -60,14 +80,34 @@ public class CenterActivity extends BaseActivity implements View.OnClickListener
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 0){
-                    Intent intent = new Intent( CenterActivity.this, MainBuildingsActivity.class);
+                    Intent intent = new Intent( CenterActivity.this, cityset.class);
+                    intent.putExtra("name","教学楼区域");
                     startActivity(intent);
                 }
                 if(position == 1){
-                    Intent intent = new Intent( CenterActivity.this, IndexActivity.class);
+                    Intent intent = new Intent( CenterActivity.this, cityset.class);
+                    intent.putExtra("name","教学公共区域");
                     startActivity(intent);
                 }
                 if(position == 2){
+                    Intent intent = new Intent( CenterActivity.this, cityset.class);
+                    intent.putExtra("name","宿舍区域");
+                    startActivity(intent);
+                }
+                if(position == 3){
+                    Intent intent = new Intent( CenterActivity.this, cityset.class);
+                    intent.putExtra("name","户外区域");
+                    startActivity(intent);
+                }
+                if(position == 4){
+                    Intent intent = new Intent( CenterActivity.this, SelectUndoActivity.class);
+                    startActivity(intent);
+                }
+                if(position == 5){
+                    Intent intent = new Intent( CenterActivity.this, IndexActivity.class);
+                    startActivity(intent);
+                }
+                if(position == 6){
                     Intent intent = new Intent( CenterActivity.this, SettingActivity.class);
                     startActivity(intent);
                 }

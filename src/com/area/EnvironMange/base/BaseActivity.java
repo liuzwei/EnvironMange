@@ -7,10 +7,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import com.area.EnvironMange.adapter.SelectUndoAdapter;
 import com.area.EnvironMange.menu.MainPopMenu;
-import com.area.EnvironMange.ui.CenterActivity;
-import com.area.EnvironMange.ui.IndexActivity;
-import com.area.EnvironMange.ui.MainBuildingsActivity;
+import com.area.EnvironMange.ui.*;
 import com.area.EnvironMange.util.SystemExitUtil;
 import net.tsz.afinal.FinalHttp;
 
@@ -75,13 +74,37 @@ public class BaseActivity extends Activity implements MainPopMenu.OnItemClickLis
                 Intent myindex = new Intent( this, CenterActivity.class);
                 startActivity(myindex);
                 break;
-            case 1://打分
-                Intent main = new Intent(this, MainBuildingsActivity.class );
-                startActivity(main);
+            case 1://教学楼区域
+                Intent vs1 = new Intent(this, cityset.class );
+                vs1.putExtra("name","教学楼区域");
+                startActivity(vs1);
                 break;
-            case 2://查询
-                Intent chaxun = new Intent(this, IndexActivity.class);
-                startActivity(chaxun);
+            case 2://教学公共区域
+                Intent vs2 = new Intent(this, cityset.class);
+                vs2.putExtra("name","教学公共区域");
+                startActivity(vs2);
+                break;
+            case 3://宿舍区域
+                Intent vs3 = new Intent(this, cityset.class);
+                vs3.putExtra("name", "宿舍区域");
+                startActivity(vs3);
+                break;
+            case 4://户外区域
+                Intent vs4 = new Intent(this, cityset.class);
+                vs4.putExtra("name","户外区域");
+                startActivity(vs4);
+                break;
+            case 5://未提交成绩
+                Intent chaxun1 = new Intent(this, SelectUndoActivity.class);
+                startActivity(chaxun1);
+                break;
+            case 6://历史成绩
+                Intent chaxun2 = new Intent(this, IndexActivity.class);
+                startActivity(chaxun2);
+                break;
+            case 7://设置
+                Intent set = new Intent(this, SettingActivity.class);
+                startActivity(set);
                 break;
         }
     }

@@ -1,6 +1,5 @@
 package com.area.EnvironMange.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -9,14 +8,14 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.area.EnvironMange.R;
-import com.area.EnvironMange.adapter.BuildingAdapter;
 import com.area.EnvironMange.adapter.MyBuildScoreAdapter;
 import com.area.EnvironMange.adapter.OnClickContentItemListener;
+import com.area.EnvironMange.adapter.SelectUndoAdapter;
 import com.area.EnvironMange.base.BaseActivity;
-import com.area.EnvironMange.model.Building;
 import com.area.EnvironMange.model.MyBuildScore;
 import com.area.EnvironMange.util.SystemExitUtil;
 import com.area.EnvironMange.widget.MobileDialog;
+import com.area.EnvironMange.widget.SaveScoreDialog;
 import com.area.EnvironMange.widget.SelectTimeDialog;
 
 import java.util.ArrayList;
@@ -28,15 +27,16 @@ import java.util.List;
  * Time: 14:29
  * 类的功能、说明写在此处.
  */
-public class IndexActivity extends BaseActivity implements View.OnClickListener, OnClickContentItemListener {
+public class SelectUndoActivity extends BaseActivity implements View.OnClickListener, OnClickContentItemListener {
     private List<MyBuildScore> list = new ArrayList<MyBuildScore>();
     private ListView listView;
-    private MyBuildScoreAdapter adapter;
+    private SelectUndoAdapter adapter;
     private ImageView back;
+    private ImageView saveall;//一键提交
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mybuildscore_layout);
+        setContentView(R.layout.selectundo_layout);
         initView();
 
         SelectTimeDialog dialog = new SelectTimeDialog( myBuildScore , this, R.style.dialog1);
@@ -68,7 +68,7 @@ public class IndexActivity extends BaseActivity implements View.OnClickListener,
 
     private void initView() {
         listView = (ListView) findViewById(R.id.building_lsv);
-        adapter = new MyBuildScoreAdapter(mContext, list);
+        adapter = new SelectUndoAdapter(mContext, list);
         adapter.setOnClickContentItemListener(this);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -81,6 +81,8 @@ public class IndexActivity extends BaseActivity implements View.OnClickListener,
         });
         back = (ImageView) this.findViewById(R.id.back);
         back.setOnClickListener(this);
+        saveall = (ImageView) this.findViewById(R.id.saveall);
+        saveall.setOnClickListener(this);
     }
 
     @Override
@@ -88,6 +90,11 @@ public class IndexActivity extends BaseActivity implements View.OnClickListener,
         switch (v.getId()){
             case R.id.back:
                 finish();
+                break;
+            case R.id.saveall:
+                SaveScoreDialog dialog = new SaveScoreDialog( myBuildScore , this, R.style.dialog1);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.show();
                 break;
         }
     }
@@ -101,11 +108,17 @@ public class IndexActivity extends BaseActivity implements View.OnClickListener,
         myBuildScore = list.get(position);
         switch (flag){
             case 1:
+//                SaveScoreDialog dialog = new SaveScoreDialog( myBuildScore , this, R.style.dialog1);
+//                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//                dialog.show();
+
                 MobileDialog dialog = new MobileDialog( myBuildScore , this, R.style.dialog1);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.show();
                 break;
-
+            case 2:
+                Toast.makeText(mContext, "提交成功", Toast.LENGTH_SHORT).show();
+                break;
         }
     }
 

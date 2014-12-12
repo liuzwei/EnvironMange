@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+              >
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            >
+            <TextView android:layout_width="wrap_content"
+                      android:text="E301 卫生区域"
+                      android:textColor="#000000"
+                      android:id="@+id/title"
+                      android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:layout_margin="10dp"
+                  android:gravity="center_horizontal"
+                  android:background="@drawable/login_main_kuang">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="45dp"
+                  android:hint="E301卫生区域负责人是张三"
+                  android:textColor="#333333"
+                  android:background="@drawable/login_dlog_shape"
+                  android:gravity="center"
+                  android:layout_weight="1"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:gravity="center_horizontal"
+                  android:orientation="vertical">
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                 android:orientation="horizontal"
+                android:padding="5dp">
+
+            <Button android:layout_width="wrap_content" android:layout_height="45dp"
+                    android:text="确定"
+                    android:textColor="#FFFFFF"
+                    android:id="@+id/sure"
+                    android:background="#fdb201"
+                    android:gravity="center"
+                    android:layout_weight="1"/>
+
+
+         </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

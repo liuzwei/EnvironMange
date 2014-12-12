@@ -110,6 +110,27 @@
                   android:hint="最大分20"
                 />
     </LinearLayout>
+    <View android:layout_width="match_parent"
+          android:layout_height="0.1dp"
+          android:background="#d1d1d1"
+          android:layout_marginBottom="10dp"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:padding="10dp"
+            >
+        <TextView android:layout_width="65dp"
+                  android:layout_height="wrap_content"
+                  android:text="扣分原因"
+                  android:textSize="16sp"
+                  android:textColor="#999999"/>
+        <EditText android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textColor="#333333"
+                  android:textSize="16sp"
+                  android:hint="请说明扣分原因"
+                />
+    </LinearLayout>
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:gravity="center"
@@ -122,6 +143,14 @@
                 android:textSize="20dip"
                 android:layout_below="@id/login_password"
                 android:text="提交"
+                android:background="@drawable/login_btn_bg" />
+        <Button
+                android:id="@+id/save"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textSize="20dip"
+                android:layout_below="@id/login_password"
+                android:text="保存"
                 android:background="@drawable/login_btn_bg" />
     </LinearLayout>
 

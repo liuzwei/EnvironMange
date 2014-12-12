@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.area.EnvironMange.R;
-import com.area.EnvironMange.model.Building;
 import com.area.EnvironMange.model.MyBuildScore;
 
 import java.util.List;
@@ -15,11 +14,11 @@ import java.util.List;
 /**
  * Created by liuzwei on 2014/12/9.
  */
-public class MyBuildScoreAdapter extends BaseAdapter  {
+public class SelectUndoAdapter extends BaseAdapter  {
     private Context mContext;
     private List<MyBuildScore> list;
     private ViewHolder holder;
-    public MyBuildScoreAdapter(Context mContext, List<MyBuildScore> list) {
+    public SelectUndoAdapter(Context mContext, List<MyBuildScore> list) {
         this.mContext = mContext;
         this.list = list;
     }
@@ -46,11 +45,12 @@ public class MyBuildScoreAdapter extends BaseAdapter  {
     public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null){
             holder = new ViewHolder();
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.index_item, null);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.selectundo_item, null);
             holder.name = (TextView) convertView.findViewById(R.id.name);
             holder.score = (TextView) convertView.findViewById(R.id.score);
             holder.time = (TextView) convertView.findViewById(R.id.time);
-//            holder.update = (TextView) convertView.findViewById(R.id.update);
+            holder.update = (TextView) convertView.findViewById(R.id.update);
+            holder.save = (TextView) convertView.findViewById(R.id.save);
             convertView.setTag(holder);
         }else {
             holder = (ViewHolder) convertView.getTag();
@@ -59,12 +59,18 @@ public class MyBuildScoreAdapter extends BaseAdapter  {
         holder.name.setText(building.getName());
         holder.score.setText(building.getScore());
         holder.time.setText(building.getDatetime());
-//        holder.update.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onClickContentItemListener.onClickContentItem(position, 1, null);
-//            }
-//        });
+        holder.update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickContentItemListener.onClickContentItem(position, 1, null);
+            }
+        });
+        holder.save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickContentItemListener.onClickContentItem(position, 2, null);
+            }
+        });
         return convertView;
     }
 
@@ -72,7 +78,7 @@ public class MyBuildScoreAdapter extends BaseAdapter  {
         TextView name;
         TextView score;
         TextView time;
-//        TextView update;
-
+        TextView update;
+        TextView save;
     }
 }
