@@ -8,15 +8,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.area.EnvironMange.R;
-import com.area.EnvironMange.adapter.MyBuildScoreAdapter;
 import com.area.EnvironMange.adapter.OnClickContentItemListener;
 import com.area.EnvironMange.adapter.SelectUndoAdapter;
 import com.area.EnvironMange.base.BaseActivity;
 import com.area.EnvironMange.model.MyBuildScore;
 import com.area.EnvironMange.util.SystemExitUtil;
-import com.area.EnvironMange.widget.MobileDialog;
+import com.area.EnvironMange.widget.UpdateScoreDialog;
 import com.area.EnvironMange.widget.SaveScoreDialog;
-import com.area.EnvironMange.widget.SelectTimeDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,9 +37,9 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
         setContentView(R.layout.selectundo_layout);
         initView();
 
-        SelectTimeDialog dialog = new SelectTimeDialog( myBuildScore , this, R.style.dialog1);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.show();
+//        SelectTimeDialog dialog = new SelectTimeDialog( myBuildScore , this, R.style.dialog1);
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        dialog.show();
 
         list.add(new MyBuildScore("办公楼 E301","100分","2014-12-10 10:20"));
         list.add(new MyBuildScore("办公楼 E302","80分","2014-12-10 10:20"));
@@ -112,7 +110,7 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
 //                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //                dialog.show();
 
-                MobileDialog dialog = new MobileDialog( myBuildScore , this, R.style.dialog1);
+                UpdateScoreDialog dialog = new UpdateScoreDialog( myBuildScore , this, R.style.dialog1);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.show();
                 break;

@@ -63,6 +63,28 @@
                   android:layout_height="wrap_content"
                   android:orientation="horizontal"
                   android:padding="10dp"
+            >
+        <TextView android:layout_width="65dp"
+                  android:paddingLeft="15dp"
+                  android:layout_height="wrap_content"
+                  android:text="扣分原因"
+                  android:textSize="12dp"
+                  android:textColor="#999999"/>
+        <EditText android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textColor="#333333"
+                  android:textSize="12dp"
+                  android:hint="请说明扣分原因"
+                />
+    </LinearLayout>
+    <View android:layout_width="match_parent"
+          android:layout_height="0.1dp"
+          android:background="#d1d1d1"
+          android:layout_marginBottom="10dp"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:padding="10dp"
                  >
         <TextView android:layout_width="65dp"
                   android:layout_height="wrap_content"
@@ -82,32 +104,16 @@
                   android:padding="10dp"
             >
         <TextView android:layout_width="65dp"
+                  android:paddingLeft="15dp"
                   android:layout_height="wrap_content"
-                  android:text="桌椅"
-                  android:textSize="16sp"
+                  android:text="扣分原因"
+                  android:textSize="12dp"
                   android:textColor="#999999"/>
         <EditText android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:textColor="#333333"
-                  android:textSize="16sp"
-                  android:hint="最大分20"
-                />
-    </LinearLayout>
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="horizontal"
-                  android:padding="10dp"
-            >
-        <TextView android:layout_width="65dp"
-                  android:layout_height="wrap_content"
-                  android:text="地面"
-                  android:textSize="16sp"
-                  android:textColor="#999999"/>
-        <EditText android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:textColor="#333333"
-                  android:textSize="16sp"
-                  android:hint="最大分20"
+                  android:textSize="12dp"
+                  android:hint="请说明扣分原因"
                 />
     </LinearLayout>
     <View android:layout_width="match_parent"
@@ -119,18 +125,15 @@
                   android:orientation="horizontal"
                   android:padding="10dp"
             >
-        <TextView android:layout_width="65dp"
-                  android:layout_height="wrap_content"
-                  android:text="扣分原因"
-                  android:textSize="16sp"
-                  android:textColor="#999999"/>
+
         <EditText android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:textColor="#333333"
                   android:textSize="16sp"
-                  android:hint="请说明扣分原因"
+                  android:hint="备注"
                 />
     </LinearLayout>
+
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:gravity="center"

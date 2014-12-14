@@ -100,7 +100,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                     @Override
                     public void onFailure(Throwable t, int errorNo, String strMsg) {
                         super.onFailure(t, errorNo, strMsg);
-                        Toast.makeText(mContext, "网络请求失败", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(mContext, "网络请求失败", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(LoginActivity.this, CenterActivity.class));
                     }
                 }
         );

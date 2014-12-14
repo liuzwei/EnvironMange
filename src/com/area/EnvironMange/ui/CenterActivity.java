@@ -37,12 +37,12 @@ public class CenterActivity extends BaseActivity implements View.OnClickListener
         for(int i=0;i<7;i++){
             if(i == 0){
                 HashMap<String,Center> map1 = new HashMap<String,Center>();
-                map1.put("image", new Center("教学楼区域", String.valueOf(R.drawable.mine)));
+                map1.put("image", new Center("教学楼区域", String.valueOf(R.drawable.jiaoxuel)));
                 imagelist.add(map1);
             }
             if(i == 1){
                 HashMap<String,Center> map1 = new HashMap<String,Center>();
-                map1.put("image", new Center("教学公共区域", String.valueOf(R.drawable.mine)));
+                map1.put("image", new Center("教学公共区域", String.valueOf(R.drawable.publicg)));
                 imagelist.add(map1);
             }
             if(i == 2){
@@ -52,12 +52,12 @@ public class CenterActivity extends BaseActivity implements View.OnClickListener
             }
             if(i == 3){
                 HashMap<String,Center> map1 = new HashMap<String,Center>();
-                map1.put("image", new Center("户外区域\n", String.valueOf(R.drawable.mine)));
+                map1.put("image", new Center("户外区域\n", String.valueOf(R.drawable.outdoor)));
                 imagelist.add(map1);
             }
             if(i == 4){
                 HashMap<String,Center> map1 = new HashMap<String,Center>();
-                map1.put("image", new Center("查询未提交成绩", String.valueOf(R.drawable.seticon)));
+                map1.put("image", new Center("查询未提交成绩", String.valueOf(R.drawable.todo)));
                 imagelist.add(map1);
             }
             if(i == 5){
@@ -80,22 +80,22 @@ public class CenterActivity extends BaseActivity implements View.OnClickListener
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 0){
-                    Intent intent = new Intent( CenterActivity.this, cityset.class);
+                    Intent intent = new Intent( CenterActivity.this, JiaoxuelouActivity.class);
                     intent.putExtra("name","教学楼区域");
                     startActivity(intent);
                 }
                 if(position == 1){
-                    Intent intent = new Intent( CenterActivity.this, cityset.class);
+                    Intent intent = new Intent( CenterActivity.this, JiaoxuepublicActivity.class);
                     intent.putExtra("name","教学公共区域");
                     startActivity(intent);
                 }
                 if(position == 2){
-                    Intent intent = new Intent( CenterActivity.this, cityset.class);
+                    Intent intent = new Intent( CenterActivity.this, SusheActivity.class);
                     intent.putExtra("name","宿舍区域");
                     startActivity(intent);
                 }
                 if(position == 3){
-                    Intent intent = new Intent( CenterActivity.this, cityset.class);
+                    Intent intent = new Intent( CenterActivity.this, OutdoorActivity.class);
                     intent.putExtra("name","户外区域");
                     startActivity(intent);
                 }

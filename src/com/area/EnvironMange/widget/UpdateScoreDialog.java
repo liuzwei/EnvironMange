@@ -2,7 +2,6 @@ package com.area.EnvironMange.widget;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,7 +14,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.model.MyBuildScore;
-import com.google.gson.Gson;
 
 
 /**
@@ -24,7 +22,7 @@ import com.google.gson.Gson;
  * Time: 15:39
  * 类的功能、说明写在此处.
  */
-public class MobileDialog extends Dialog implements View.OnClickListener{
+public class UpdateScoreDialog extends Dialog implements View.OnClickListener{
     private Context context;
     private EditText number;
     private Button sure;
@@ -42,7 +40,7 @@ public class MobileDialog extends Dialog implements View.OnClickListener{
         }
     };
 
-    public MobileDialog(MyBuildScore myBuildScore, Context context, int them) {
+    public UpdateScoreDialog(MyBuildScore myBuildScore, Context context, int them) {
         super(context,them);
         this.context = context;
         this.myBuildScore = myBuildScore;
@@ -75,10 +73,10 @@ public class MobileDialog extends Dialog implements View.OnClickListener{
         switch (v.getId()){
             case R.id.sure:
                 Toast.makeText(context, "修改成功", Toast.LENGTH_SHORT).show();
-                MobileDialog.this.dismiss();
+                UpdateScoreDialog.this.dismiss();
                 break;
             case R.id.cancle:
-                MobileDialog.this.dismiss();
+                UpdateScoreDialog.this.dismiss();
                 break;
         }
     }

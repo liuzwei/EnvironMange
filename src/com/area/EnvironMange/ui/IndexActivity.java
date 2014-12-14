@@ -1,22 +1,21 @@
 package com.area.EnvironMange.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 import com.area.EnvironMange.R;
-import com.area.EnvironMange.adapter.BuildingAdapter;
 import com.area.EnvironMange.adapter.MyBuildScoreAdapter;
 import com.area.EnvironMange.adapter.OnClickContentItemListener;
 import com.area.EnvironMange.base.BaseActivity;
-import com.area.EnvironMange.model.Building;
 import com.area.EnvironMange.model.MyBuildScore;
 import com.area.EnvironMange.util.SystemExitUtil;
-import com.area.EnvironMange.widget.MobileDialog;
+import com.area.EnvironMange.widget.DetailDialog;
+import com.area.EnvironMange.widget.SaveScoreDialog;
+import com.area.EnvironMange.widget.UpdateScoreDialog;
 import com.area.EnvironMange.widget.SelectTimeDialog;
 
 import java.util.ArrayList;
@@ -33,6 +32,7 @@ public class IndexActivity extends BaseActivity implements View.OnClickListener,
     private ListView listView;
     private MyBuildScoreAdapter adapter;
     private ImageView back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +81,7 @@ public class IndexActivity extends BaseActivity implements View.OnClickListener,
         });
         back = (ImageView) this.findViewById(R.id.back);
         back.setOnClickListener(this);
+
     }
 
     @Override
@@ -95,13 +96,14 @@ public class IndexActivity extends BaseActivity implements View.OnClickListener,
     public void onTopMenuPopupButtonClick(View view){
         mainPopMenu.showAsDropDown(view);
     }
+
     MyBuildScore myBuildScore = null;
     @Override
     public void onClickContentItem(int position, int flag, final Object object) {
         myBuildScore = list.get(position);
         switch (flag){
             case 1:
-                MobileDialog dialog = new MobileDialog( myBuildScore , this, R.style.dialog1);
+                DetailDialog dialog = new DetailDialog( myBuildScore , this, R.style.dialog1);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.show();
                 break;

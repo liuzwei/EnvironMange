@@ -12,7 +12,7 @@
             android:gravity="center"
             >
             <TextView android:layout_width="wrap_content"
-                      android:text="请重新输入分数"
+                      android:text="E301卫生得分"
                       android:textColor="#000000"
                       android:id="@+id/title"
                       android:layout_height="wrap_content"/>
@@ -45,7 +45,7 @@
                     android:layout_weight="25"/>
 
 
-            <EditText android:layout_width="wrap_content"
+            <TextView android:layout_width="wrap_content"
                       android:layout_height="30dp"
                     android:text="20分"
                     android:textSize="15dp"
@@ -70,7 +70,7 @@
                       />
 
 
-            <EditText android:layout_width="wrap_content"
+            <TextView android:layout_width="wrap_content"
                       android:layout_height="30dp"
                       android:text="桌椅有灰尘"
                       android:layout_weight="80"
@@ -106,7 +106,7 @@
                       android:layout_weight="25"/>
 
 
-            <EditText android:layout_width="wrap_content"
+            <TextView android:layout_width="wrap_content"
                       android:layout_height="30dp"
                       android:text="80分"
                       android:background="@drawable/login_dlog_shape"
@@ -131,7 +131,7 @@
                     />
 
 
-            <EditText android:layout_width="wrap_content"
+            <TextView android:layout_width="wrap_content"
                       android:layout_height="30dp"
                       android:text="无"
                       android:layout_weight="80"
@@ -183,7 +183,7 @@
                   android:layout_margin="10dp"
                   android:gravity="center_vertical"
                   android:background="@drawable/login_main_kuang">
-        <EditText android:layout_width="match_parent"
+        <TextView android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/number"
         android:gravity="center_vertical"
@@ -234,14 +234,14 @@
                     android:layout_weight="1"/>
 
 
-            <Button android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                      android:text="取消"
-                      android:textColor="#333333"
-                      android:gravity="center"
-                      android:id="@+id/cancle"
-                      android:background="@color/logout_but_bg"
-                      android:layout_weight="1"/>
+            <!--<Button android:layout_width="wrap_content"-->
+                    <!--android:layout_height="45dp"-->
+                      <!--android:text="取消"-->
+                      <!--android:textColor="#333333"-->
+                      <!--android:gravity="center"-->
+                      <!--android:id="@+id/cancle"-->
+                      <!--android:background="@color/logout_but_bg"-->
+                      <!--android:layout_weight="1"/>-->
          </LinearLayout>
 
     </LinearLayout>

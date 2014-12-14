@@ -50,7 +50,7 @@ public class MyBuildScoreAdapter extends BaseAdapter  {
             holder.name = (TextView) convertView.findViewById(R.id.name);
             holder.score = (TextView) convertView.findViewById(R.id.score);
             holder.time = (TextView) convertView.findViewById(R.id.time);
-//            holder.update = (TextView) convertView.findViewById(R.id.update);
+            holder.detail = (TextView) convertView.findViewById(R.id.detail);
             convertView.setTag(holder);
         }else {
             holder = (ViewHolder) convertView.getTag();
@@ -59,12 +59,12 @@ public class MyBuildScoreAdapter extends BaseAdapter  {
         holder.name.setText(building.getName());
         holder.score.setText(building.getScore());
         holder.time.setText(building.getDatetime());
-//        holder.update.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onClickContentItemListener.onClickContentItem(position, 1, null);
-//            }
-//        });
+        holder.detail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickContentItemListener.onClickContentItem(position, 1, null);
+            }
+        });
         return convertView;
     }
 
@@ -72,7 +72,7 @@ public class MyBuildScoreAdapter extends BaseAdapter  {
         TextView name;
         TextView score;
         TextView time;
-//        TextView update;
+        TextView detail;
 
     }
 }

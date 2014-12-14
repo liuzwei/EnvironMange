@@ -60,12 +60,14 @@ public class SelectUndoAdapter extends BaseAdapter  {
         holder.score.setText(building.getScore());
         holder.time.setText(building.getDatetime());
         holder.update.setOnClickListener(new View.OnClickListener() {
+           //修改
             @Override
             public void onClick(View v) {
                 onClickContentItemListener.onClickContentItem(position, 1, null);
             }
         });
         holder.save.setOnClickListener(new View.OnClickListener() {
+            //提交
             @Override
             public void onClick(View v) {
                 onClickContentItemListener.onClickContentItem(position, 2, null);

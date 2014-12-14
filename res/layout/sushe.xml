@@ -23,11 +23,12 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="办公楼 楼层"
-                android:textSize="15dp"
+                android:text="宿舍区域"
+                android:textSize="15sp"
                 android:textColor="#FFFFFF"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
+                android:id="@+id/title"
                 />
         <ImageView android:layout_width="wrap_content" android:layout_height="match_parent"
                    android:src="@drawable/ceshi_03"
@@ -43,12 +44,46 @@
           android:layout_marginBottom="10dp"/>
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:padding="10dp"
+                  android:id="@+id/areaone"
+            >
+
+     <Spinner
+        android:id="@+id/province"
+        android:layout_height="45dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="7px"
+        android:drawSelectorOnTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="fill_parent"></Spinner>
+
+
+
+
+    </LinearLayout>
+
+    <View android:layout_width="match_parent"
+          android:layout_height="0.1dp"
+          android:background="#d1d1d1"
+          android:layout_marginBottom="10dp"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="vertical"
+                  android:id="@+id/contentsliner"
+                  android:layout_height="wrap_content">
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
                   android:orientation="horizontal"
                   android:padding="10dp"
-                  android:id="@+id/floorone"
-                  >
-        <TextView android:layout_width="190dp" android:layout_height="wrap_content"
-                  android:text="楼层一"
+                  android:id="@+id/areatwo"
+            >
+        <TextView android:layout_width="280dp" android:layout_height="wrap_content"
+                  android:text="E302"
+                  android:id="@+id/titleitem"
                   android:textSize="20sp"
                   android:textColor="#999999"/>
 
@@ -58,29 +93,15 @@
           android:background="#d1d1d1"
           android:layout_marginBottom="10dp"/>
     <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="horizontal"
-                  android:padding="10dp"
-                  >
-        <TextView android:layout_width="190dp" android:layout_height="wrap_content"
-                  android:text="楼层二"
-                  android:textSize="20sp"
-                  android:textColor="#999999"/>
-
-    </LinearLayout>
-    <View android:layout_width="match_parent"
-          android:layout_height="0.1dp"
-          android:background="#d1d1d1"
-          android:layout_marginBottom="10dp"/>
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
+                  android:layout_height="match_parent"
                   android:orientation="horizontal"
                   android:padding="10dp"
             >
-        <TextView android:layout_width="190dp" android:layout_height="wrap_content"
-                  android:text="楼层三"
+        <TextView android:layout_width="280dp" android:layout_height="wrap_content"
+                  android:text="E303"
                   android:textSize="20sp"
                   android:textColor="#999999"/>
+
 
     </LinearLayout>
     <View android:layout_width="match_parent"
@@ -88,14 +109,15 @@
           android:background="#d1d1d1"
           android:layout_marginBottom="10dp"/>
     <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
+                  android:layout_height="match_parent"
                   android:orientation="horizontal"
                   android:padding="10dp"
             >
-        <TextView android:layout_width="190dp" android:layout_height="wrap_content"
-                  android:text="楼层四"
+        <TextView android:layout_width="280dp" android:layout_height="wrap_content"
+                  android:text="E304"
                   android:textSize="20sp"
                   android:textColor="#999999"/>
+
 
     </LinearLayout>
     <View android:layout_width="match_parent"
@@ -103,14 +125,15 @@
           android:background="#d1d1d1"
           android:layout_marginBottom="10dp"/>
     <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
+                  android:layout_height="match_parent"
                   android:orientation="horizontal"
                   android:padding="10dp"
             >
-        <TextView android:layout_width="190dp" android:layout_height="wrap_content"
-                  android:text="楼层五"
+        <TextView android:layout_width="280dp" android:layout_height="wrap_content"
+                  android:text="E305"
                   android:textSize="20sp"
                   android:textColor="#999999"/>
+
 
     </LinearLayout>
     <View android:layout_width="match_parent"
@@ -118,33 +141,16 @@
           android:background="#d1d1d1"
           android:layout_marginBottom="10dp"/>
     <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
+                  android:layout_height="match_parent"
                   android:orientation="horizontal"
                   android:padding="10dp"
             >
-        <TextView android:layout_width="190dp" android:layout_height="wrap_content"
-                  android:text="楼层六"
+        <TextView android:layout_width="280dp" android:layout_height="wrap_content"
+                  android:text="E306"
                   android:textSize="20sp"
                   android:textColor="#999999"/>
+    </LinearLayout>
 
     </LinearLayout>
-    <View android:layout_width="match_parent"
-          android:layout_height="0.1dp"
-          android:background="#d1d1d1"
-          android:layout_marginBottom="10dp"/>
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="horizontal"
-                  android:padding="10dp"
-            >
-        <TextView android:layout_width="190dp" android:layout_height="wrap_content"
-                  android:text="楼层七"
-                  android:textSize="20sp"
-                  android:textColor="#999999"/>
 
-    </LinearLayout>
-    <View android:layout_width="match_parent"
-          android:layout_height="0.1dp"
-          android:background="#d1d1d1"
-          android:layout_marginBottom="10dp"/>
 </LinearLayout>

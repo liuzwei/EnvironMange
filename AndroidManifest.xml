@@ -32,5 +32,9 @@
         <activity android:name=".ui.SettingActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation"/>
         <activity android:name=".ui.cityset"/>
         <activity android:name=".ui.SelectUndoActivity"/>
+        <activity android:name=".ui.JiaoxuelouActivity"/>
+        <activity android:name=".ui.SusheActivity"/>
+        <activity android:name=".ui.JiaoxuepublicActivity"/>
+        <activity android:name=".ui.OutdoorActivity"/>
     </application>
 </manifest>
