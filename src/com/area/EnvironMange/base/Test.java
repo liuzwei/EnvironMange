@@ -16,8 +16,8 @@ public class Test {
         String url = "http://222.135.111.86:9009/Service1.svc/SaveProjectFs";
         StringEntity entity = null;
         JSONArray array = new JSONArray();
-        array.put(SanitaionAreaAssementItem.fromObject2Json(new SanitaionAreaAssementItem("1d2831b6-2e1b-49a0-b58f-48135b72fb60", 14.0f)));
-        array.put(SanitaionAreaAssementItem.fromObject2Json(new SanitaionAreaAssementItem("1d2831b6-2e1b-49a0-b58f-48135b72fb62", 15.0f)));
+        array.put(SanitaionAreaAssementItem.fromObject2Json(new SanitaionAreaAssementItem("1d2831b6-2e1b-49a0-b58f-48135b72fb60", 14.0f, "")));
+        array.put(SanitaionAreaAssementItem.fromObject2Json(new SanitaionAreaAssementItem("1d2831b6-2e1b-49a0-b58f-48135b72fb62", 15.0f, "")));
         JSONObject object = new JSONObject();
         try {
             object.put("item", array);

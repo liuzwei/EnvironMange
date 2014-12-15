@@ -42,6 +42,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         password = (EditText) findViewById(R.id.login_password);
         loginBtn = (Button) findViewById(R.id.login_btn);
         loginBtn.setOnClickListener(this);
+
+        username.setText(getGson().fromJson(sp.getString("username", ""), String.class));
+        password.setText(getGson().fromJson(sp.getString("password", ""), String.class));
+
     }
 
 
@@ -78,9 +82,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         object.put("pwd", password.getText().toString());
 
         StringEntity entity = new StringEntity(object.toString());
-//        AjaxParams params = new AjaxParams();
-//        params.put("ID", username.getText().toString());
-//        params.put("pwd", username.getText().toString());
         getFinalHttp().post(
                 InternetURL.LOGIN_URL,
                 entity,
@@ -90,18 +91,20 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                     public void onSuccess(Object o) {
                         super.onSuccess(o);
                         if ("true".equals(o.toString())){
+                            save("username", username.getText().toString());
+                            save("password", password.getText().toString());
                             startActivity(new Intent(LoginActivity.this, CenterActivity.class));
                         }else {
-//                            Toast.makeText(mContext, "用户名或密码错误", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, CenterActivity.class));
+                            Toast.makeText(mContext, "用户名或密码错误", Toast.LENGTH_SHORT).show();
+//                            startActivity(new Intent(LoginActivity.this, CenterActivity.class));
                         }
                     }
 
                     @Override
                     public void onFailure(Throwable t, int errorNo, String strMsg) {
                         super.onFailure(t, errorNo, strMsg);
-//                        Toast.makeText(mContext, "网络请求失败", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this, CenterActivity.class));
+                        Toast.makeText(mContext, "网络请求失败", Toast.LENGTH_SHORT).show();
+//                        startActivity(new Intent(LoginActivity.this, CenterActivity.class));
                     }
                 }
         );

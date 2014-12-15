@@ -11,6 +11,7 @@ import com.area.EnvironMange.adapter.SelectUndoAdapter;
 import com.area.EnvironMange.menu.MainPopMenu;
 import com.area.EnvironMange.ui.*;
 import com.area.EnvironMange.util.SystemExitUtil;
+import com.google.gson.Gson;
 import net.tsz.afinal.FinalHttp;
 
 /**
@@ -24,7 +25,7 @@ public class BaseActivity extends Activity implements MainPopMenu.OnItemClickLis
 
     private ActivityTack tack= ActivityTack.getInstanse();
 
-//    private Gson gson = new Gson();
+    private Gson gson = new Gson();
     public MainPopMenu mainPopMenu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +38,6 @@ public class BaseActivity extends Activity implements MainPopMenu.OnItemClickLis
         tack.addActivity(this);
     }
 
-//    public Gson getGson(){
-//        return gson;
-//    }
-
     protected Context getContext() {
         return mContext;
     }
@@ -48,7 +45,7 @@ public class BaseActivity extends Activity implements MainPopMenu.OnItemClickLis
     //存储sharepreference
     public void save(String key, Object value){
         SharedPreferences.Editor editor = sp.edit();
-//        editor.putString(key, gson.toJson(value)).commit();
+        editor.putString(key, gson.toJson(value)).commit();
     }
 
     public ActivityTack getTack() {
@@ -117,4 +114,7 @@ public class BaseActivity extends Activity implements MainPopMenu.OnItemClickLis
         ToastUtil.show(getApplicationContext(), resId);
     }
 
+    public Gson getGson() {
+        return gson;
+    }
 }

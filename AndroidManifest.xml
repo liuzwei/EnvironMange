@@ -30,11 +30,11 @@
         <activity android:name=".ui.IndexActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation"/>
         <activity android:name=".ui.CenterActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation"/>
         <activity android:name=".ui.SettingActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation"/>
-        <activity android:name=".ui.cityset"/>
-        <activity android:name=".ui.SelectUndoActivity"/>
-        <activity android:name=".ui.JiaoxuelouActivity"/>
-        <activity android:name=".ui.SusheActivity"/>
-        <activity android:name=".ui.JiaoxuepublicActivity"/>
-        <activity android:name=".ui.OutdoorActivity"/>
+        <activity android:name=".ui.cityset" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.SelectUndoActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.JiaoxuelouActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.SusheActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.JiaoxuepublicActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.OutdoorActivity" android:screenOrientation="portrait"/>
     </application>
 </manifest>

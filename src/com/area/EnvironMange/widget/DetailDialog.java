@@ -7,11 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.model.MyBuildScore;
 
@@ -26,7 +22,6 @@ public class DetailDialog extends Dialog implements View.OnClickListener{
     private Context context;
     private Button sure;
     private TextView title;
-    private RequestQueue mRequestQueue;
     private MyBuildScore myBuildScore;
     private Handler handler = new Handler(){
         @Override
@@ -53,7 +48,6 @@ public class DetailDialog extends Dialog implements View.OnClickListener{
     }
 
     private void initView(){
-        mRequestQueue = Volley.newRequestQueue(context);
 //        number = (EditText) findViewById(R.id.number);
         title = (TextView) findViewById(R.id.title);
         sure = (Button) this.findViewById(R.id.sure);
