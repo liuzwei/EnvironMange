@@ -100,7 +100,6 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
                 JSONArray array = new JSONArray();
                 for (int i=0; i<list.size(); i++) {
                     SanitaionAreaProject project = list.get(i);
-//                    EditText score = (EditText) this.findViewById(1000+i);
                     if (StringUtil.isNullOrEmpty(scoreMap.get(i))){
                         Toast.makeText(mContext, project.getXmmc()+" 没有打分", Toast.LENGTH_SHORT).show();
                         return;
@@ -109,7 +108,6 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
                         Toast.makeText(mContext, project.getXmmc()+"不能超过"+project.getZdfs()+"分", Toast.LENGTH_SHORT).show();
                         return;
                     }
-//                    EditText reason = (EditText) this.findViewById(2000+i);
                     SanitaionAreaAssementItem item = new SanitaionAreaAssementItem(project.getID(), Float.parseFloat(scoreMap.get(i)), reasonMap.get(i));
                     array.put(SanitaionAreaAssementItem.fromObject2Json(item));
                 }
@@ -124,17 +122,15 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
                 JSONArray array2 = new JSONArray();
                 for (int i=0; i<list.size(); i++) {
                     SanitaionAreaProject project = list.get(i);
-                    EditText score = (EditText) this.findViewById(1000+i);
-                    if (StringUtil.isNullOrEmpty(score.getText().toString())){
+                    if (StringUtil.isNullOrEmpty(scoreMap.get(i))){
                         Toast.makeText(mContext, project.getXmmc()+" 没有打分", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if (Double.parseDouble(score.getText().toString()) > Integer.parseInt(project.getZdfs())){
+                    if (Double.parseDouble(scoreMap.get(i)) > Integer.parseInt(project.getZdfs())){
                         Toast.makeText(mContext, project.getXmmc()+"不能超过"+project.getZdfs()+"分", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    EditText reason = (EditText) this.findViewById(2000+i);
-                    SanitaionAreaAssementItem item = new SanitaionAreaAssementItem(project.getID(), Float.parseFloat(score.getText().toString()), reason.getText().toString());
+                    SanitaionAreaAssementItem item = new SanitaionAreaAssementItem(project.getID(), Float.parseFloat(scoreMap.get(i)), reasonMap.get(i));
                     array2.put(SanitaionAreaAssementItem.fromObject2Json(item));
                 }
                 try {
