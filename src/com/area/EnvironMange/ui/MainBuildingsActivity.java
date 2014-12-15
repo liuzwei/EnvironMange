@@ -1,15 +1,19 @@
 package com.area.EnvironMange.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.adapter.BuildingAdapter;
+import com.area.EnvironMange.adapter.OnClickContentItemListener;
 import com.area.EnvironMange.base.BaseActivity;
 import com.area.EnvironMange.common.InternetURL;
 import com.area.EnvironMange.model.Building;
+import com.area.EnvironMange.util.SystemExitUtil;
 import com.google.gson.Gson;
 import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.http.AjaxCallBack;
@@ -23,17 +27,21 @@ import java.util.List;
 /**
  * Created by liuzwei on 2014/12/9.
  */
-public class MainBuildingsActivity extends BaseActivity {
+public class MainBuildingsActivity extends BaseActivity implements View.OnClickListener{
     private List<Building> list = new ArrayList<Building>();
     private ListView listView;
     private BuildingAdapter adapter;
+    private ImageView back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.building_layout);
 
         initView();
+
         getBuildings();
+
+        SystemExitUtil.getInstance().addActivity(this);
     }
 
     private void initView(){
@@ -44,8 +52,12 @@ public class MainBuildingsActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //点击某一项时触发
+                Intent floor = new Intent(MainBuildingsActivity.this,FloorSelectActivity.class);
+                startActivity(floor);
             }
         });
+        back = (ImageView) this.findViewById(R.id.back);
+        back.setOnClickListener(this);
     }
 
     private void getBuildings(){
@@ -74,5 +86,19 @@ public class MainBuildingsActivity extends BaseActivity {
                     }
                 }
         );
+    }
+    //弹出顶部主菜单
+    public void onTopMenuPopupButtonClick(View view){
+        mainPopMenu.showAsDropDown(view);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.back:
+                finish();
+                break;
+        }
     }
 }

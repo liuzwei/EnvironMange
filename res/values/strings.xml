@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">EnvironMange</string>
+    <string name="app_name">山东商院</string>
     <string name="login_username_hint">用户名</string>
     <string name="login_password_hint">密码</string>
     <string name="login_btn">登录</string>
 
-
+    <string-array name="main_menu_arry">
+        <item>主页</item>
+        <item>教学楼区域</item>
+        <item>教学公共区域</item>
+        <item>宿舍区域</item>
+        <item>户外区域</item>
+        <item>未提交成绩</item>
+        <item>历史成绩</item>
+        <item>设置</item>
+    </string-array>
+    <string name="exit_str">Are you sure to exit</string>
 </resources>

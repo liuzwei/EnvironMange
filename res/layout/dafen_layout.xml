@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:background="#f7f7f7"
+              android:layout_height="match_parent">
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/maincolor"
+            android:gravity="center_vertical"
+            >
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ceshi_05"
+                android:layout_centerVertical="true"
+                android:id="@+id/back"
+                android:paddingLeft="15dp"
+                android:paddingRight="10dp"
+                />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="打分"
+                android:textSize="15dp"
+                android:textColor="#FFFFFF"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:id="@+id/title"
+                />
+        <ImageView android:layout_width="wrap_content" android:layout_height="match_parent"
+                   android:src="@drawable/ceshi_03"
+                   android:layout_alignParentRight="true"
+                   android:paddingRight="15dp"
+                   android:paddingLeft="10dp"
+                   android:background="@drawable/top_back_select"
+                   android:onClick="onTopMenuPopupButtonClick"/>
+    </RelativeLayout>
+    <View android:layout_width="match_parent"
+          android:layout_height="0.1dp"
+          android:background="#d1d1d1"
+          android:layout_marginBottom="10dp"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:padding="10dp"
+                  android:id="@+id/areaone"
+            >
+
+     <Spinner
+        android:id="@+id/province"
+        android:layout_height="45dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="7px"
+        android:drawSelectorOnTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="fill_parent"></Spinner>
+
+
+
+
+    </LinearLayout>
+    <View android:layout_width="match_parent"
+          android:layout_height="0.1dp"
+          android:background="#d1d1d1"
+          android:layout_marginBottom="10dp"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:padding="10dp"
+            >
+        <Spinner android:layout_width="fill_parent"
+                 android:id="@+id/city"
+                 android:layout_height="45dp"
+                 android:layout_marginLeft="5dp"
+                 android:layout_marginRight="10dp"
+                 android:layout_marginTop="3px"
+                 android:drawSelectorOnTop="true"
+                 android:layout_alignParentRight="true"
+                 android:layout_below="@id/province"
+                />
+
+    </LinearLayout>
+    <View android:layout_width="match_parent"
+          android:layout_height="0.1dp"
+          android:background="#d1d1d1"
+          android:layout_marginBottom="10dp"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="vertical"
+                  android:id="@+id/contentsliner"
+                  android:layout_height="wrap_content">
+
+
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="horizontal"
+                  android:padding="10dp"
+                  android:id="@+id/areatwo"
+            >
+        <TextView android:layout_width="280dp" android:layout_height="wrap_content"
+                  android:text="E302"
+                  android:id="@+id/titleitem"
+                  android:textSize="20sp"
+                  android:textColor="#999999"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="备注"
+                  android:textSize="20sp"
+                  android:id="@+id/beizhu"
+                  android:textColor="#999999"/>
+    </LinearLayout>
+    <View android:layout_width="match_parent"
+          android:layout_height="0.1dp"
+          android:background="#d1d1d1"
+          android:layout_marginBottom="10dp"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="horizontal"
+                  android:padding="10dp"
+            >
+        <TextView android:layout_width="280dp" android:layout_height="wrap_content"
+                  android:text="E303"
+                  android:textSize="20sp"
+                  android:textColor="#999999"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="备注"
+                  android:textSize="20sp"
+                  android:textColor="#999999"/>
+
+    </LinearLayout>
+    <View android:layout_width="match_parent"
+          android:layout_height="0.1dp"
+          android:background="#d1d1d1"
+          android:layout_marginBottom="10dp"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="horizontal"
+                  android:padding="10dp"
+            >
+        <TextView android:layout_width="280dp" android:layout_height="wrap_content"
+                  android:text="E304"
+                  android:textSize="20sp"
+                  android:textColor="#999999"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="备注"
+                  android:textSize="20sp"
+                  android:textColor="#999999"/>
+
+    </LinearLayout>
+    <View android:layout_width="match_parent"
+          android:layout_height="0.1dp"
+          android:background="#d1d1d1"
+          android:layout_marginBottom="10dp"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="horizontal"
+                  android:padding="10dp"
+            >
+        <TextView android:layout_width="280dp" android:layout_height="wrap_content"
+                  android:text="E305"
+                  android:textSize="20sp"
+                  android:textColor="#999999"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="备注"
+                  android:textSize="20sp"
+                  android:textColor="#999999"/>
+
+    </LinearLayout>
+    <View android:layout_width="match_parent"
+          android:layout_height="0.1dp"
+          android:background="#d1d1d1"
+          android:layout_marginBottom="10dp"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="horizontal"
+                  android:padding="10dp"
+            >
+        <TextView android:layout_width="280dp" android:layout_height="wrap_content"
+                  android:text="E306"
+                  android:textSize="20sp"
+                  android:textColor="#999999"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="备注"
+                  android:textSize="20sp"
+                  android:textColor="#999999"/>
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -26,6 +26,10 @@ public class Building {
         this.MC = MC;
     }
 
+    public Building() {
+
+    }
+
     public static Building jsonObject2Object(JSONObject object){
         Building building = new Building();
         try {
@@ -35,5 +39,10 @@ public class Building {
             e.printStackTrace();
         }
         return building;
+    }
+
+    public Building(String ID, String MC) {
+        this.ID = ID;
+        this.MC = MC;
     }
 }
