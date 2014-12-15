@@ -20,6 +20,7 @@ public class AreaTypeAdapter extends BaseAdapter {
     private List<SanitaionAreaProject> list;
     private Context mContext;
     private ViewHolder holder;
+    private static boolean isGo = true;
 
     public AreaTypeAdapter(List<SanitaionAreaProject> list, Context mContext) {
         this.list = list;
@@ -57,8 +58,13 @@ public class AreaTypeAdapter extends BaseAdapter {
         SanitaionAreaProject project = list.get(position);
         holder.aretype.setText(project.getXmmc());
         holder.maxScore.setHint("最大分数:"+project.getZdfs());
-        holder.maxScore.setId(1000+position);
-        holder.reduceReason.setId(2000+position);
+        if (isGo) {
+            holder.maxScore.setId(1000 + position);
+            holder.reduceReason.setId(2000 + position);
+        }
+        if (position == list.size()-1){
+            isGo = false;
+        }
 
         return convertView;
     }
