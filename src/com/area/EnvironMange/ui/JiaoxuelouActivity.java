@@ -37,11 +37,8 @@ import java.util.List;
 public class JiaoxuelouActivity extends BaseActivity implements View.OnClickListener{
     private static final String TAG = JiaoxuelouActivity.class.getSimpleName();
 
-    private String[] city = new String[]{};
-//    private String[] floors = new String[]{"请选择楼层","请选择楼层","楼层一","楼层二","楼层三","楼层四"};
     private Spinner teachBuilding;//选择教学楼
     private Spinner floor;
-    private Context context;
     private List<Building> buildingList = new ArrayList<Building>();//取回来的建筑物数据存放在这
     private List<String> buildingNames = new ArrayList<String>();//存放建筑物的名字
     private List<String> floors = new ArrayList<String>();//楼层信息
@@ -50,15 +47,18 @@ public class JiaoxuelouActivity extends BaseActivity implements View.OnClickList
 
     ArrayAdapter<String> floorAdapter;
 
+    private ImageView back;
     private ListView areaListView;
     private TeachBuildingAreaAdapter areaAdapter;//展示某楼层的区域
     private List<SanitationArea> areaList = new ArrayList<SanitationArea>();
-    private ImageView back;
+
+    private String buildingName = "";
+    private String floorName = "";
+
     private String buildingID;
      public void onCreate(Bundle savedInstanceState) {
          super.onCreate(savedInstanceState);
          setContentView(R.layout.jiaoxuelou);
-         context = this;
          floors.add("请选择楼层");
          initView();
          getBuildings();
@@ -66,6 +66,8 @@ public class JiaoxuelouActivity extends BaseActivity implements View.OnClickList
      }
 
     private void initView() {
+        back = (ImageView) this.findViewById(R.id.back);
+        back.setOnClickListener(this);
         teachBuildingAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, buildingNames);
         teachBuildingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         teachBuilding = (Spinner) findViewById(R.id.province);
@@ -79,6 +81,7 @@ public class JiaoxuelouActivity extends BaseActivity implements View.OnClickList
                     areaList.clear();
                     areaAdapter.notifyDataSetChanged();
                     Building building = buildingList.get(position-1);
+                    buildingName = building.getMC();
                     try {
                         //获取楼层信息
                         getFloor(building.getID());
@@ -113,6 +116,7 @@ public class JiaoxuelouActivity extends BaseActivity implements View.OnClickList
                     try {
                         areaList.clear();
                         getArea(buildingID, floors.get(position) );
+                        floorName = position+"";
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -139,11 +143,12 @@ public class JiaoxuelouActivity extends BaseActivity implements View.OnClickList
                 SanitationArea area =  areaList.get(position);
                 Intent score = new Intent(JiaoxuelouActivity.this, ScoreActivity.class);
                 score.putExtra("areaID", area.getID());
+                score.putExtra("titleName", buildingName +"  楼层"+floorName +" "+area.getMc()+"  卫生打分");
                 startActivity(score);
             }
         });
-        back = (ImageView) this.findViewById(R.id.back);
-        back.setOnClickListener(this);
+
+
     }
 
     @Override

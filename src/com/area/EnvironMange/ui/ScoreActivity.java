@@ -40,14 +40,15 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
     private EditText beizhu;//备注
     private ListView listView;
     private AreaTypeAdapter areaTypeAdapter;
+    private TextView title;
     private List<SanitaionAreaProject> list  =new ArrayList<SanitaionAreaProject>();
-
+    private String titleName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.score_layout);
         areaID = getIntent().getStringExtra("areaID");
-
+        titleName = getIntent().getStringExtra("titleName");
         initView();
 
         try {
@@ -69,6 +70,8 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
         listView = (ListView) findViewById(R.id.score_layout_lsv);
         areaTypeAdapter = new AreaTypeAdapter(list, mContext);
         listView.setAdapter(areaTypeAdapter);
+        title = (TextView) this.findViewById(R.id.score_layout_title);
+        title.setText(titleName);
         listView.requestFocus();
         listView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

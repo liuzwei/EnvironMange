@@ -21,6 +21,7 @@
                 android:paddingRight="10dp"
                 />
         <TextView
+                android:id="@+id/score_layout_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="办公楼 楼层一 E302 卫生打分"

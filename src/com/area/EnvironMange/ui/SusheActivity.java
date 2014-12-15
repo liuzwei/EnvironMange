@@ -1,14 +1,31 @@
 package com.area.EnvironMange.ui;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.*;
 import com.area.EnvironMange.R;
+import com.area.EnvironMange.adapter.TeachBuildingAreaAdapter;
 import com.area.EnvironMange.base.BaseActivity;
+import com.area.EnvironMange.base.Constants;
+import com.area.EnvironMange.common.InternetURL;
+import com.area.EnvironMange.model.Building;
+import com.area.EnvironMange.model.SanitationArea;
 import com.area.EnvironMange.widget.BeizhuDialog;
+import net.tsz.afinal.http.AjaxCallBack;
+import org.apache.http.entity.StringEntity;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * author: ${zhanghailong}
@@ -17,88 +34,80 @@ import com.area.EnvironMange.widget.BeizhuDialog;
  * 类的功能、说明写在此处.
  */
 public class SusheActivity extends BaseActivity implements View.OnClickListener{
-    private String[] province = new String[] {"请选择建筑物","学生宿舍1号楼", "学生宿舍2号楼","学生宿舍3号楼","学生宿舍4号楼","学生宿舍5号楼"};
-//    private String[] city = new String[]{};
-//    private String[][] pandc = new String[][]{{"请选择楼层"},{"请选择楼层","楼层一","楼层二","楼层三","楼层四"},{"请选择楼层","楼层一","楼层二","楼层三","楼层四"},{"请选择楼层","楼层一","楼层二","楼层三","楼层四"},{"请选择楼层","楼层一","楼层二","楼层三","楼层四"},{"请选择楼层","楼层一","楼层二","楼层三","楼层四"}};
-    private Spinner sp;
-//    private Spinner sp2;
-    private Context context;
+    private static final String TAG = JiaoxuelouActivity.class.getSimpleName();
 
-    ArrayAdapter<String> adapter ;
+    private Spinner teachBuilding;//选择教学楼
+    private List<Building> buildingList = new ArrayList<Building>();//取回来的建筑物数据存放在这
+    private List<String> buildingNames = new ArrayList<String>();//存放建筑物的名字
 
-//    ArrayAdapter<String> adapter2;
+    ArrayAdapter<String> teachBuildingAdapter ;
 
-    private LinearLayout contentliner;
+    private ListView areaListView;
+    private TeachBuildingAreaAdapter areaAdapter;//展示某楼层的区域
+    private List<SanitationArea> areaList = new ArrayList<SanitationArea>();
+    private String buildingName;
+    private String buildingID;
     private ImageView back;
-    private TextView title;
-    private TextView titleitem;
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sushe);
-        context = this;
         initView();
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, province);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp = (Spinner) findViewById(R.id.province);
-        sp.setAdapter(adapter);
-        sp.setOnItemSelectedListener(selectListener);
-
-//        adapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, city);
-//        adapter2.setDropDownViewResource
-//                (android.R.layout.simple_spinner_dropdown_item);
-//        sp2 = (Spinner) findViewById(R.id.city);
-//        sp2.setAdapter(adapter2);
-//        sp2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                if(position != 0){
-//                    contentliner.setVisibility(View.VISIBLE);
-//                    contentliner.setOnClickListener(SusheActivity.this);
-//                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
+        getBuildings();
+        registerBoradcastReceiver();
     }
 
     private void initView() {
-        contentliner = (LinearLayout) this.findViewById(R.id.contentsliner);
-        contentliner.setVisibility(View.GONE);
         back = (ImageView) this.findViewById(R.id.back);
         back.setOnClickListener(this);
-        title = (TextView) this.findViewById(R.id.title);
-        String name  = getIntent().getExtras().getString("name");
-        title.setText(name);
-        titleitem = (TextView) this.findViewById(R.id.titleitem);
-        titleitem.setOnClickListener(this);
-
-    }
-
-    private AdapterView.OnItemSelectedListener selectListener = new AdapterView.OnItemSelectedListener(){
-        public void onItemSelected(AdapterView parent, View v, int position,long id){
-            int pos = sp.getSelectedItemPosition();
-            if(position != 0){
-                contentliner.setVisibility(View.VISIBLE);
-                contentliner.setOnClickListener(SusheActivity.this);
-            }else{
-                contentliner.setVisibility(View.GONE);
+        teachBuildingAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, buildingNames);
+        teachBuildingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        teachBuilding = (Spinner) findViewById(R.id.province);
+        teachBuilding.setAdapter(teachBuildingAdapter);
+        teachBuilding.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.e(TAG, position + "");
+                if (position>0) {
+                    areaList.clear();
+                    areaAdapter.notifyDataSetChanged();
+                    Building building = buildingList.get(position-1);
+                    try {
+                        //获取选中宿舍楼的区域
+                        getArea(building.getID());
+                        buildingName = building.getMC();
+                        buildingID = building.getID();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }else {
+                    areaList.clear();
+                    areaAdapter.notifyDataSetChanged();
+                }
             }
-//            adapter2 = new ArrayAdapter<String>
-//                    (context,android.R.layout.simple_spinner_item, pandc[pos]);
-//            sp2.setAdapter(adapter2);
-//                     Toast.makeText(cityset.this, pandc[pos].toString(), Toast.LENGTH_SHORT).show();
-        }
 
-        public void onNothingSelected(AdapterView arg0){
-//                     Toast.makeText(cityset.this, "没选择", Toast.LENGTH_SHORT).show();
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-        }
+            }
+        });
 
-    };
+
+        areaListView = (ListView) this.findViewById(R.id.jiaoxuelou_lsv);
+        areaAdapter = new TeachBuildingAreaAdapter(areaList, mContext);
+        areaListView.setAdapter(areaAdapter);
+
+        areaListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //获取检查项目
+                SanitationArea area =  areaList.get(position);
+                Intent score = new Intent(SusheActivity.this, ScoreActivity.class);
+                score.putExtra("areaID", area.getID());
+                score.putExtra("titleName", buildingName + " " + area.getMc() +"  卫生打分");
+                startActivity(score);
+            }
+        });
+    }
 
     @Override
     public void onClick(View v) {
@@ -113,33 +122,106 @@ public class SusheActivity extends BaseActivity implements View.OnClickListener{
                 Intent score = new Intent(this, ScoreActivity.class);
                 startActivity(score);
                 break;
-//            case R.id.beizhu:
-//                BeizhuDialog dialog = new BeizhuDialog(this, R.style.dialog1);
-//                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//                dialog.show();
-//                break;
+            case R.id.beizhu:
+                BeizhuDialog dialog = new BeizhuDialog(this, R.style.dialog1);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.show();
+                break;
         }
     }
 
-    //    private OnItemSelectedListener selectListener1 = new OnItemSelectedListener(){
-//        public void onItemSelected(AdapterView parent, View v, int position,long id){
-//            int pos = sp2.getSelectedItemPosition();
-//            adapter2 = new ArrayAdapter<String>
-//                    (context,android.R.layout.simple_spinner_item, pandc[pos]);
-//            sp2.setAdapter(adapter2);
-////                     Toast.makeText(cityset.this, pandc[pos].toString(), Toast.LENGTH_SHORT).show();
-//            contentliner.setVisibility(View.VISIBLE);
-//        }
-//
-//        public void onNothingSelected(AdapterView arg0){
-////                     Toast.makeText(cityset.this, "没选择", Toast.LENGTH_SHORT).show();
-//
-//        }
-//
-//    };
-//弹出顶部主菜单
+    //弹出顶部主菜单
     public void onTopMenuPopupButtonClick(View view){
         mainPopMenu.showAsDropDown(view);
     }
+
+    /**
+     * 获取建筑物信息
+     */
+    private void getBuildings(){
+        getFinalHttp().post(
+                InternetURL.GET_SUSHE_URL,
+                new AjaxCallBack<Object>(){
+                    @Override
+                    public void onSuccess(Object o) {
+                        try {
+                            JSONArray array = new JSONArray(o.toString());
+                            for (int i=0; i<array.length(); i++){
+                                Building building = getGson().fromJson(String.valueOf(array.getJSONObject(i)), Building.class);
+                                buildingList.add(building);
+                                if (i==0){
+                                    buildingNames.add("请选择宿舍楼");
+                                }
+                                buildingNames.add(building.getMC());
+                            }
+                            //取回来的宿舍楼信息, 根据宿舍楼数据封装要显示的信息
+                            teachBuildingAdapter.notifyDataSetChanged();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        super.onSuccess(o);
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t, int errorNo, String strMsg) {
+                        super.onFailure(t, errorNo, strMsg);
+                    }
+                });
+    }
+
+    /**
+     *  获取某个宿舍楼的卫生区域
+     * @param buildingID  建筑物ID
+     */
+    private void getArea(String buildingID) throws JSONException, UnsupportedEncodingException {
+        JSONObject object = new JSONObject();
+        object.put("buildingID", buildingID);
+        StringEntity entity = new StringEntity(object.toString());
+
+        getFinalHttp().post(
+                InternetURL.GET_SS_AREA_URL,
+                entity,
+                "application/json; charset=utf-8",
+                new AjaxCallBack<Object>() {
+                    @Override
+                    public void onSuccess(Object o) {
+                        super.onSuccess(o);
+                        try {
+                            JSONArray array = new JSONArray(o.toString());
+                            for (int i=0; i<array.length(); i++){
+                                areaList.add(getGson().fromJson(array.getJSONObject(i).toString(), SanitationArea.class));
+                            }
+                            areaAdapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t, int errorNo, String strMsg) {
+                        super.onFailure(t, errorNo, strMsg);
+                    }
+                }
+        );
+    }
+
+    public void registerBoradcastReceiver(){
+        IntentFilter myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction(Constants.BROADCAST);
+        registerReceiver(mBroadcastReceiver, myIntentFilter);
+    }
+
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver(){
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if(action.equals(Constants.BROADCAST)){
+                Toast.makeText(mContext, "保存成功", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    };
 }
 

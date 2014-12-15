@@ -11,11 +11,17 @@ public class InternetURL {
     //获得建筑物
     public static String GET_BUILDING_URL = MAIN_URL+"GetJs";
 
+    //获取所有宿舍
+    public static String GET_SUSHE_URL = MAIN_URL+"GetSS";
+
     //获取教学楼的楼层信息
     public static String GET_FLOOR_URL = MAIN_URL+"GetLcByBuildingID";
 
     //获取某教学楼楼层的卫生区域
     public static String GET_BUILDING_AREA_URL = MAIN_URL+"GetAreaInfoByAreaid";
+
+    //获取宿舍卫生区域
+    public static String GET_SS_AREA_URL = MAIN_URL+"GetSSAreaInfoByBuildingID";
 
     //获取所有的建筑物的检查项目
     public static String GET_AREA_TYPES = MAIN_URL+"GetAreaTypesByAreaID";
@@ -25,6 +31,7 @@ public class InternetURL {
 
     //提交某一区域卫生成绩
     public static String COMMIT_AREA_SCORE = MAIN_URL+"CommitProjectFs";
+
 
 
 }
