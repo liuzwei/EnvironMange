@@ -108,7 +108,11 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
                         Toast.makeText(mContext, project.getXmmc()+"不能超过"+project.getZdfs()+"分", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    SanitaionAreaAssementItem item = new SanitaionAreaAssementItem(project.getID(), Float.parseFloat(scoreMap.get(i)), reasonMap.get(i));
+                    String reason = "";
+                    if (reasonMap.containsKey(i)) {
+                        reason = reasonMap.get(i);
+                    }
+                    SanitaionAreaAssementItem item = new SanitaionAreaAssementItem(project.getID(), Float.parseFloat(scoreMap.get(i)), reason);
                     array.put(SanitaionAreaAssementItem.fromObject2Json(item));
                 }
                 try {
@@ -130,7 +134,11 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
                         Toast.makeText(mContext, project.getXmmc()+"不能超过"+project.getZdfs()+"分", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    SanitaionAreaAssementItem item = new SanitaionAreaAssementItem(project.getID(), Float.parseFloat(scoreMap.get(i)), reasonMap.get(i));
+                    String reason = "";
+                    if (reasonMap.containsKey(i)) {
+                         reason = reasonMap.get(i);
+                    }
+                    SanitaionAreaAssementItem item = new SanitaionAreaAssementItem(project.getID(), Float.parseFloat(scoreMap.get(i)), reason);
                     array2.put(SanitaionAreaAssementItem.fromObject2Json(item));
                 }
                 try {
