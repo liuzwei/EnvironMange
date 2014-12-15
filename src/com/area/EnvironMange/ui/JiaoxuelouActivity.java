@@ -53,7 +53,7 @@ public class JiaoxuelouActivity extends BaseActivity implements View.OnClickList
     private ListView areaListView;
     private TeachBuildingAreaAdapter areaAdapter;//展示某楼层的区域
     private List<SanitationArea> areaList = new ArrayList<SanitationArea>();
-
+    private ImageView back;
     private String buildingID;
      public void onCreate(Bundle savedInstanceState) {
          super.onCreate(savedInstanceState);
@@ -142,6 +142,8 @@ public class JiaoxuelouActivity extends BaseActivity implements View.OnClickList
                 startActivity(score);
             }
         });
+        back = (ImageView) this.findViewById(R.id.back);
+        back.setOnClickListener(this);
     }
 
     @Override
