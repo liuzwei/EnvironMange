@@ -37,95 +37,19 @@
                    android:background="@drawable/top_back_select"
                    android:onClick="onTopMenuPopupButtonClick"/>
     </RelativeLayout>
-    <ListView
-            android:id="@+id/score_layout_lsv"
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            >
+            <ListView
+                    android:id="@+id/score_layout_lsv"
+                    android:layout_width="match_parent"
+                    android:descendantFocusability="beforeDescendants"
+                    android:layout_height="wrap_content">
 
-    </ListView>
-    <!--<View android:layout_width="match_parent"-->
-          <!--android:layout_height="0.1dp"-->
-          <!--android:background="#d1d1d1"-->
-          <!--android:layout_marginBottom="10dp"/>-->
-
-    <!--<LinearLayout android:layout_width="match_parent"-->
-                  <!--android:layout_height="wrap_content"-->
-                  <!--android:orientation="horizontal"-->
-                  <!--android:padding="10dp"-->
-                  <!--android:id="@+id/linearname">-->
-        <!--<TextView android:layout_width="65dp"-->
-                  <!--android:layout_height="wrap_content"-->
-                  <!--android:text="桌面"-->
-                  <!--android:textSize="16sp"-->
-                  <!--android:textColor="#999999"/>-->
-        <!--<EditText android:layout_width="match_parent"-->
-                  <!--android:layout_height="wrap_content"-->
-                  <!--android:textColor="#333333"-->
-                  <!--android:textSize="16sp"-->
-                  <!--android:hint="最大分20"-->
-                  <!--android:id="@+id/score"/>-->
-    <!--</LinearLayout>-->
-    <!--<LinearLayout android:layout_width="match_parent"-->
-                  <!--android:layout_height="wrap_content"-->
-                  <!--android:orientation="horizontal"-->
-                  <!--android:padding="10dp"-->
-            <!-->-->
-        <!--<TextView android:layout_width="65dp"-->
-                  <!--android:paddingLeft="15dp"-->
-                  <!--android:layout_height="wrap_content"-->
-                  <!--android:text="扣分原因"-->
-                  <!--android:textSize="12dp"-->
-                  <!--android:textColor="#999999"/>-->
-        <!--<EditText android:layout_width="match_parent"-->
-                  <!--android:layout_height="wrap_content"-->
-                  <!--android:textColor="#333333"-->
-                  <!--android:textSize="12dp"-->
-                  <!--android:hint="请说明扣分原因"-->
-                <!--/>-->
-    <!--</LinearLayout>-->
-    <!--<View android:layout_width="match_parent"-->
-          <!--android:layout_height="0.1dp"-->
-          <!--android:background="#d1d1d1"-->
-          <!--android:layout_marginBottom="10dp"/>-->
-    <!--<LinearLayout android:layout_width="match_parent"-->
-                  <!--android:layout_height="wrap_content"-->
-                  <!--android:orientation="horizontal"-->
-                  <!--android:padding="10dp"-->
-                 <!-->-->
-        <!--<TextView android:layout_width="65dp"-->
-                  <!--android:layout_height="wrap_content"-->
-                  <!--android:text="窗台"-->
-                  <!--android:textSize="16sp"-->
-                  <!--android:textColor="#999999"/>-->
-        <!--<EditText android:layout_width="match_parent"-->
-                  <!--android:layout_height="wrap_content"-->
-                  <!--android:textColor="#333333"-->
-                  <!--android:textSize="16sp"-->
-                  <!--android:hint="最大分20"-->
-                  <!--/>-->
-    <!--</LinearLayout>-->
-    <!--<LinearLayout android:layout_width="match_parent"-->
-                  <!--android:layout_height="wrap_content"-->
-                  <!--android:orientation="horizontal"-->
-                  <!--android:padding="10dp"-->
-            <!-->-->
-        <!--<TextView android:layout_width="65dp"-->
-                  <!--android:paddingLeft="15dp"-->
-                  <!--android:layout_height="wrap_content"-->
-                  <!--android:text="扣分原因"-->
-                  <!--android:textSize="12dp"-->
-                  <!--android:textColor="#999999"/>-->
-        <!--<EditText android:layout_width="match_parent"-->
-                  <!--android:layout_height="wrap_content"-->
-                  <!--android:textColor="#333333"-->
-                  <!--android:textSize="12dp"-->
-                  <!--android:hint="请说明扣分原因"-->
-                <!--/>-->
-    <!--</LinearLayout>-->
-    <!--<View android:layout_width="match_parent"-->
-          <!--android:layout_height="0.1dp"-->
-          <!--android:background="#d1d1d1"-->
-          <!--android:layout_marginBottom="10dp"/>-->
+            </ListView>
+   </LinearLayout>
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:orientation="horizontal"

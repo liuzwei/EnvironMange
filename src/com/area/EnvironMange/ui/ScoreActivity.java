@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.*;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.adapter.AreaTypeAdapter;
@@ -68,6 +69,18 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
         listView = (ListView) findViewById(R.id.score_layout_lsv);
         areaTypeAdapter = new AreaTypeAdapter(list, mContext);
         listView.setAdapter(areaTypeAdapter);
+        listView.requestFocus();
+        listView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                listView.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                listView.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
+            }
+        });
 
     }
 
