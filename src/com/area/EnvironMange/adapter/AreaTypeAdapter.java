@@ -1,7 +1,9 @@
 package com.area.EnvironMange.adapter;
 
 import android.content.Context;
+import android.text.Editable;
 import android.text.Layout;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.model.SanitaionAreaProject;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -21,10 +24,15 @@ public class AreaTypeAdapter extends BaseAdapter {
     private Context mContext;
     private ViewHolder holder;
     private static boolean isGo = true;
+    private HashMap<Integer, String> scoreMap;
+    private HashMap<Integer, String> reasonMap;
 
-    public AreaTypeAdapter(List<SanitaionAreaProject> list, Context mContext) {
+
+    public AreaTypeAdapter(List<SanitaionAreaProject> list, Context mContext, HashMap<Integer, String> scoreMap, HashMap<Integer, String> reasonMap) {
         this.list = list;
         this.mContext = mContext;
+        this.scoreMap = scoreMap;
+        this.reasonMap = reasonMap;
     }
 
     @Override
@@ -43,7 +51,7 @@ public class AreaTypeAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null){
             holder = new ViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.score_item, null);
@@ -58,13 +66,38 @@ public class AreaTypeAdapter extends BaseAdapter {
         SanitaionAreaProject project = list.get(position);
         holder.aretype.setText(project.getXmmc());
         holder.maxScore.setHint("最大分数:"+project.getZdfs());
-        if (isGo) {
-            holder.maxScore.setId(1000 + position);
-            holder.reduceReason.setId(2000 + position);
-        }
-        if (position == list.size()-1){
-            isGo = false;
-        }
+        holder.maxScore.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                scoreMap.put(position, s.toString());
+            }
+        });
+        holder.reduceReason.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                reasonMap.put(position, s.toString());
+            }
+        });
 
         return convertView;
     }

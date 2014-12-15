@@ -24,6 +24,7 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -43,6 +44,10 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
     private TextView title;
     private List<SanitaionAreaProject> list  =new ArrayList<SanitaionAreaProject>();
     private String titleName;
+
+    //定义一个HashMap，用来存放EditText的值，Key是position
+    HashMap<Integer, String> scoreMap = new HashMap<Integer, String>();
+    HashMap<Integer, String> reasonMap = new HashMap<Integer, String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +73,7 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
 
         beizhu = (EditText) this.findViewById(R.id.score_layout_beizhu);
         listView = (ListView) findViewById(R.id.score_layout_lsv);
-        areaTypeAdapter = new AreaTypeAdapter(list, mContext);
+        areaTypeAdapter = new AreaTypeAdapter(list, mContext, scoreMap, reasonMap);
         listView.setAdapter(areaTypeAdapter);
         title = (TextView) this.findViewById(R.id.score_layout_title);
         title.setText(titleName);
@@ -95,17 +100,17 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
                 JSONArray array = new JSONArray();
                 for (int i=0; i<list.size(); i++) {
                     SanitaionAreaProject project = list.get(i);
-                    EditText score = (EditText) this.findViewById(1000+i);
-                    if (StringUtil.isNullOrEmpty(score.getText().toString())){
+//                    EditText score = (EditText) this.findViewById(1000+i);
+                    if (StringUtil.isNullOrEmpty(scoreMap.get(i))){
                         Toast.makeText(mContext, project.getXmmc()+" 没有打分", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if (Double.parseDouble(score.getText().toString()) > Integer.parseInt(project.getZdfs())){
+                    if (Double.parseDouble(scoreMap.get(i)) > Integer.parseInt(project.getZdfs())){
                         Toast.makeText(mContext, project.getXmmc()+"不能超过"+project.getZdfs()+"分", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    EditText reason = (EditText) this.findViewById(2000+i);
-                    SanitaionAreaAssementItem item = new SanitaionAreaAssementItem(project.getID(), Float.parseFloat(score.getText().toString()), reason.getText().toString());
+//                    EditText reason = (EditText) this.findViewById(2000+i);
+                    SanitaionAreaAssementItem item = new SanitaionAreaAssementItem(project.getID(), Float.parseFloat(scoreMap.get(i)), reasonMap.get(i));
                     array.put(SanitaionAreaAssementItem.fromObject2Json(item));
                 }
                 try {
