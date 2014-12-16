@@ -1,12 +1,12 @@
 package com.area.EnvironMange.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.base.BaseActivity;
-import com.area.EnvironMange.util.SystemExitUtil;
 
 /**
  * author: ${zhanghailong}
@@ -17,13 +17,13 @@ import com.area.EnvironMange.util.SystemExitUtil;
 public class SettingActivity extends BaseActivity implements View.OnClickListener {
     private ImageView back;
     private TextView setting_exit;
+    private TextView updatePass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_layout);
         initView();
 
-        SystemExitUtil.getInstance().addActivity(this);
     }
 
     private void initView() {
@@ -31,6 +31,9 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         back.setOnClickListener(this);
         setting_exit = (TextView) this.findViewById(R.id.setting_exit);
         setting_exit.setOnClickListener(this);
+
+        updatePass = (TextView) this.findViewById(R.id.set_update_pass);
+        updatePass.setOnClickListener(this);
     }
 
     @Override
@@ -41,7 +44,10 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.setting_exit:
-                SystemExitUtil.getInstance().exit();
+
+                break;
+            case R.id.set_update_pass:
+                startActivity(new Intent(SettingActivity.this, UpdatePassActivity.class));
                 break;
         }
     }

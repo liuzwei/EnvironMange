@@ -16,29 +16,45 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/ceshi_05"
                 android:layout_centerVertical="true"
-                android:id="@+id/detail_back"
+                android:id="@+id/update_back"
                 android:paddingLeft="15dp"
                 android:paddingRight="10dp"
                 />
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="打分明细"
+                android:text="修改密码"
                 android:textSize="15dp"
                 android:textColor="#FFFFFF"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
+                android:id="@+id/title"
                 />
     </RelativeLayout>
-    <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-    <LinearLayout
-            android:id="@+id/detail_project"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            </LinearLayout>
-    </ScrollView>
+    <TextView
+            android:text="密码:"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    <EditText
+            android:inputType="textPassword"
+            android:id="@+id/update_pass_pwd"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:hint="请输入要修改的密码"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    <Button
+            android:id="@+id/update_pass_btn"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="修改"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 </LinearLayout>

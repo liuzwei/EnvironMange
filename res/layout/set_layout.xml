@@ -46,7 +46,10 @@
                   android:background="@drawable/zhuye_item_select"
                   android:layout_marginTop="5dp"
             >
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        <TextView
+                android:id="@+id/set_update_pass"
+                android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
                   android:text="修改密码"
                   android:layout_weight="1"
                   android:textSize="18sp"

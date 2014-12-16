@@ -1,5 +1,6 @@
 package com.area.EnvironMange.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -93,9 +94,11 @@ public class IndexActivity extends BaseActivity implements View.OnClickListener,
         assessment = list.get(position);
         switch (flag){
             case 1:
-                DetailDialog dialog = new DetailDialog( assessment , this, R.style.dialog1);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.show();
+                SanitationAreaAssessment asm = list.get(position);
+                Intent intent = new Intent(IndexActivity.this, ScoreDetailActivity.class );
+                intent.putExtra("assessmentID", asm.getID());
+                intent.putExtra("beizhu", asm.getBz());
+                startActivity(intent);
                 break;
 
         }

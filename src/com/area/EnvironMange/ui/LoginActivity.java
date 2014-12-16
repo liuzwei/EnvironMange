@@ -1,5 +1,6 @@
 package com.area.EnvironMange.ui;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,11 +10,8 @@ import android.widget.Toast;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.base.BaseActivity;
 import com.area.EnvironMange.common.InternetURL;
-import com.area.EnvironMange.util.IntentUtil;
 import com.area.EnvironMange.util.StringUtil;
-import com.area.EnvironMange.util.SystemExitUtil;
 import net.tsz.afinal.http.AjaxCallBack;
-import net.tsz.afinal.http.AjaxParams;
 import org.apache.http.entity.StringEntity;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,14 +25,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     private EditText username;
     private EditText password;
     private Button loginBtn;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
         initView();
-
-        SystemExitUtil.getInstance().addActivity(this);
     }
 
     private void initView(){
@@ -55,6 +52,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
             case R.id.login_btn:
                 if (checkParams()){
                     try {
+                        progressDialog = new ProgressDialog(LoginActivity.this);
+                        progressDialog.setMessage("正在登录...");
+                        progressDialog.setCanceledOnTouchOutside(false);
+                        progressDialog.show();
                         login();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -89,6 +90,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                     @Override
                     public void onSuccess(Object o) {
                         super.onSuccess(o);
+                        if (progressDialog != null){
+                            progressDialog.dismiss();
+                        }
                         if ("-1".equals(o.toString())) {
                             Toast.makeText(mContext, "用户名或密码错误", Toast.LENGTH_SHORT).show();
                         } else {
@@ -102,8 +106,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                     @Override
                     public void onFailure(Throwable t, int errorNo, String strMsg) {
                         super.onFailure(t, errorNo, strMsg);
-                        Toast.makeText(mContext, "网络请求失败", Toast.LENGTH_SHORT).show();
-//                        startActivity(new Intent(LoginActivity.this, CenterActivity.class));
+                        if (progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                        Toast.makeText(mContext, "用户名或密码错误", Toast.LENGTH_SHORT).show();
                     }
                 }
         );

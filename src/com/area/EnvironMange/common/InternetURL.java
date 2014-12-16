@@ -60,4 +60,7 @@ public class InternetURL {
     //更改密码
     public static String UPDATE_PASSWORD_URL = MAIN_URL+"UpdateUserInfo";
 
+    //更新保存分数
+    public static String UPDATE_SAVE_FS_URL = MAIN_URL+"UpdateSaveProjectFs";
+
 }

@@ -7,10 +7,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import com.area.EnvironMange.adapter.SelectUndoAdapter;
 import com.area.EnvironMange.menu.MainPopMenu;
 import com.area.EnvironMange.ui.*;
-import com.area.EnvironMange.util.SystemExitUtil;
 import com.google.gson.Gson;
 import net.tsz.afinal.FinalHttp;
 

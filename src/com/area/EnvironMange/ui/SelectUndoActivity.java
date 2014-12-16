@@ -106,6 +106,7 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
                 SanitationAreaAssessment asm = list.get(position);
                 Intent intent = new Intent(SelectUndoActivity.this, ModifyScoreActivity.class );
                 intent.putExtra("assessmentID", asm.getID());
+                intent.putExtra("beizhu", asm.getBz());
                 startActivityForResult(intent, MODIFY_CODE);
                 break;
             case 2:
@@ -158,7 +159,18 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode== Activity.RESULT_OK && requestCode == MODIFY_CODE){
-
+            boolean isUpdate = data.getBooleanExtra("isUpdate", false);
+            if (isUpdate){
+                Toast.makeText(mContext, "更新成功", Toast.LENGTH_SHORT).show();
+                try {
+                    list.clear();
+                    getData();//更新数据
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }else {
+                Toast.makeText(mContext, "更新失败", Toast.LENGTH_SHORT).show();
+            }
         }
 
     }

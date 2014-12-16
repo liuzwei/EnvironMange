@@ -1,5 +1,6 @@
 package com.area.EnvironMange.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -35,6 +36,7 @@ public class ModifyScoreActivity extends BaseActivity{
     private ImageView back;
     private List<SanitaionAreaAssementItemView> list  =new ArrayList<SanitaionAreaAssementItemView>();
     private String assessmentID;
+    private String beizhuStr;//备注
 
 
     @Override
@@ -43,6 +45,7 @@ public class ModifyScoreActivity extends BaseActivity{
         setContentView(R.layout.modify_score_layout);
         initView();
         assessmentID = getIntent().getStringExtra("assessmentID");
+        beizhuStr = getIntent().getStringExtra("beizhu");
         try {
             getData(assessmentID);
         } catch (Exception e) {
@@ -54,12 +57,10 @@ public class ModifyScoreActivity extends BaseActivity{
         projectLayout  = (LinearLayout) this.findViewById(R.id.modify_project_layout);
         beizhu = (EditText) this.findViewById(R.id.modify_layout_beizhu);
         commit = (Button) this.findViewById(R.id.modify_sub);
-        save = (Button) this.findViewById(R.id.modify_save);
         back = (ImageView) this.findViewById(R.id.modify_back);
 
         back.setOnClickListener(this);
         commit.setOnClickListener(this);
-        save.setOnClickListener(this);
     }
 
     @Override
@@ -83,36 +84,12 @@ public class ModifyScoreActivity extends BaseActivity{
 //                        Toast.makeText(mContext, project.getProjectMC()+"不能超过"+"分", Toast.LENGTH_SHORT).show();
 //                        return;
 //                    }
-                    SanitaionAreaAssementItem item = new SanitaionAreaAssementItem(itemView.getAreaAssementID(),itemView.getProjectID(), Float.parseFloat(score.getText().toString()), reason.getText().toString());
+                    SanitaionAreaAssementItem item = new SanitaionAreaAssementItem(itemView.getAsItemID(),itemView.getProjectID(), Float.parseFloat(score.getText().toString()), reason.getText().toString());
                     array.put(SanitaionAreaAssementItem.fromObject2Json(item));
                 }
                 try {
                     //提交分数
-                    saveProject(array, InternetURL.COMMIT_AREA_SCORE, false);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                break;
-            case R.id.modify_save:
-                JSONArray array2 = new JSONArray();
-                for (int i=0; i<list.size(); i++) {
-                    EditText score = (EditText) this.findViewById(1000+i);
-                    EditText reason = (EditText) this.findViewById(2000+i);
-                    SanitaionAreaAssementItemView project = list.get(i);
-//                    if (StringUtil.isNullOrEmpty(score.getText().toString())){
-//                        Toast.makeText(mContext, project.getXmmc()+" 没有打分", Toast.LENGTH_SHORT).show();
-//                        return;
-//                    }
-//                    if (Double.parseDouble(score.getText().toString()) > Double.parseDouble((project.getZdfs()))){
-//                        Toast.makeText(mContext, project.getXmmc()+"不能超过"+project.getZdfs()+"分", Toast.LENGTH_SHORT).show();
-//                        return;
-//                    }
-                    SanitaionAreaAssementItem item = new SanitaionAreaAssementItem(project.getAreaAssementID(), project.getProjectID(), Float.parseFloat(score.getText().toString()), reason.getText().toString());
-                    array2.put(SanitaionAreaAssementItem.fromObject2Json(item));
-                }
-                try {
-                    //保存分数
-                    saveProject(array2, InternetURL.SAVE_AREA_SCORE, true);
+                    saveProject(array, InternetURL.UPDATE_SAVE_FS_URL, false);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -150,6 +127,7 @@ public class ModifyScoreActivity extends BaseActivity{
                                 scoreReason.setText(itemView.getKfyy());
                                 projectLayout.addView(layout);
                             }
+                            beizhu.setText(beizhuStr);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -158,6 +136,7 @@ public class ModifyScoreActivity extends BaseActivity{
                     @Override
                     public void onFailure(Throwable t, int errorNo, String strMsg) {
                         super.onFailure(t, errorNo, strMsg);
+                        Toast.makeText(mContext, "获取数据失败，请稍后重试", Toast.LENGTH_SHORT).show();
                     }
                 }
         );
@@ -170,6 +149,7 @@ public class ModifyScoreActivity extends BaseActivity{
         object.put("userid",userid);
         object.put("areaID", assessmentID);
         object.put("bz", beizhu.getText().toString());
+        object.put("asmentID", list.get(0).getAreaAssementID());
 
         StringEntity entity = new StringEntity(object.toString(), "utf-8");
         getFinalHttp().post(
@@ -182,9 +162,11 @@ public class ModifyScoreActivity extends BaseActivity{
                         super.onSuccess(o);
                         if (o.toString().equals("true")){
                             Intent intent = new Intent(Constants.BROADCAST);
-                            intent.putExtra("isSave", isSave);
-                            mContext.sendBroadcast(intent);
-//                            finish();
+                            intent.putExtra("isUpdate", true);
+                            setResult(Activity.RESULT_OK, intent);
+                            finish();
+                        }else {
+                            Toast.makeText(mContext, "修改失败,请稍后重试", Toast.LENGTH_SHORT).show();
                         }
                     }
 

@@ -15,5 +15,5 @@
         <item>历史成绩</item>
         <item>设置</item>
     </string-array>
-    <string name="exit_str">Are you sure to exit</string>
+    <string name="exit_str">再按一次推出程序</string>
 </resources>

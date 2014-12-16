@@ -6,12 +6,11 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import com.area.EnvironMange.MainActivity;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.adapter.CenterAdapter;
+import com.area.EnvironMange.base.ActivityTack;
 import com.area.EnvironMange.base.BaseActivity;
 import com.area.EnvironMange.model.Center;
-import com.area.EnvironMange.util.SystemExitUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -114,7 +113,6 @@ public class CenterActivity extends BaseActivity implements View.OnClickListener
             }
         });
 
-        SystemExitUtil.getInstance().addActivity(this);
     }
     //再摁退出程序
     @Override
@@ -125,7 +123,7 @@ public class CenterActivity extends BaseActivity implements View.OnClickListener
                 alert(R.string.exit_str);
                 touchTime = currentTime;
             }else {
-                SystemExitUtil.getInstance().exit();
+                ActivityTack.getInstanse().exit(mContext);
             }
             return true;
         }

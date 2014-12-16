@@ -9,13 +9,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.adapter.BuildingAdapter;
-import com.area.EnvironMange.adapter.OnClickContentItemListener;
 import com.area.EnvironMange.base.BaseActivity;
 import com.area.EnvironMange.common.InternetURL;
 import com.area.EnvironMange.model.Building;
-import com.area.EnvironMange.util.SystemExitUtil;
-import com.google.gson.Gson;
-import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.http.AjaxCallBack;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,8 +36,6 @@ public class MainBuildingsActivity extends BaseActivity implements View.OnClickL
         initView();
 
         getBuildings();
-
-        SystemExitUtil.getInstance().addActivity(this);
     }
 
     private void initView(){

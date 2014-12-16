@@ -8,7 +8,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.base.BaseActivity;
-import com.area.EnvironMange.util.SystemExitUtil;
 
 /**
  * author: ${zhanghailong}
@@ -25,8 +24,6 @@ public class AreaActivity extends BaseActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.area_layout);
         initView();
-
-        SystemExitUtil.getInstance().addActivity(this);
     }
 
     private void initView() {
