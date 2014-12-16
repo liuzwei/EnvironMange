@@ -314,4 +314,10 @@ public class JiaoxuelouActivity extends BaseActivity implements View.OnClickList
         }
 
     };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mBroadcastReceiver);
+    }
 }

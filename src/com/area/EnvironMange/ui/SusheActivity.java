@@ -228,5 +228,11 @@ public class SusheActivity extends BaseActivity implements View.OnClickListener{
         }
 
     };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mBroadcastReceiver);
+    }
 }
 

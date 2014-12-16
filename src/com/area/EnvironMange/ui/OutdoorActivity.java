@@ -1,22 +1,31 @@
 package com.area.EnvironMange.ui;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.*;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.adapter.BuildingAdapter;
+import com.area.EnvironMange.adapter.TeachBuildingAreaAdapter;
 import com.area.EnvironMange.base.BaseActivity;
+import com.area.EnvironMange.base.Constants;
 import com.area.EnvironMange.common.InternetURL;
 import com.area.EnvironMange.model.Building;
+import com.area.EnvironMange.model.SanitationArea;
 import com.area.EnvironMange.util.SystemExitUtil;
+import com.area.EnvironMange.widget.BeizhuDialog;
 import net.tsz.afinal.http.AjaxCallBack;
+import org.apache.http.entity.StringEntity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,82 +36,132 @@ import java.util.List;
  * 类的功能、说明写在此处.
  */
 public class OutdoorActivity extends BaseActivity implements View.OnClickListener{
-    private List<Building> list = new ArrayList<Building>();
-    private ListView listView;
-    private BuildingAdapter adapter;
+    private static final String TAG = JiaoxuelouActivity.class.getSimpleName();
+
+    private ListView areaListView;
+    private TeachBuildingAreaAdapter areaAdapter;//展示某楼层的区域
+    private List<SanitationArea> areaList = new ArrayList<SanitationArea>();
     private ImageView back;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.building_layout);
         initView();
-        getBuildings();
-        SystemExitUtil.getInstance().addActivity(this);
+        registerBoradcastReceiver();
+        try {
+            getArea();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private void initView(){
-        listView = (ListView) findViewById(R.id.building_lsv);
-        adapter = new BuildingAdapter(mContext, list);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    private void initView() {
+        back = (ImageView) this.findViewById(R.id.back);
+        back.setOnClickListener(this);
+
+
+
+        areaListView = (ListView) this.findViewById(R.id.building_lsv);
+        areaAdapter = new TeachBuildingAreaAdapter(areaList, mContext);
+        areaListView.setAdapter(areaAdapter);
+
+        areaListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //点击某一项时触发
-//                Intent floor = new Intent(OutdoorActivity.this,FloorSelectActivity.class);
-//                startActivity(floor);
+                //获取检查项目
+                SanitationArea area =  areaList.get(position);
                 Intent score = new Intent(OutdoorActivity.this, ScoreActivity.class);
+                score.putExtra("areaID", area.getID());
+                score.putExtra("titleName",   area.getMc() +"  卫生打分");
                 startActivity(score);
             }
         });
-        back = (ImageView) this.findViewById(R.id.back);
-        back.setOnClickListener(this);
-    }
-
-    private void getBuildings(){
-//        getFinalHttp().get(
-//                InternetURL.GET_BUILDING_URL,
-//                new AjaxCallBack<Object>() {
-//                    @Override
-//                    public void onSuccess(Object o) {
-//                        try {
-//                            JSONArray array = new JSONArray(o.toString());
-//                            for (int i=0; i<array.length(); i++){
-//                                JSONObject object = array.getJSONObject(i);
-//                                list.add(Building.jsonObject2Object(object));
-//                            }
-//                            adapter.notifyDataSetChanged();
-//                            Log.i("Main", array.toString());
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                        super.onSuccess(o);
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Throwable t, int errorNo, String strMsg) {
-//                        super.onFailure(t, errorNo, strMsg);
-//                    }
-//                }
-//        );
-        list.add(new Building("1H", "宿舍1号楼周边及其绿化带"));
-        list.add(new Building("1H", "1号楼北侧树林"));
-        list.add(new Building("1H", "东操场周边及其绿化带"));
-
-        adapter.notifyDataSetChanged();
-    }
-    //弹出顶部主菜单
-    public void onTopMenuPopupButtonClick(View view){
-        mainPopMenu.showAsDropDown(view);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
+        switch (v.getId()){
             case R.id.back:
                 finish();
                 break;
+            case R.id.contentsliner:
+
+                break;
+            case R.id.titleitem:
+                Intent score = new Intent(this, ScoreActivity.class);
+                startActivity(score);
+                break;
+            case R.id.beizhu:
+                BeizhuDialog dialog = new BeizhuDialog(this, R.style.dialog1);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.show();
+                break;
         }
+    }
+
+    //弹出顶部主菜单
+    public void onTopMenuPopupButtonClick(View view){
+        mainPopMenu.showAsDropDown(view);
+    }
+    /**
+     *  获取户外区域
+     */
+    private void getArea() throws JSONException, UnsupportedEncodingException {
+        JSONObject object = new JSONObject();
+        StringEntity entity = new StringEntity(object.toString());
+
+        getFinalHttp().post(
+                InternetURL.GET_OUTDOOR_AREA_URL,
+                entity,
+                "application/json; charset=utf-8",
+                new AjaxCallBack<Object>() {
+                    @Override
+                    public void onSuccess(Object o) {
+                        super.onSuccess(o);
+                        try {
+                            JSONArray array = new JSONArray(o.toString());
+                            for (int i=0; i<array.length(); i++){
+                                areaList.add(getGson().fromJson(array.getJSONObject(i).toString(), SanitationArea.class));
+                            }
+                            areaAdapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t, int errorNo, String strMsg) {
+                        super.onFailure(t, errorNo, strMsg);
+                    }
+                }
+        );
+    }
+
+    public void registerBoradcastReceiver(){
+        IntentFilter myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction(Constants.BROADCAST);
+        registerReceiver(mBroadcastReceiver, myIntentFilter);
+    }
+
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver(){
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if(action.equals(Constants.BROADCAST)){
+                boolean isSave = intent.getBooleanExtra("isSave", true);
+                if (isSave) {
+                    Toast.makeText(mContext, "保存成功", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(mContext, "提交成功", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mBroadcastReceiver);
     }
 }
 

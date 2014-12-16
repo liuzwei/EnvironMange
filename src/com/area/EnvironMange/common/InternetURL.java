@@ -35,6 +35,9 @@ public class InternetURL {
     //获取一座教学楼的教学公共区域
     public static String GET_TEACH_PUBLIC_URL = MAIN_URL+"GetJXGGArea";
 
+    //获取所有的户外区域
+    public static String GET_OUTDOOR_AREA_URL = MAIN_URL+"GetHwArea";
+
 
 
 }

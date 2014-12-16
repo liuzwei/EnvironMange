@@ -228,5 +228,11 @@ public class JiaoxuepublicActivity extends BaseActivity implements View.OnClickL
         }
 
     };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mBroadcastReceiver);
+    }
 }
 
