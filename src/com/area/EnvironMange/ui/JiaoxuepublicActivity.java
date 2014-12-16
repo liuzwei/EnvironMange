@@ -218,7 +218,12 @@ public class JiaoxuepublicActivity extends BaseActivity implements View.OnClickL
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if(action.equals(Constants.BROADCAST)){
-                Toast.makeText(mContext, "保存成功", Toast.LENGTH_SHORT).show();
+                boolean isSave = intent.getBooleanExtra("isSave", true);
+                if (isSave) {
+                    Toast.makeText(mContext, "保存成功", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(mContext, "提交成功", Toast.LENGTH_SHORT).show();
+                }
             }
         }
 

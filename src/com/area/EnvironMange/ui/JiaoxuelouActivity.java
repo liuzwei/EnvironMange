@@ -75,12 +75,12 @@ public class JiaoxuelouActivity extends BaseActivity implements View.OnClickList
         teachBuilding.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.e(TAG, position+"");
-                if (position>0) {
+                Log.e(TAG, position + "");
+                if (position > 0) {
                     floors.clear();
                     areaList.clear();
                     areaAdapter.notifyDataSetChanged();
-                    Building building = buildingList.get(position-1);
+                    Building building = buildingList.get(position - 1);
                     buildingName = building.getMC();
                     try {
                         //获取楼层信息
@@ -89,7 +89,7 @@ public class JiaoxuelouActivity extends BaseActivity implements View.OnClickList
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }else {
+                } else {
                     floors.clear();
                     floors.add("请选择楼层");
                     floorAdapter.notifyDataSetChanged();
@@ -304,7 +304,12 @@ public class JiaoxuelouActivity extends BaseActivity implements View.OnClickList
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if(action.equals(Constants.BROADCAST)){
-                Toast.makeText(mContext, "保存成功", Toast.LENGTH_SHORT).show();
+                boolean isSave = intent.getBooleanExtra("isSave", true);
+                if (isSave) {
+                    Toast.makeText(mContext, "保存成功", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(mContext, "提交成功", Toast.LENGTH_SHORT).show();
+                }
             }
         }
 

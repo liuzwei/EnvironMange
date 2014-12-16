@@ -91,7 +91,7 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
                 }
                 try {
                     //提交分数
-                    saveProject(array, InternetURL.COMMIT_AREA_SCORE);
+                    saveProject(array, InternetURL.COMMIT_AREA_SCORE, false);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -114,8 +114,8 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
                     array2.put(SanitaionAreaAssementItem.fromObject2Json(item));
                 }
                 try {
-                    //提交分数
-                    saveProject(array2, InternetURL.SAVE_AREA_SCORE);
+                    //保存分数
+                    saveProject(array2, InternetURL.SAVE_AREA_SCORE, true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -158,7 +158,6 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
                                 scoreReason.setId(2000+i);
                                 projectLayout.addView(layout);
                             }
-//                            areaTypeAdapter.notifyDataSetChanged();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -172,7 +171,7 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
         );
     }
 
-    private void saveProject(JSONArray array, String url) throws JSONException, UnsupportedEncodingException {
+    private void saveProject(JSONArray array, String url, final boolean isSave) throws JSONException, UnsupportedEncodingException {
         String userid = getGson().fromJson(sp.getString("username", ""), String.class);
         JSONObject object = new JSONObject();
         object.put("item", array);
@@ -191,6 +190,7 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
                         super.onSuccess(o);
                         if (o.toString().equals("true")){
                             Intent intent = new Intent(Constants.BROADCAST);
+                            intent.putExtra("isSave", isSave);
                             mContext.sendBroadcast(intent);
                           finish();
                         }
