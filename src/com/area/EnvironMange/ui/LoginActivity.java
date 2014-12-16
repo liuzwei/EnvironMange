@@ -82,20 +82,20 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         object.put("pwd", password.getText().toString());
         StringEntity entity = new StringEntity(object.toString(), "utf-8");
         getFinalHttp().post(
-                InternetURL.LOGIN_URL,
+                InternetURL.LOGIN_URL_ID,
                 entity,
                 "application/json; charset=utf-8",
                 new AjaxCallBack<Object>() {
                     @Override
                     public void onSuccess(Object o) {
                         super.onSuccess(o);
-                        if ("true".equals(o.toString())) {
+                        if ("-1".equals(o.toString())) {
+                            Toast.makeText(mContext, "用户名或密码错误", Toast.LENGTH_SHORT).show();
+                        } else {
                             save("username", username.getText().toString());
                             save("password", password.getText().toString());
+                            save("userid", getGson().fromJson(o.toString(), String.class));
                             startActivity(new Intent(LoginActivity.this, CenterActivity.class));
-                        } else {
-                            Toast.makeText(mContext, "用户名或密码错误", Toast.LENGTH_SHORT).show();
-//                            startActivity(new Intent(LoginActivity.this, CenterActivity.class));
                         }
                     }
 

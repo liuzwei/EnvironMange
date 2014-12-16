@@ -14,6 +14,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.model.MyBuildScore;
+import com.area.EnvironMange.model.SanitationAreaAssessment;
+
+import java.util.List;
 
 
 /**
@@ -28,8 +31,7 @@ public class SaveScoreDialog extends Dialog implements View.OnClickListener{
     private Button sure;
     private Button cancle;
     private TextView title;
-    private RequestQueue mRequestQueue;
-    private MyBuildScore myBuildScore;
+    List<SanitationAreaAssessment> list;
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -40,10 +42,10 @@ public class SaveScoreDialog extends Dialog implements View.OnClickListener{
         }
     };
 
-    public SaveScoreDialog(MyBuildScore myBuildScore, Context context, int them) {
+    public SaveScoreDialog(List<SanitationAreaAssessment> list, Context context, int them) {
         super(context,them);
         this.context = context;
-        this.myBuildScore = myBuildScore;
+        this.list = list;
     }
 
     @Override
@@ -54,8 +56,6 @@ public class SaveScoreDialog extends Dialog implements View.OnClickListener{
     }
 
     private void initView(){
-        mRequestQueue = Volley.newRequestQueue(context);
-
         sure = (Button) this.findViewById(R.id.sure);
         sure.setOnClickListener(this);
         cancle = (Button) this.findViewById(R.id.cancle);

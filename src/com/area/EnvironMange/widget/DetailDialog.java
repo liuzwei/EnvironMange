@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.model.MyBuildScore;
+import com.area.EnvironMange.model.SanitationAreaAssessment;
 
 
 /**
@@ -22,7 +23,7 @@ public class DetailDialog extends Dialog implements View.OnClickListener{
     private Context context;
     private Button sure;
     private TextView title;
-    private MyBuildScore myBuildScore;
+    private SanitationAreaAssessment assessment;
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -33,10 +34,10 @@ public class DetailDialog extends Dialog implements View.OnClickListener{
         }
     };
 
-    public DetailDialog(MyBuildScore myBuildScore, Context context, int them) {
+    public DetailDialog(SanitationAreaAssessment assessment, Context context, int them) {
         super(context,them);
         this.context = context;
-        this.myBuildScore = myBuildScore;
+        this.assessment = assessment;
     }
 
     @Override

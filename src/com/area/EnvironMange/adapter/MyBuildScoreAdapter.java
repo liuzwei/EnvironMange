@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.model.Building;
 import com.area.EnvironMange.model.MyBuildScore;
+import com.area.EnvironMange.model.SanitationAreaAssessment;
 
 import java.util.List;
 
@@ -17,9 +18,9 @@ import java.util.List;
  */
 public class MyBuildScoreAdapter extends BaseAdapter  {
     private Context mContext;
-    private List<MyBuildScore> list;
+    private List<SanitationAreaAssessment> list;
     private ViewHolder holder;
-    public MyBuildScoreAdapter(Context mContext, List<MyBuildScore> list) {
+    public MyBuildScoreAdapter(Context mContext, List<SanitationAreaAssessment> list) {
         this.mContext = mContext;
         this.list = list;
     }
@@ -55,10 +56,10 @@ public class MyBuildScoreAdapter extends BaseAdapter  {
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
-        MyBuildScore building = list.get(position);
-        holder.name.setText(building.getName());
-        holder.score.setText(building.getScore());
-        holder.time.setText(building.getDatetime());
+        SanitationAreaAssessment assessment = list.get(position);
+        holder.name.setText(assessment.getAreamc());
+        holder.score.setText(assessment.getFs());
+        holder.time.setText(assessment.getJcsj());
         holder.detail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

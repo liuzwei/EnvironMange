@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.model.MyBuildScore;
+import com.area.EnvironMange.model.SanitationAreaAssessment;
 
 import java.util.List;
 
@@ -16,9 +17,9 @@ import java.util.List;
  */
 public class SelectUndoAdapter extends BaseAdapter  {
     private Context mContext;
-    private List<MyBuildScore> list;
+    private List<SanitationAreaAssessment> list;
     private ViewHolder holder;
-    public SelectUndoAdapter(Context mContext, List<MyBuildScore> list) {
+    public SelectUndoAdapter(Context mContext, List<SanitationAreaAssessment> list) {
         this.mContext = mContext;
         this.list = list;
     }
@@ -55,10 +56,10 @@ public class SelectUndoAdapter extends BaseAdapter  {
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
-        MyBuildScore building = list.get(position);
-        holder.name.setText(building.getName());
-        holder.score.setText(building.getScore());
-        holder.time.setText(building.getDatetime());
+        SanitationAreaAssessment assessment = list.get(position);
+        holder.name.setText(assessment.getAreamc());
+        holder.score.setText(assessment.getFs());
+        holder.time.setText(assessment.getJcsj());
         holder.update.setOnClickListener(new View.OnClickListener() {
            //修改
             @Override

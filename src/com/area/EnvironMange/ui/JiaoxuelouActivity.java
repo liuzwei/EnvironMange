@@ -217,7 +217,7 @@ public class JiaoxuelouActivity extends BaseActivity implements View.OnClickList
      * @param buildId
      */
     private void getFloor(String buildId) throws JSONException, UnsupportedEncodingException {
-        String  userId = getGson().fromJson(sp.getString("username", ""), String.class);
+        String  userId = getGson().fromJson(sp.getString("userid", ""), String.class);
         JSONObject object = new JSONObject();
         object.put("userid", userId);
         object.put("buildingID", buildId);

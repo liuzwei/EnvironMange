@@ -14,6 +14,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.model.MyBuildScore;
+import com.area.EnvironMange.model.SanitationAreaAssessment;
 
 
 /**
@@ -29,7 +30,7 @@ public class UpdateScoreDialog extends Dialog implements View.OnClickListener{
     private Button cancle;
     private TextView title;
     private RequestQueue mRequestQueue;
-    private MyBuildScore myBuildScore;
+    private SanitationAreaAssessment assessment;
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -40,10 +41,10 @@ public class UpdateScoreDialog extends Dialog implements View.OnClickListener{
         }
     };
 
-    public UpdateScoreDialog(MyBuildScore myBuildScore, Context context, int them) {
+    public UpdateScoreDialog(SanitationAreaAssessment assessment, Context context, int them) {
         super(context,them);
         this.context = context;
-        this.myBuildScore = myBuildScore;
+        this.assessment = assessment;
     }
 
     @Override
@@ -51,7 +52,7 @@ public class UpdateScoreDialog extends Dialog implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mobile_dialog);
         initView();
-        title.setText("请给区域："+myBuildScore.getName()+" 重新打分");
+        title.setText("请给区域："+assessment.getAreamc()+" 重新打分");
 
     }
 

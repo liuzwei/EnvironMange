@@ -3,22 +3,29 @@ package com.area.EnvironMange.ui;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.adapter.MyBuildScoreAdapter;
 import com.area.EnvironMange.adapter.OnClickContentItemListener;
 import com.area.EnvironMange.base.BaseActivity;
+import com.area.EnvironMange.common.InternetURL;
 import com.area.EnvironMange.model.MyBuildScore;
+import com.area.EnvironMange.model.SanitationAreaAssessment;
+import com.area.EnvironMange.util.DateUtil;
 import com.area.EnvironMange.util.SystemExitUtil;
 import com.area.EnvironMange.widget.DetailDialog;
 import com.area.EnvironMange.widget.SaveScoreDialog;
 import com.area.EnvironMange.widget.UpdateScoreDialog;
 import com.area.EnvironMange.widget.SelectTimeDialog;
+import net.tsz.afinal.http.AjaxCallBack;
+import org.apache.http.entity.StringEntity;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,10 +35,11 @@ import java.util.List;
  * 类的功能、说明写在此处.
  */
 public class IndexActivity extends BaseActivity implements View.OnClickListener, OnClickContentItemListener {
-    private List<MyBuildScore> list = new ArrayList<MyBuildScore>();
+    private List<SanitationAreaAssessment> list = new ArrayList<SanitationAreaAssessment>();
     private ListView listView;
     private MyBuildScoreAdapter adapter;
     private ImageView back;
+    private Button search;//搜索按钮
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,31 +47,15 @@ public class IndexActivity extends BaseActivity implements View.OnClickListener,
         setContentView(R.layout.mybuildscore_layout);
         initView();
 
-        SelectTimeDialog dialog = new SelectTimeDialog( myBuildScore , this, R.style.dialog1);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.show();
+        String beginTime = DateUtil.getFormatDateTime(new Date(System.currentTimeMillis() - 14 * 24 * 60 * 60 * 1000), "yyyyMMdd");
+        String endTime = DateUtil.getFormatDateTime(new Date(), "yyyyMMdd");
 
-        list.add(new MyBuildScore("办公楼 E301","100分","2014-12-10 10:20"));
-        list.add(new MyBuildScore("办公楼 E302","80分","2014-12-10 10:20"));
-        list.add(new MyBuildScore("办公楼 E303","90分","2014-12-10 10:20"));
-        list.add(new MyBuildScore("办公楼 E304","100分","2014-12-10 10:20"));
-        list.add(new MyBuildScore("办公楼 E305","90分","2014-12-10 10:20"));
-        list.add(new MyBuildScore("办公楼 E306","70分","2014-12-10 10:20"));
-        list.add(new MyBuildScore("办公楼 E307","100分","2014-12-10 10:20"));
-        list.add(new MyBuildScore("办公楼 E308","10分","2014-12-10 10:20"));
-        list.add(new MyBuildScore("办公楼 E309","100分","2014-12-10 10:20"));
-        list.add(new MyBuildScore("办公楼 E3010","100分","2014-12-10 10:20"));
-        list.add(new MyBuildScore("音乐楼 E3021","80分","2014-12-10 10:20"));
-        list.add(new MyBuildScore("音乐楼 E3030","90分","2014-12-10 10:20"));
-        list.add(new MyBuildScore("音乐楼 E3040","100分","2014-12-10 10:20"));
-        list.add(new MyBuildScore("音乐楼 E3050","90分","2014-12-10 10:20"));
-        list.add(new MyBuildScore("音乐楼 E3060","70分","2014-12-10 10:20"));
-        list.add(new MyBuildScore("音乐楼 E3071","100分","2014-12-10 10:20"));
-        list.add(new MyBuildScore("音乐楼 E3080","10分","2014-12-10 10:20"));
-        list.add(new MyBuildScore("音乐楼 E3094","100分","2014-12-10 10:20"));
-        adapter.notifyDataSetChanged();
+        try {
+            getData(beginTime, endTime);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        SystemExitUtil.getInstance().addActivity(this);
     }
 
     private void initView() {
@@ -71,16 +63,11 @@ public class IndexActivity extends BaseActivity implements View.OnClickListener,
         adapter = new MyBuildScoreAdapter(mContext, list);
         adapter.setOnClickContentItemListener(this);
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                //点击某一项时触发
-//                Intent floor = new Intent(IndexActivity.this,FloorSelectActivity.class);
-//                startActivity(floor);
-            }
-        });
         back = (ImageView) this.findViewById(R.id.back);
         back.setOnClickListener(this);
+
+        search = (Button) this.findViewById(R.id.mybuildscore_search);
+        search.setOnClickListener(this);
 
     }
 
@@ -90,6 +77,9 @@ public class IndexActivity extends BaseActivity implements View.OnClickListener,
             case R.id.back:
                 finish();
                 break;
+            case R.id.mybuildscore_search://点击搜索按钮
+//                getData();
+                break;
         }
     }
     //弹出顶部主菜单
@@ -97,18 +87,55 @@ public class IndexActivity extends BaseActivity implements View.OnClickListener,
         mainPopMenu.showAsDropDown(view);
     }
 
-    MyBuildScore myBuildScore = null;
+    SanitationAreaAssessment assessment = null;
     @Override
     public void onClickContentItem(int position, int flag, final Object object) {
-        myBuildScore = list.get(position);
+        assessment = list.get(position);
         switch (flag){
             case 1:
-                DetailDialog dialog = new DetailDialog( myBuildScore , this, R.style.dialog1);
+                DetailDialog dialog = new DetailDialog( assessment , this, R.style.dialog1);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.show();
                 break;
 
         }
+    }
+
+    private void getData(String beginTime, String endTime) throws JSONException, UnsupportedEncodingException {
+        String userid = getGson().fromJson(sp.getString("userid", ""), String.class);
+        JSONObject object = new JSONObject();
+        object.put("userid", userid);
+        object.put("begineTime", beginTime);
+        object.put("endtime", endTime);
+
+        StringEntity entity = new StringEntity(object.toString(), "utf-8");
+
+        getFinalHttp().post(
+                InternetURL.GET_COMMIT_FS_URL,
+                entity,
+                "application/json; charset=utf-8",
+                new AjaxCallBack<Object>() {
+                    @Override
+                    public void onSuccess(Object o) {
+                        super.onSuccess(o);
+                        try {
+                            JSONArray array = new JSONArray(o.toString());
+                            for (int i=0; i<array.length(); i++){
+                                SanitationAreaAssessment asm = getGson().fromJson(String.valueOf(array.getJSONObject(i)), SanitationAreaAssessment.class);
+                                list.add(asm);
+                            }
+                            adapter.notifyDataSetChanged();
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t, int errorNo, String strMsg) {
+                        super.onFailure(t, errorNo, strMsg);
+                    }
+                }
+        );
     }
 
 }
