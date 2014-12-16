@@ -33,6 +33,7 @@
                     android:textColor="#333333"
                     android:textSize="16sp"
                     android:hint="最大分20"
+                    android:inputType="number"
                     android:background="@android:drawable/edit_text"
                     />
 

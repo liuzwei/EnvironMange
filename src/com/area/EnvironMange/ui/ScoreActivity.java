@@ -1,16 +1,11 @@
 package com.area.EnvironMange.ui;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.*;
 import com.area.EnvironMange.R;
-import com.area.EnvironMange.adapter.AreaTypeAdapter;
 import com.area.EnvironMange.base.BaseActivity;
 import com.area.EnvironMange.base.Constants;
 import com.area.EnvironMange.common.InternetURL;
@@ -25,7 +20,6 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -40,16 +34,11 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
     private Button save;
     private String areaID;
     private EditText beizhu;//备注
-//    private ListView listView;
-//    private AreaTypeAdapter areaTypeAdapter;
     private TextView title;
     private List<SanitaionAreaProject> list  =new ArrayList<SanitaionAreaProject>();
     private String titleName;
     private LinearLayout projectLayout;
 
-    //定义一个HashMap，用来存放EditText的值，Key是position
-    HashMap<Integer, String> scoreMap = new HashMap<Integer, String>();
-    HashMap<Integer, String> reasonMap = new HashMap<Integer, String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,24 +64,8 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
 
         beizhu = (EditText) this.findViewById(R.id.score_layout_beizhu);
         projectLayout = (LinearLayout) findViewById(R.id.score_project_layout);
-//        listView = (ListView) findViewById(R.id.score_layout_lsv);
-//        areaTypeAdapter = new AreaTypeAdapter(list, mContext, scoreMap, reasonMap);
-//        listView.setAdapter(areaTypeAdapter);
-//        title = (TextView) this.findViewById(R.id.score_layout_title);
-//        title.setText(titleName);
-//        listView.requestFocus();
-//        listView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                listView.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//                listView.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
-//            }
-//        });
-
+        title = (TextView) this.findViewById(R.id.score_layout_title);
+        title.setText(titleName);
     }
 
     @Override
@@ -102,20 +75,18 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
             case R.id.sub:
                 JSONArray array = new JSONArray();
                 for (int i=0; i<list.size(); i++) {
+                    EditText score = (EditText) this.findViewById(1000+i);
+                    EditText reason = (EditText) this.findViewById(2000+i);
                     SanitaionAreaProject project = list.get(i);
-                    if (StringUtil.isNullOrEmpty(scoreMap.get(i))){
+                    if (StringUtil.isNullOrEmpty(score.getText().toString())){
                         Toast.makeText(mContext, project.getXmmc()+" 没有打分", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if (Double.parseDouble(scoreMap.get(i)) > Integer.parseInt(project.getZdfs())){
+                    if (Double.parseDouble(score.getText().toString()) > Double.parseDouble((project.getZdfs()))){
                         Toast.makeText(mContext, project.getXmmc()+"不能超过"+project.getZdfs()+"分", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    String reason = "";
-                    if (reasonMap.containsKey(i)) {
-                        reason = reasonMap.get(i);
-                    }
-                    SanitaionAreaAssementItem item = new SanitaionAreaAssementItem(project.getID(), Float.parseFloat(scoreMap.get(i)), reason);
+                    SanitaionAreaAssementItem item = new SanitaionAreaAssementItem(project.getID(), Float.parseFloat(score.getText().toString()), reason.getText().toString());
                     array.put(SanitaionAreaAssementItem.fromObject2Json(item));
                 }
                 try {
@@ -128,20 +99,18 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
             case R.id.save:
                 JSONArray array2 = new JSONArray();
                 for (int i=0; i<list.size(); i++) {
+                    EditText score = (EditText) this.findViewById(1000+i);
+                    EditText reason = (EditText) this.findViewById(2000+i);
                     SanitaionAreaProject project = list.get(i);
-                    if (StringUtil.isNullOrEmpty(scoreMap.get(i))){
+                    if (StringUtil.isNullOrEmpty(score.getText().toString())){
                         Toast.makeText(mContext, project.getXmmc()+" 没有打分", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if (Double.parseDouble(scoreMap.get(i)) > Integer.parseInt(project.getZdfs())){
+                    if (Double.parseDouble(score.getText().toString()) > Double.parseDouble((project.getZdfs()))){
                         Toast.makeText(mContext, project.getXmmc()+"不能超过"+project.getZdfs()+"分", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    String reason = "";
-                    if (reasonMap.containsKey(i)) {
-                         reason = reasonMap.get(i);
-                    }
-                    SanitaionAreaAssementItem item = new SanitaionAreaAssementItem(project.getID(), Float.parseFloat(scoreMap.get(i)), reason);
+                    SanitaionAreaAssementItem item = new SanitaionAreaAssementItem(project.getID(), Float.parseFloat(score.getText().toString()), reason.getText().toString());
                     array2.put(SanitaionAreaAssementItem.fromObject2Json(item));
                 }
                 try {

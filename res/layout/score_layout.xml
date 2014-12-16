@@ -44,59 +44,60 @@
             android:layout_weight="1"
             android:scrollbars="none" >
             <LinearLayout
-                    android:id="@+id/score_project_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:orientation="vertical"
+
                     >
-                    <!--<ListView-->
-                            <!--android:id="@+id/score_layout_lsv"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:descendantFocusability="beforeDescendants"-->
-                            <!--android:layout_height="wrap_content">-->
+                <LinearLayout android:layout_width="wrap_content"
+                              android:id="@+id/score_project_layout"
+                              android:orientation="vertical"
+                              android:layout_height="wrap_content">
 
-                    <!--</ListView>-->
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:orientation="horizontal"
+                              android:padding="10dp"
+                        >
+
+                    <EditText
+                            android:id="@+id/score_layout_beizhu"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="#333333"
+                            android:textSize="16sp"
+                            android:hint="备注"
+                            />
+                </LinearLayout>
+
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:gravity="center"
+                              android:padding="10dp"
+                        >
+                    <Button
+                            android:id="@+id/sub"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:textSize="20dip"
+                            android:layout_below="@id/login_password"
+                            android:text="提交"
+                            android:background="@drawable/login_btn_bg" />
+                    <Button
+                            android:id="@+id/save"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:textSize="20dip"
+                            android:layout_below="@id/login_password"
+                            android:text="保存"
+                            android:background="@drawable/login_btn_bg" />
+                </LinearLayout>
            </LinearLayout>
+
     </ScrollView>
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="horizontal"
-                  android:padding="10dp"
-            >
 
-        <EditText
-                android:id="@+id/score_layout_beizhu"
-                android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:textColor="#333333"
-                  android:textSize="16sp"
-                  android:hint="备注"
-                />
-    </LinearLayout>
-
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:gravity="center"
-                  android:padding="10dp"
-            >
-        <Button
-                android:id="@+id/sub"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:textSize="20dip"
-                android:layout_below="@id/login_password"
-                android:text="提交"
-                android:background="@drawable/login_btn_bg" />
-        <Button
-                android:id="@+id/save"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:textSize="20dip"
-                android:layout_below="@id/login_password"
-                android:text="保存"
-                android:background="@drawable/login_btn_bg" />
-    </LinearLayout>
 
     <View android:layout_width="match_parent"
           android:layout_height="0.1dp"
