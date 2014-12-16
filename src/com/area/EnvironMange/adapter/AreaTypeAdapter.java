@@ -52,20 +52,26 @@ public class AreaTypeAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        if (convertView == null){
-            holder = new ViewHolder();
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.score_item, null);
-            holder.aretype = (TextView) convertView.findViewById(R.id.score_item_type);
-            holder.maxScore = (EditText) convertView.findViewById(R.id.score_item_score);
-            holder.reduceReason = (EditText) convertView.findViewById(R.id.score_item_reason);
-
-            convertView.setTag(holder);
-        }else {
-            holder = (ViewHolder) convertView.getTag();
-        }
+        holder = new ViewHolder();
+        convertView = LayoutInflater.from(mContext).inflate(R.layout.score_item, null);
+        holder.aretype = (TextView) convertView.findViewById(R.id.score_item_type);
+        holder.maxScore = (EditText) convertView.findViewById(R.id.score_item_score);
+        holder.reduceReason = (EditText) convertView.findViewById(R.id.score_item_reason);
+//        if (convertView == null){
+//            holder = new ViewHolder();
+//            convertView = LayoutInflater.from(mContext).inflate(R.layout.score_item, null);
+//            holder.aretype = (TextView) convertView.findViewById(R.id.score_item_type);
+//            holder.maxScore = (EditText) convertView.findViewById(R.id.score_item_score);
+//            holder.reduceReason = (EditText) convertView.findViewById(R.id.score_item_reason);
+//
+//            convertView.setTag(holder);
+//        }else {
+//            holder = (ViewHolder) convertView.getTag();
+//        }
         SanitaionAreaProject project = list.get(position);
         holder.aretype.setText(project.getXmmc());
         holder.maxScore.setHint("最大分数:"+project.getZdfs());
+
         holder.maxScore.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

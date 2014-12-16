@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
@@ -39,11 +40,12 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
     private Button save;
     private String areaID;
     private EditText beizhu;//备注
-    private ListView listView;
-    private AreaTypeAdapter areaTypeAdapter;
+//    private ListView listView;
+//    private AreaTypeAdapter areaTypeAdapter;
     private TextView title;
     private List<SanitaionAreaProject> list  =new ArrayList<SanitaionAreaProject>();
     private String titleName;
+    private LinearLayout projectLayout;
 
     //定义一个HashMap，用来存放EditText的值，Key是position
     HashMap<Integer, String> scoreMap = new HashMap<Integer, String>();
@@ -72,23 +74,24 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
         save.setOnClickListener(this);
 
         beizhu = (EditText) this.findViewById(R.id.score_layout_beizhu);
-        listView = (ListView) findViewById(R.id.score_layout_lsv);
-        areaTypeAdapter = new AreaTypeAdapter(list, mContext, scoreMap, reasonMap);
-        listView.setAdapter(areaTypeAdapter);
-        title = (TextView) this.findViewById(R.id.score_layout_title);
-        title.setText(titleName);
-        listView.requestFocus();
-        listView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                listView.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                listView.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
-            }
-        });
+        projectLayout = (LinearLayout) findViewById(R.id.score_project_layout);
+//        listView = (ListView) findViewById(R.id.score_layout_lsv);
+//        areaTypeAdapter = new AreaTypeAdapter(list, mContext, scoreMap, reasonMap);
+//        listView.setAdapter(areaTypeAdapter);
+//        title = (TextView) this.findViewById(R.id.score_layout_title);
+//        title.setText(titleName);
+//        listView.requestFocus();
+//        listView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                listView.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//                listView.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
+//            }
+//        });
 
     }
 
@@ -174,9 +177,19 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
                         try {
                             JSONArray array = new JSONArray(o.toString());
                             for (int i=0; i<array.length(); i++){
+                                SanitaionAreaProject project = getGson().fromJson(array.getJSONObject(i).toString(), SanitaionAreaProject.class);
                                 list.add(getGson().fromJson(array.getJSONObject(i).toString(), SanitaionAreaProject.class));
+                                LinearLayout layout = (LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.score_item, null);
+                                TextView scoreType = (TextView) layout.findViewById(R.id.score_item_type);
+                                EditText score = (EditText) layout.findViewById(R.id.score_item_score);
+                                EditText scoreReason = (EditText) layout.findViewById(R.id.score_item_reason);
+                                scoreType.setText(project.getXmmc());
+                                score.setHint("最大分数："+project.getZdfs());
+                                score.setId(1000+i);
+                                scoreReason.setId(2000+i);
+                                projectLayout.addView(layout);
                             }
-                            areaTypeAdapter.notifyDataSetChanged();
+//                            areaTypeAdapter.notifyDataSetChanged();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -198,7 +211,7 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
         object.put("areaID", areaID);
         object.put("bz", beizhu.getText().toString());
 
-        StringEntity entity = new StringEntity(object.toString());
+        StringEntity entity = new StringEntity(object.toString(), "utf-8");
         getFinalHttp().post(
                 url,
                 entity,

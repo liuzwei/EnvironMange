@@ -49,112 +49,24 @@
                   android:id="@+id/areaone"
             >
 
-     <Spinner
-        android:id="@+id/province"
-        android:layout_height="45dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="7px"
-        android:drawSelectorOnTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_width="fill_parent"></Spinner>
-
-
-
-
-    </LinearLayout>
-
-    <View android:layout_width="match_parent"
-          android:layout_height="0.1dp"
-          android:background="#d1d1d1"
-          android:layout_marginBottom="10dp"/>
-
-    <LinearLayout android:layout_width="match_parent"
-                  android:orientation="vertical"
-                  android:id="@+id/contentsliner"
-                  android:layout_height="wrap_content">
-
-
-    <LinearLayout android:layout_width="fill_parent"
-                  android:layout_height="match_parent"
-                  android:orientation="horizontal"
-                  android:padding="10dp"
-                  android:id="@+id/areatwo"
-            >
-        <TextView android:layout_width="280dp" android:layout_height="wrap_content"
-                  android:text="教学F楼一层（含1F-2F楼梯）"
-                  android:id="@+id/titleitem"
-                  android:textSize="20sp"
-                  android:textColor="#999999"/>
-
+        <Spinner
+                android:id="@+id/province"
+                android:layout_height="45dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="7px"
+                android:drawSelectorOnTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="fill_parent"></Spinner>
     </LinearLayout>
     <View android:layout_width="match_parent"
           android:layout_height="0.1dp"
           android:background="#d1d1d1"
           android:layout_marginBottom="10dp"/>
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:orientation="horizontal"
-                  android:padding="10dp"
-            >
-        <TextView android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
-                  android:text="教学A楼二层（含2F-3F楼梯）"
-                  android:textSize="20sp"
-                  android:textColor="#999999"/>
 
-
-    </LinearLayout>
-    <View android:layout_width="match_parent"
-          android:layout_height="0.1dp"
-          android:background="#d1d1d1"
-          android:layout_marginBottom="10dp"/>
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:orientation="horizontal"
-                  android:padding="10dp"
-            >
-        <TextView android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
-                  android:text="教学B楼二层（含B-E南北连廊）"
-                  android:textSize="20sp"
-                  android:textColor="#999999"/>
-
-
-    </LinearLayout>
-    <View android:layout_width="match_parent"
-          android:layout_height="0.1dp"
-          android:background="#d1d1d1"
-          android:layout_marginBottom="10dp"/>
-    <LinearLayout android:layout_width="fill_parent"
-                  android:layout_height="match_parent"
-                  android:orientation="horizontal"
-                  android:padding="10dp"
-            >
-        <TextView android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
-                  android:text="教学E楼二层（含2F-3F）"
-                  android:textSize="20sp"
-                  android:textColor="#999999"/>
-
-
-    </LinearLayout>
-    <View android:layout_width="match_parent"
-          android:layout_height="0.1dp"
-          android:background="#d1d1d1"
-          android:layout_marginBottom="10dp"/>
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:orientation="horizontal"
-                  android:padding="10dp"
-            >
-        <TextView android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
-                  android:text="教学E楼4层（含4F-5F楼梯）"
-                  android:textSize="20sp"
-                  android:textColor="#999999"/>
-    </LinearLayout>
-
-    </LinearLayout>
-
+    <ListView
+            android:id="@+id/jiaoxuelou_lsv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+    </ListView>
 </LinearLayout>

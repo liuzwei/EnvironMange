@@ -39,17 +39,19 @@
                    android:onClick="onTopMenuPopupButtonClick"/>
     </RelativeLayout>
     <LinearLayout
+            android:id="@+id/score_project_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:orientation="vertical"
             >
-            <ListView
-                    android:id="@+id/score_layout_lsv"
-                    android:layout_width="match_parent"
-                    android:descendantFocusability="beforeDescendants"
-                    android:layout_height="wrap_content">
+            <!--<ListView-->
+                    <!--android:id="@+id/score_layout_lsv"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:descendantFocusability="beforeDescendants"-->
+                    <!--android:layout_height="wrap_content">-->
 
-            </ListView>
+            <!--</ListView>-->
    </LinearLayout>
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
