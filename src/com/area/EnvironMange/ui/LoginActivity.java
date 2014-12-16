@@ -80,8 +80,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         JSONObject object = new JSONObject();
         object.put("ID", username.getText().toString());
         object.put("pwd", password.getText().toString());
-
-        StringEntity entity = new StringEntity(object.toString());
+        StringEntity entity = new StringEntity(object.toString(), "utf-8");
         getFinalHttp().post(
                 InternetURL.LOGIN_URL,
                 entity,
@@ -90,11 +89,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                     @Override
                     public void onSuccess(Object o) {
                         super.onSuccess(o);
-                        if ("true".equals(o.toString())){
+                        if ("true".equals(o.toString())) {
                             save("username", username.getText().toString());
                             save("password", password.getText().toString());
                             startActivity(new Intent(LoginActivity.this, CenterActivity.class));
-                        }else {
+                        } else {
                             Toast.makeText(mContext, "用户名或密码错误", Toast.LENGTH_SHORT).show();
 //                            startActivity(new Intent(LoginActivity.this, CenterActivity.class));
                         }
