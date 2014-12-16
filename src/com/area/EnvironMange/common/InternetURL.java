@@ -32,6 +32,9 @@ public class InternetURL {
     //提交某一区域卫生成绩
     public static String COMMIT_AREA_SCORE = MAIN_URL+"CommitProjectFs";
 
+    //获取一座教学楼的教学公共区域
+    public static String GET_TEACH_PUBLIC_URL = MAIN_URL+"GetJXGGArea";
+
 
 
 }

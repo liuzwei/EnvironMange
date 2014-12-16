@@ -140,7 +140,7 @@ public class JiaoxuepublicActivity extends BaseActivity implements View.OnClickL
      */
     private void getBuildings(){
         getFinalHttp().post(
-                InternetURL.GET_SUSHE_URL,
+                InternetURL.GET_BUILDING_URL,
                 new AjaxCallBack<Object>(){
                     @Override
                     public void onSuccess(Object o) {
@@ -150,7 +150,7 @@ public class JiaoxuepublicActivity extends BaseActivity implements View.OnClickL
                                 Building building = getGson().fromJson(String.valueOf(array.getJSONObject(i)), Building.class);
                                 buildingList.add(building);
                                 if (i==0){
-                                    buildingNames.add("请选择宿舍楼");
+                                    buildingNames.add("请选择教学楼楼");
                                 }
                                 buildingNames.add(building.getMC());
                             }
@@ -171,7 +171,7 @@ public class JiaoxuepublicActivity extends BaseActivity implements View.OnClickL
     }
 
     /**
-     *  获取某个宿舍楼的卫生区域
+     *  获取某个教学楼的公共卫生区域
      * @param buildingID  建筑物ID
      */
     private void getArea(String buildingID) throws JSONException, UnsupportedEncodingException {
@@ -180,7 +180,7 @@ public class JiaoxuepublicActivity extends BaseActivity implements View.OnClickL
         StringEntity entity = new StringEntity(object.toString());
 
         getFinalHttp().post(
-                InternetURL.GET_SS_AREA_URL,
+                InternetURL.GET_TEACH_PUBLIC_URL,
                 entity,
                 "application/json; charset=utf-8",
                 new AjaxCallBack<Object>() {
