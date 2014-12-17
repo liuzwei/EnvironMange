@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.area.EnvironMange.R;
+import com.area.EnvironMange.base.ActivityTack;
 import com.area.EnvironMange.base.BaseActivity;
 
 /**
@@ -44,7 +45,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.setting_exit:
-
+                ActivityTack.getInstanse().popUntilActivity(LoginActivity.class);
                 break;
             case R.id.set_update_pass:
                 startActivity(new Intent(SettingActivity.this, UpdatePassActivity.class));
