@@ -90,6 +90,7 @@ public class JiaoxuelouActivity extends BaseActivity implements View.OnClickList
                         e.printStackTrace();
                     }
                 } else {
+                    floor.setEnabled(false);//如果没有选择建筑物，让选择楼层不可点击
                     floors.clear();
                     floors.add("请选择楼层");
                     floorAdapter.notifyDataSetChanged();
@@ -242,6 +243,7 @@ public class JiaoxuelouActivity extends BaseActivity implements View.OnClickList
                                 floors.add(array.getString(i));
                             }
                             floor.setSelection(0);
+                            floor.setEnabled(true);//选择了建筑物后，楼层可以点击
                             floorAdapter.notifyDataSetChanged();
                         } catch (JSONException e) {
                             e.printStackTrace();
