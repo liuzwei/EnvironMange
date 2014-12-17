@@ -63,4 +63,6 @@ public class InternetURL {
     //更新保存分数
     public static String UPDATE_SAVE_FS_URL = MAIN_URL+"UpdateSaveProjectFs";
 
+    //提交保存但未提交的
+    public static String SAVE_NOT_COMMIT = MAIN_URL+"CommitSavedProjectFs";
 }
