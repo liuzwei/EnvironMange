@@ -18,4 +18,5 @@
     <string name="exit_str">再按一次推出程序</string>
 
     <string name="not_df">该区域不可以打分</string>
+    <string name="check_network">请检查网络是否可用</string>
 </resources>

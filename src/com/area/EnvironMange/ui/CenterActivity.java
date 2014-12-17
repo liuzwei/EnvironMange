@@ -10,11 +10,13 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.adapter.CenterAdapter;
 import com.area.EnvironMange.base.ActivityTack;
 import com.area.EnvironMange.base.BaseActivity;
 import com.area.EnvironMange.model.Center;
+import com.area.EnvironMange.util.PhoneEnvUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -88,6 +90,10 @@ public class CenterActivity extends BaseActivity implements View.OnClickListener
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (!PhoneEnvUtil.isNetworkConnected(mContext)){
+                    Toast.makeText(mContext, R.string.check_network, Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if(position == 0){
                     Intent intent = new Intent( CenterActivity.this, JiaoxuelouActivity.class);
                     intent.putExtra("name","教学楼区域");

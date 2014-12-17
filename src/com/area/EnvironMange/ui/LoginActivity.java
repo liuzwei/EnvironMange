@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.base.BaseActivity;
 import com.area.EnvironMange.common.InternetURL;
-import com.area.EnvironMange.model.Center;
+import com.area.EnvironMange.util.PhoneEnvUtil;
 import com.area.EnvironMange.util.StringUtil;
 import net.tsz.afinal.http.AjaxCallBack;
 import org.apache.http.entity.StringEntity;
@@ -51,6 +51,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.login_btn:
+                if (!PhoneEnvUtil.isNetworkConnected(mContext)){
+                    Toast.makeText(mContext, R.string.check_network, Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (checkParams()){
                     try {
                         progressDialog = new ProgressDialog(LoginActivity.this);
