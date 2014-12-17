@@ -101,10 +101,11 @@ public class JiaoxuepublicActivity extends BaseActivity implements View.OnClickL
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //获取检查项目
                 SanitationArea area =  areaList.get(position);
-                Intent score = new Intent(JiaoxuepublicActivity.this, ScoreActivity.class);
-                score.putExtra("areaID", area.getID());
-                score.putExtra("titleName", buildingName + " " + area.getMc() +"  卫生打分");
-                startActivity(score);
+                try {
+                    checkIsScore(area);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -233,6 +234,43 @@ public class JiaoxuepublicActivity extends BaseActivity implements View.OnClickL
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(mBroadcastReceiver);
+    }
+
+    /**
+     * 检查该区域是否可以打分
+     * @param area
+     * @throws UnsupportedEncodingException
+     * @throws JSONException
+     */
+    private void  checkIsScore(final SanitationArea area) throws UnsupportedEncodingException, JSONException {
+        JSONObject object = new JSONObject();
+        object.put("areaid", area.getID());
+        StringEntity entity = new StringEntity(object.toString());
+
+        getFinalHttp().post(
+                InternetURL.IS_CAN_DF,
+                entity,
+                "application/json; charset=utf-8",
+                new AjaxCallBack<Object>() {
+                    @Override
+                    public void onSuccess(Object o) {
+                        super.onSuccess(o);
+                        if ("true".equals(o.toString())){
+                            Intent score = new Intent(JiaoxuepublicActivity.this, ScoreActivity.class);
+                            score.putExtra("areaID", area.getID());
+                            score.putExtra("titleName", buildingName + " " + area.getMc() +"  卫生打分");
+                            startActivity(score);
+                        }else {
+                            Toast.makeText(mContext, R.string.not_df, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t, int errorNo, String strMsg) {
+                        super.onFailure(t, errorNo, strMsg);
+                    }
+                }
+        );
     }
 }
 

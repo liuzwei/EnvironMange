@@ -12,8 +12,6 @@ import com.area.EnvironMange.base.Constants;
 import com.area.EnvironMange.common.InternetURL;
 import com.area.EnvironMange.model.SanitaionAreaAssementItem;
 import com.area.EnvironMange.model.SanitaionAreaAssementItemView;
-import com.area.EnvironMange.model.SanitaionAreaProject;
-import com.area.EnvironMange.util.StringUtil;
 import net.tsz.afinal.http.AjaxCallBack;
 import org.apache.http.entity.StringEntity;
 import org.json.JSONArray;
@@ -36,6 +34,7 @@ public class ModifyScoreActivity extends BaseActivity{
     private ImageView back;
     private List<SanitaionAreaAssementItemView> list  =new ArrayList<SanitaionAreaAssementItemView>();
     private String assessmentID;
+    private String dafenID;
     private String beizhuStr;//备注
 
 
@@ -45,9 +44,10 @@ public class ModifyScoreActivity extends BaseActivity{
         setContentView(R.layout.modify_score_layout);
         initView();
         assessmentID = getIntent().getStringExtra("assessmentID");
+        dafenID = getIntent().getStringExtra("dafenID");
         beizhuStr = getIntent().getStringExtra("beizhu");
         try {
-            getData(assessmentID);
+            getData(dafenID);
         } catch (Exception e) {
             e.printStackTrace();
         }

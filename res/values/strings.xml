@@ -16,4 +16,6 @@
         <item>设置</item>
     </string-array>
     <string name="exit_str">再按一次推出程序</string>
+
+    <string name="not_df">该区域不可以打分</string>
 </resources>

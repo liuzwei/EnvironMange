@@ -99,7 +99,8 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
             case 1:
                 SanitationAreaAssessment asm = list.get(position);
                 Intent intent = new Intent(SelectUndoActivity.this, ModifyScoreActivity.class );
-                intent.putExtra("assessmentID", asm.getID());
+                intent.putExtra("assessmentID", asm.getAreaid());
+                intent.putExtra("dafenID", asm.getID());
                 intent.putExtra("beizhu", asm.getBz());
                 startActivityForResult(intent, MODIFY_CODE);
                 break;
