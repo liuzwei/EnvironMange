@@ -1,18 +1,18 @@
 package com.area.EnvironMange.ui;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.*;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.adapter.OnClickContentItemListener;
 import com.area.EnvironMange.adapter.SelectUndoAdapter;
 import com.area.EnvironMange.base.BaseActivity;
 import com.area.EnvironMange.common.InternetURL;
+import com.area.EnvironMange.model.SanitaionAreaAssementItem;
+import com.area.EnvironMange.model.SanitaionAreaAssementItemView;
 import com.area.EnvironMange.model.SanitationAreaAssessment;
 import com.area.EnvironMange.util.DateUtil;
 import com.area.EnvironMange.util.XCRoundImageView;
@@ -41,6 +41,7 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
     private ImageView back;
     private XCRoundImageView saveall;//一键提交
     private static final int MODIFY_CODE = 102;
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,14 +60,6 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
         adapter = new SelectUndoAdapter(mContext, list);
         adapter.setOnClickContentItemListener(this);
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                //点击某一项时触发
-//                Intent floor = new Intent(IndexActivity.this,FloorSelectActivity.class);
-//                startActivity(floor);
-            }
-        });
         back = (ImageView) this.findViewById(R.id.back);
         back.setOnClickListener(this);
         saveall = (XCRoundImageView) this.findViewById(R.id.saveall);
@@ -81,11 +74,21 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
                 break;
             case R.id.saveall:
                 //todo
-                Toast.makeText(mContext, "未做", Toast.LENGTH_SHORT).show();
-//                SaveScoreDialog dialog = new SaveScoreDialog( list , this, R.style.dialog1);
-//                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//                dialog.show();
+//                Toast.makeText(mContext, "未做", Toast.LENGTH_SHORT).show();
+                progressDialog = new ProgressDialog(SelectUndoActivity.this);
+                progressDialog.setMessage("正在提交");
+                progressDialog.setCanceledOnTouchOutside(false);
+                progressDialog.show();
+                for (int i=0; i<list.size(); i++){
+                    SanitationAreaAssessment asment = list.get(i);
+                    try {
+                        getData(asment);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
                 break;
+
         }
     }
     //弹出顶部主菜单
@@ -106,12 +109,26 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
                 intent.putExtra("beizhu", asm.getBz());
                 startActivityForResult(intent, MODIFY_CODE);
                 break;
-            case 2:
-                Toast.makeText(mContext, "提交成功", Toast.LENGTH_SHORT).show();
+            case 2://单个提交数据
+                SanitationAreaAssessment asment = list.get(position);
+                try {
+                    progressDialog = new ProgressDialog(SelectUndoActivity.this);
+                    progressDialog.setMessage("正在提交");
+                    progressDialog.setCanceledOnTouchOutside(false);
+                    progressDialog.show();
+                    getData(asment);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
         }
     }
 
+    /**
+     * 查询保存但没有提交的数据
+     * @throws JSONException
+     * @throws UnsupportedEncodingException
+     */
     private void getData() throws JSONException, UnsupportedEncodingException {
         String userid = getGson().fromJson(sp.getString("userid", ""), String.class);
         JSONObject object = new JSONObject();
@@ -139,6 +156,9 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
                             }
                             Collections.sort(list);
                             adapter.notifyDataSetChanged();
+                            if (array.length() == 0){
+                                Toast.makeText(mContext, R.string.no_data_save, Toast.LENGTH_SHORT).show();
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -171,5 +191,93 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
             }
         }
 
+    }
+
+    private void getData(final SanitationAreaAssessment assessment) throws JSONException, UnsupportedEncodingException {
+        JSONObject object = new JSONObject();
+        object.put("assmentid", assessment.getID());
+        StringEntity entity = new StringEntity(object.toString());
+
+        getFinalHttp().post(
+                InternetURL.GET_SAVE_DETAIL_URL,
+                entity,
+                "application/json; charset=utf-8",
+                new AjaxCallBack<Object>() {
+                    @Override
+                    public void onSuccess(Object o) {
+                        super.onSuccess(o);
+                        try {
+                            JSONArray array = new JSONArray(o.toString());
+                            JSONArray commitAry = new JSONArray();
+                            for (int i=0; i<array.length(); i++){
+                                SanitaionAreaAssementItemView itemView = getGson().fromJson(array.getJSONObject(i).toString(), SanitaionAreaAssementItemView.class);
+
+                                SanitaionAreaAssementItem item = new SanitaionAreaAssementItem(
+                                        itemView.getAsItemID(),itemView.getProjectID(), Float.parseFloat(itemView.getProjectfs()), itemView.getKfyy()
+                                );
+                                commitAry.put(SanitaionAreaAssementItem.fromObject2Json(item));
+                            }
+                            commitData(assessment, commitAry);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            if (progressDialog != null){
+                                progressDialog.dismiss();
+                                Toast.makeText(mContext, R.string.data_error, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t, int errorNo, String strMsg) {
+                        super.onFailure(t, errorNo, strMsg);
+                        Toast.makeText(mContext, "获取数据失败，请稍后重试", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+    }
+
+    //保存数据
+    private void commitData(SanitationAreaAssessment assessment, JSONArray array) throws JSONException, UnsupportedEncodingException {
+        String userid = getGson().fromJson(sp.getString("userid", ""), String.class);
+        JSONObject object = new JSONObject();
+        object.put("item", array);
+        object.put("userid",userid);
+        object.put("areaID", assessment.getAreaid());
+        object.put("bz", assessment.getBz());
+        object.put("oldAssementID", assessment.getID());
+
+        StringEntity entity = new StringEntity(object.toString(), "utf-8");
+        getFinalHttp().post(
+                InternetURL.SAVE_NOT_COMMIT,
+                entity,
+                "application/json; charset=utf-8",
+                new AjaxCallBack<Object>() {
+                    @Override
+                    public void onSuccess(Object o) {
+                        super.onSuccess(o);
+                        if (o.toString().equals("true")){
+                            if (progressDialog != null){
+                                progressDialog.dismiss();
+                                Toast.makeText(mContext, R.string.commit_over, Toast.LENGTH_SHORT).show();
+                            }
+                            try {
+                                getData();//提交完毕后更新数据
+                                list.clear();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        }else {
+                            Toast.makeText(mContext, "修改失败,请稍后重试", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t, int errorNo, String strMsg) {
+                        super.onFailure(t, errorNo, strMsg);
+                    }
+                }
+        );
     }
 }
