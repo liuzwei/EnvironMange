@@ -18,6 +18,7 @@ import com.area.EnvironMange.base.Constants;
 import com.area.EnvironMange.common.InternetURL;
 import com.area.EnvironMange.model.Person;
 import com.area.EnvironMange.model.SanitationArea;
+import com.area.EnvironMange.util.PhoneEnvUtil;
 import com.area.EnvironMange.util.StringUtil;
 import com.area.EnvironMange.widget.BeizhuDialog;
 import net.tsz.afinal.http.AjaxCallBack;
@@ -37,7 +38,7 @@ import java.util.List;
  * 类的功能、说明写在此处.
  */
 public class PersonsActivity extends BaseActivity implements View.OnClickListener{
-    private static final String TAG = JiaoxuelouActivity.class.getSimpleName();
+    private static final String TAG = PersonsActivity.class.getSimpleName();
 
     private ListView persons;
     private PersonAdapter adapter;
@@ -49,7 +50,11 @@ public class PersonsActivity extends BaseActivity implements View.OnClickListene
         setContentView(R.layout.person);
         initView();
         try {
-            getPerson();
+            if (PhoneEnvUtil.isNetworkConnected(mContext)) {
+                getPerson();
+            }else {
+                Toast.makeText(mContext, R.string.check_network, Toast.LENGTH_SHORT).show();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -77,6 +82,10 @@ public class PersonsActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void afterTextChanged(Editable s) {
                 personList.clear();
+                if (!PhoneEnvUtil.isNetworkConnected(mContext)){
+                    Toast.makeText(mContext, R.string.check_network, Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (StringUtil.isNullOrEmpty(s.toString())){
                     try {
                         //为空的话查询所有人
