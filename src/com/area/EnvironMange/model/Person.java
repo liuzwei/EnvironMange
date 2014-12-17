@@ -7,22 +7,31 @@ package com.area.EnvironMange.model;
  * 类的功能、说明写在此处.
  */
 public class Person {
-    private String name;
-    private String tele;
+    private String ID;
+    private String Xm;//姓名
+    private String Tel;//电话
 
-    public String getName() {
-        return name;
+    public String getID() {
+        return ID;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
-    public String getTele() {
-        return tele;
+    public String getXm() {
+        return Xm;
     }
 
-    public void setTele(String tele) {
-        this.tele = tele;
+    public void setXm(String xm) {
+        Xm = xm;
+    }
+
+    public String getTel() {
+        return Tel;
+    }
+
+    public void setTel(String tel) {
+        Tel = tel;
     }
 }

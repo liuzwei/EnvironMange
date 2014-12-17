@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.widget.*;
@@ -16,6 +18,7 @@ import com.area.EnvironMange.base.Constants;
 import com.area.EnvironMange.common.InternetURL;
 import com.area.EnvironMange.model.Person;
 import com.area.EnvironMange.model.SanitationArea;
+import com.area.EnvironMange.util.StringUtil;
 import com.area.EnvironMange.widget.BeizhuDialog;
 import net.tsz.afinal.http.AjaxCallBack;
 import org.apache.http.entity.StringEntity;
@@ -38,29 +41,59 @@ public class PersonsActivity extends BaseActivity implements View.OnClickListene
 
     private ListView persons;
     private PersonAdapter adapter;
-    private List<Person> areaList = new ArrayList<Person>();
+    private List<Person> personList = new ArrayList<Person>();
     private ImageView back;
     private EditText content;//搜索框
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.person);
         initView();
-        registerBoradcastReceiver();
-//        try {
-//            getArea();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        try {
+            getPerson();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void initView() {
         back = (ImageView) this.findViewById(R.id.back);
         back.setOnClickListener(this);
-
+        content = (EditText) this.findViewById(R.id.content);
         persons = (ListView) this.findViewById(R.id.persons);
-        adapter = new PersonAdapter(PersonsActivity.this, areaList);
+        adapter = new PersonAdapter(PersonsActivity.this, personList);
         persons.setAdapter(adapter);
 
+        content.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                personList.clear();
+                if (StringUtil.isNullOrEmpty(s.toString())){
+                    try {
+                        //为空的话查询所有人
+                        getPerson();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }else {
+                    //不为空的话先清空再查找人
+                    try {
+                        searchByName();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -80,27 +113,22 @@ public class PersonsActivity extends BaseActivity implements View.OnClickListene
     /**
      *
      */
-    private void getArea() throws JSONException, UnsupportedEncodingException {
-        JSONObject object = new JSONObject();
-        StringEntity entity = new StringEntity(object.toString());
-
+    private void getPerson() throws JSONException, UnsupportedEncodingException {
         getFinalHttp().post(
-                InternetURL.GET_OUTDOOR_AREA_URL,
-                entity,
-                "application/json; charset=utf-8",
+                InternetURL.GET_ALL_LXR_URL,
                 new AjaxCallBack<Object>() {
                     @Override
                     public void onSuccess(Object o) {
                         super.onSuccess(o);
-//                        try {
-////                            JSONArray array = new JSONArray(o.toString());
-////                            for (int i=0; i<array.length(); i++){
-////                                areaList.add(getGson().fromJson(array.getJSONObject(i).toString(), SanitationArea.class));
-////                            }
-////                            areaAdapter.notifyDataSetChanged();
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
+                        try {
+                            JSONArray array = new JSONArray(o.toString());
+                            for (int i=0; i<array.length(); i++){
+                                personList.add(getGson().fromJson(array.getJSONObject(i).toString(), Person.class));
+                            }
+                            adapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
 
                     @Override
@@ -111,60 +139,34 @@ public class PersonsActivity extends BaseActivity implements View.OnClickListene
         );
     }
 
-    public void registerBoradcastReceiver(){
-        IntentFilter myIntentFilter = new IntentFilter();
-        myIntentFilter.addAction(Constants.BROADCAST);
-        registerReceiver(mBroadcastReceiver, myIntentFilter);
-    }
-
-    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver(){
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if(action.equals(Constants.BROADCAST)){
-                boolean isSave = intent.getBooleanExtra("isSave", true);
-                if (isSave) {
-                    Toast.makeText(mContext, "保存成功", Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(mContext, "提交成功", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
-
-    };
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(mBroadcastReceiver);
     }
 
-    /**
-     * 检查该区域是否可以打分
-     * @param area
-     * @throws java.io.UnsupportedEncodingException
-     * @throws org.json.JSONException
-     */
-    private void  checkIsScore(final SanitationArea area) throws UnsupportedEncodingException, JSONException {
+    private void searchByName() throws UnsupportedEncodingException, JSONException {
         JSONObject object = new JSONObject();
-        object.put("areaid", area.getID());
-        StringEntity entity = new StringEntity(object.toString());
-
+        object.put("xm", content.getText().toString());
+        StringEntity entity = new StringEntity(object.toString(), "utf-8");
         getFinalHttp().post(
-                InternetURL.IS_CAN_DF,
+                InternetURL.GET_LXR_BY_NAME,
                 entity,
                 "application/json; charset=utf-8",
                 new AjaxCallBack<Object>() {
                     @Override
                     public void onSuccess(Object o) {
                         super.onSuccess(o);
-                        if ("true".equals(o.toString())){
-                            Intent score = new Intent(PersonsActivity.this, ScoreActivity.class);
-                            score.putExtra("areaID", area.getID());
-                            score.putExtra("titleName",   area.getMc() +"  卫生打分");
-                            startActivity(score);
-                        }else {
-                            Toast.makeText(mContext, R.string.not_df, Toast.LENGTH_SHORT).show();
+                        try {
+                            JSONArray array = new JSONArray(o.toString());
+                            for (int i=0; i<array.length(); i++){
+                                personList.add(getGson().fromJson(array.getJSONObject(i).toString(), Person.class));
+                            }
+                            adapter.notifyDataSetChanged();
+                            if (array.length() == 0){
+                                Toast.makeText(mContext, R.string.no_person_data, Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
                     }
 

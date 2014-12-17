@@ -55,8 +55,8 @@ public class PersonAdapter extends BaseAdapter  {
             holder = (ViewHolder) convertView.getTag();
         }
         Person person = list.get(position);
-        holder.name.setText(person.getName());
-        holder.tele.setText(person.getTele());
+        holder.name.setText(person.getXm());
+        holder.tele.setText(person.getTel());
         return convertView;
     }
 

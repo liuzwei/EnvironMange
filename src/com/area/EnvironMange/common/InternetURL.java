@@ -65,4 +65,10 @@ public class InternetURL {
 
     //提交保存但未提交的
     public static String SAVE_NOT_COMMIT = MAIN_URL+"CommitSavedProjectFs";
+
+    //获取所有联系人
+    public static String GET_ALL_LXR_URL = MAIN_URL+"GetAllLxr";
+
+    //根据姓名查找联系人
+    public static String GET_LXR_BY_NAME = MAIN_URL+"GetAllLxrByXm";
 }
