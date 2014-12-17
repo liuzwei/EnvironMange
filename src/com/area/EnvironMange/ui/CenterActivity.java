@@ -45,7 +45,7 @@ public class CenterActivity extends BaseActivity implements View.OnClickListener
         setContentView(R.layout.center_layout);
         initView();
         namestr = getGson().fromJson(sp.getString("username", ""), String.class);
-        for(int i=0;i<6;i++){
+        for(int i=0;i<7;i++){
             if(i == 0){
                 HashMap<String,Center> map1 = new HashMap<String,Center>();
                 map1.put("image", new Center("教学楼区域", String.valueOf(R.drawable.center1)));
@@ -76,11 +76,11 @@ public class CenterActivity extends BaseActivity implements View.OnClickListener
                 map1.put("image", new Center("查询历史成绩", String.valueOf(R.drawable.center5)));
                 imagelist.add(map1);
             }
-//            if(i == 6){
-//                HashMap<String,Center> map1 = new HashMap<String,Center>();
-//                map1.put("image", new Center("修改个人信息", String.valueOf(R.drawable.seticon)));
-//                imagelist.add(map1);
-//            }
+            if(i == 6){
+                HashMap<String,Center> map1 = new HashMap<String,Center>();
+                map1.put("image", new Center("联系人", String.valueOf(R.drawable.center2)));
+                imagelist.add(map1);
+            }
         }
 
 
@@ -122,10 +122,10 @@ public class CenterActivity extends BaseActivity implements View.OnClickListener
                     Intent intent = new Intent( CenterActivity.this, IndexActivity.class);
                     startActivity(intent);
                 }
-//                if(position == 6){
-//                    Intent intent = new Intent( CenterActivity.this, SettingActivity.class);
-//                    startActivity(intent);
-//                }
+                if(position == 6){//联系人
+                    Intent intent = new Intent( CenterActivity.this, PersonsActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 

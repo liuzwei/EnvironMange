@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:background="#f7f7f7"
+              android:layout_height="match_parent">
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/maincolor"
+            android:gravity="center_vertical"
+            >
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ceshi_05"
+                android:layout_centerVertical="true"
+                android:id="@+id/back"
+                android:paddingLeft="15dp"
+                android:paddingRight="10dp"
+                />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="联系人"
+                android:textSize="15dp"
+                android:textColor="#FFFFFF"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:id="@+id/title"
+                />
+        <ImageView android:layout_width="wrap_content" android:layout_height="match_parent"
+                   android:src="@drawable/ceshi_03"
+                   android:layout_alignParentRight="true"
+                   android:paddingRight="15dp"
+                   android:paddingLeft="10dp"
+                   android:background="@drawable/top_back_select"
+                   android:onClick="onTopMenuPopupButtonClick"/>
+    </RelativeLayout>
+    <View android:layout_width="match_parent"
+          android:layout_height="0.1dp"
+          android:background="#d1d1d1"
+          android:layout_marginBottom="10dp"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:id="@+id/areaone"
+            >
+        <RelativeLayout
+                android:id="@+id/sixin1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:padding="10dp"
+                >
+            <EditText
+                    android:id="@+id/content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="7px"
+                    android:hint="输入姓名查询"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="40dp"
+                    android:textSize="14sp"
+                    android:paddingLeft="35dp"
+                    android:gravity="left|center"
+                    android:layout_width="fill_parent"/>
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/soubtn"
+                    android:layout_marginLeft="5dp"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/searchImageView"
+                    />
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/qingchu"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="5dp"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/deleteContSearch"
+                    />
+        </RelativeLayout>
+
+    </LinearLayout>
+    <View android:layout_width="match_parent"
+          android:layout_height="0.1dp"
+          android:background="#d1d1d1"
+          android:layout_marginBottom="10dp"/>
+
+    <ListView
+            android:id="@+id/persons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+    </ListView>
+</LinearLayout>
