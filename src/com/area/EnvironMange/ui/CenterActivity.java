@@ -4,8 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.adapter.CenterAdapter;
@@ -30,47 +34,53 @@ public class CenterActivity extends BaseActivity implements View.OnClickListener
     private long touchTime = 0;
     private long waitTime = 2000;
     List<HashMap<String,Center>> imagelist = new ArrayList<HashMap<String,Center>>();
+
+    private TextView name;
+    private TextView set;
+    String namestr;
+    private ImageView setimg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.center_layout);
-
-        for(int i=0;i<7;i++){
+        initView();
+        namestr = getGson().fromJson(sp.getString("username", ""), String.class);
+        for(int i=0;i<6;i++){
             if(i == 0){
                 HashMap<String,Center> map1 = new HashMap<String,Center>();
-                map1.put("image", new Center("教学楼区域", String.valueOf(R.drawable.jiaoxuel)));
+                map1.put("image", new Center("教学楼区域", String.valueOf(R.drawable.center1)));
                 imagelist.add(map1);
             }
             if(i == 1){
                 HashMap<String,Center> map1 = new HashMap<String,Center>();
-                map1.put("image", new Center("教学公共区域", String.valueOf(R.drawable.publicg)));
+                map1.put("image", new Center("教学公共区域", String.valueOf(R.drawable.center4)));
                 imagelist.add(map1);
             }
             if(i == 2){
                 HashMap<String,Center> map1 = new HashMap<String,Center>();
-                map1.put("image", new Center("宿舍区域", String.valueOf(R.drawable.mine)));
+                map1.put("image", new Center("宿舍区域", String.valueOf(R.drawable.center2)));
                 imagelist.add(map1);
             }
             if(i == 3){
                 HashMap<String,Center> map1 = new HashMap<String,Center>();
-                map1.put("image", new Center("户外区域\n", String.valueOf(R.drawable.outdoor)));
+                map1.put("image", new Center("户外区域\n", String.valueOf(R.drawable.center3)));
                 imagelist.add(map1);
             }
             if(i == 4){
                 HashMap<String,Center> map1 = new HashMap<String,Center>();
-                map1.put("image", new Center("查询未提交成绩", String.valueOf(R.drawable.todo)));
+                map1.put("image", new Center("查询未提交成绩", String.valueOf(R.drawable.center7)));
                 imagelist.add(map1);
             }
             if(i == 5){
                 HashMap<String,Center> map1 = new HashMap<String,Center>();
-                map1.put("image", new Center("查询历史成绩", String.valueOf(R.drawable.selecticon)));
+                map1.put("image", new Center("查询历史成绩", String.valueOf(R.drawable.center5)));
                 imagelist.add(map1);
             }
-            if(i == 6){
-                HashMap<String,Center> map1 = new HashMap<String,Center>();
-                map1.put("image", new Center("修改个人信息", String.valueOf(R.drawable.seticon)));
-                imagelist.add(map1);
-            }
+//            if(i == 6){
+//                HashMap<String,Center> map1 = new HashMap<String,Center>();
+//                map1.put("image", new Center("修改个人信息", String.valueOf(R.drawable.seticon)));
+//                imagelist.add(map1);
+//            }
         }
 
 
@@ -112,14 +122,25 @@ public class CenterActivity extends BaseActivity implements View.OnClickListener
                     Intent intent = new Intent( CenterActivity.this, IndexActivity.class);
                     startActivity(intent);
                 }
-                if(position == 6){
-                    Intent intent = new Intent( CenterActivity.this, SettingActivity.class);
-                    startActivity(intent);
-                }
+//                if(position == 6){
+//                    Intent intent = new Intent( CenterActivity.this, SettingActivity.class);
+//                    startActivity(intent);
+//                }
             }
         });
 
+        name.setText("上午好!"+namestr+"老师");
+
     }
+
+    private void initView() {
+        set = (TextView) this.findViewById(R.id.set);
+        set.setOnClickListener(this);
+        name = (TextView) this.findViewById(R.id.name);
+        setimg = (ImageView) this.findViewById(R.id.setimg);
+        setimg.setOnClickListener(this);
+    }
+
     //再摁退出程序
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -137,6 +158,16 @@ public class CenterActivity extends BaseActivity implements View.OnClickListener
     }
     @Override
     public void onClick(View v) {
-        super.onClick(v);
+        switch (v.getId())
+        {
+            case R.id.set:
+                Intent intent = new Intent( CenterActivity.this, SettingActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.setimg:
+                Intent set = new Intent( CenterActivity.this, SettingActivity.class);
+                startActivity(set);
+                break;
+        }
     }
 }

@@ -15,6 +15,7 @@ import com.area.EnvironMange.model.SanitaionAreaAssementItem;
 import com.area.EnvironMange.model.SanitaionAreaAssementItemView;
 import com.area.EnvironMange.model.SanitationAreaAssessment;
 import com.area.EnvironMange.util.DateUtil;
+import com.area.EnvironMange.util.XCRoundImageView;
 import net.tsz.afinal.http.AjaxCallBack;
 import org.apache.http.entity.StringEntity;
 import org.json.JSONArray;
@@ -38,7 +39,7 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
     private ListView listView;
     private SelectUndoAdapter adapter;
     private ImageView back;
-    private ImageView saveall;//一键提交
+    private XCRoundImageView saveall;//一键提交
     private static final int MODIFY_CODE = 102;
     private ProgressDialog progressDialog;
     @Override
@@ -61,7 +62,7 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
         listView.setAdapter(adapter);
         back = (ImageView) this.findViewById(R.id.back);
         back.setOnClickListener(this);
-        saveall = (ImageView) this.findViewById(R.id.saveall);
+        saveall = (XCRoundImageView) this.findViewById(R.id.saveall);
         saveall.setOnClickListener(this);
     }
 

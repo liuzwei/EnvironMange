@@ -32,15 +32,6 @@
                 />
     </RelativeLayout>
 
-    <TextView
-            android:text="密码:"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:textSize="20sp"
-            android:textColor="#000"
-            android:textStyle="bold"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
     <EditText
             android:inputType="textPassword"
             android:id="@+id/update_pass_pwd"
@@ -50,11 +41,21 @@
             android:hint="请输入要修改的密码"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+    <EditText
+            android:inputType="textPassword"
+            android:id="@+id/sure_pass_pwd"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:hint="请再次输入密码"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     <Button
             android:id="@+id/update_pass_btn"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:text="修改"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
 </LinearLayout>

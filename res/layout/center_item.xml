@@ -4,7 +4,6 @@
               android:layout_height="wrap_content"
               android:orientation="horizontal"
               android:padding="10dp"
-              android:background="@drawable/zhuye_item_select"
         >
 
     <LinearLayout
@@ -14,18 +13,20 @@
             android:gravity="center_vertical|center_horizontal"
             android:id="@+id/searchLayout"
             >
-        <ImageView android:layout_width="wrap_content"
+        <com.area.EnvironMange.util.XCRoundImageView
+                   android:layout_width="50dp"
                    android:id="@+id/imageView"
                    android:gravity="center_vertical|center_horizontal"
                    android:src="@drawable/ic_launcher"
-                   android:layout_height="wrap_content"/>
+                   android:layout_height="50dp"/>
+
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="name"
                 android:gravity="center_vertical|center_horizontal"
-                android:textSize="13sp"
-                android:textColor="#333333"
+                android:textSize="14sp"
+                android:textColor="#ffffff"
                 android:id="@+id/name"
                 />
 
