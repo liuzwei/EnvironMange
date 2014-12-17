@@ -74,11 +74,21 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
                 break;
             case R.id.saveall:
                 //todo
-                Toast.makeText(mContext, "未做", Toast.LENGTH_SHORT).show();
-//                SaveScoreDialog dialog = new SaveScoreDialog( list , this, R.style.dialog1);
-//                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//                dialog.show();
+//                Toast.makeText(mContext, "未做", Toast.LENGTH_SHORT).show();
+                progressDialog = new ProgressDialog(SelectUndoActivity.this);
+                progressDialog.setMessage("正在提交");
+                progressDialog.setCanceledOnTouchOutside(false);
+                progressDialog.show();
+                for (int i=0; i<list.size(); i++){
+                    SanitationAreaAssessment asment = list.get(i);
+                    try {
+                        getData(asment);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
                 break;
+
         }
     }
     //弹出顶部主菜单
