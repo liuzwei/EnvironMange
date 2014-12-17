@@ -1,44 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:background="#f7f7f7"
-              android:descendantFocusability="blocksDescendants"
-              android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/fm">
 
-    <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@color/maincolor"
-            android:gravity="center_vertical"
-            >
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="应用中心"
-                android:textSize="20sp"
-                android:textColor="#FFFFFF"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                />
-
-    </RelativeLayout>
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_weight="1"
             >
+        <LinearLayout android:layout_width="wrap_content"
+                      android:layout_weight="50"
+                      android:layout_height="fill_parent">
 
+        </LinearLayout>
         <GridView
         android:id="@+id/detail_picture"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1.51"
         android:horizontalSpacing="2dip"
         android:numColumns="3"
+        android:layout_weight="50"
         android:verticalSpacing="2dip" />
 
     </LinearLayout>
@@ -48,13 +35,11 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:gravity="bottom"
-            android:background="@color/maincolor"
             >
         <LinearLayout
                 android:id="@+id/lp_03"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:background="@color/maincolor"
                 android:layout_alignParentBottom="true"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -63,16 +48,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
                     android:gravity="center">
                 <TextView
-                        android:id="@+id/foot_homePage"
+                        android:id="@+id/name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=""
-                        android:textColor="@color/zhuce_titlecolor"
-                        android:textSize="15dp"
+                        android:text="上午好！、、老师"
+                        android:layout_marginLeft="18dp"
+                        android:layout_weight="1"
+                        android:textColor="#ffffff"
+                        android:textSize="17dp"
                         />
             </RelativeLayout>
             <!-- 第二 -->
@@ -94,38 +79,30 @@
                         />
             </RelativeLayout>
 
-            <RelativeLayout
-                    android:id="@+id/foot_find_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    >
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textColor="#FFFFFF"
-                        android:textSize="15dp"
-                        android:id="@+id/foot_goods"
-                        />
-            </RelativeLayout>
+
 
             <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     >
+                <ImageView
+                           android:layout_width="25dp"
+                           android:src="@drawable/set"
+                           android:id="@+id/setimg"
+                           android:layout_height="25dp"/>
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
+                        android:layout_width="50dp"
+                        android:layout_height="25dp"
+                        android:gravity="center"
+                        android:text="设置"
+                        android:layout_toRightOf="@+id/setimg"
                         android:textColor="#FFFFFF"
-                        android:textSize="15dp"
-                        android:id="@+id/foot_video"
+                        android:textSize="17dp"
+                        android:id="@+id/set"
                         />
             </RelativeLayout>
         </LinearLayout>

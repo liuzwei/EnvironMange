@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.base.BaseActivity;
 import com.area.EnvironMange.common.InternetURL;
+import com.area.EnvironMange.model.Center;
 import com.area.EnvironMange.util.StringUtil;
 import net.tsz.afinal.http.AjaxCallBack;
 import org.apache.http.entity.StringEntity;

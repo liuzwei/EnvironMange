@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.model.Building;
 import com.area.EnvironMange.model.Center;
+import com.area.EnvironMange.util.XCRoundImageView;
 
 import java.util.HashMap;
 import java.util.List;
@@ -52,7 +53,7 @@ public class CenterAdapter extends BaseAdapter {
         if (convertView == null){
             holder = new ViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.center_item, null);
-            holder.imageView = (ImageView) convertView.findViewById(R.id.imageView);
+            holder.imageView = (XCRoundImageView) convertView.findViewById(R.id.imageView);
             holder.name = (TextView) convertView.findViewById(R.id.name);
             convertView.setTag(holder);
         }else {
@@ -70,7 +71,7 @@ public class CenterAdapter extends BaseAdapter {
 
 
     class ViewHolder{
-        ImageView imageView;
+        XCRoundImageView imageView;
         TextView name;
 
     }

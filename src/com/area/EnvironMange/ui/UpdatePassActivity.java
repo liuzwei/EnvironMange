@@ -23,6 +23,7 @@ import java.io.UnsupportedEncodingException;
  */
 public class UpdatePassActivity extends BaseActivity {
     private EditText password;
+    private EditText surepass;
     private Button commit;
     private ImageView back;
     @Override
@@ -38,6 +39,8 @@ public class UpdatePassActivity extends BaseActivity {
         commit.setOnClickListener(this);
         back = (ImageView) this.findViewById(R.id.update_back);
         back.setOnClickListener(this);
+        surepass = (EditText) this.findViewById(R.id.sure_pass_pwd);
+
     }
 
     @Override
@@ -45,6 +48,20 @@ public class UpdatePassActivity extends BaseActivity {
         super.onClick(v);
         switch (v.getId()){
             case R.id.update_pass_btn:
+                String pass = password.getText().toString();
+                String sure = surepass.getText().toString();
+                if(StringUtil.isNullOrEmpty(pass)){
+                    Toast.makeText(mContext, "请输入密码", Toast.LENGTH_SHORT).show();
+                     return;
+                }
+                if(StringUtil.isNullOrEmpty(sure)){
+                    Toast.makeText(mContext, "请输入确认密码", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(!pass.equals(sure)){
+                    Toast.makeText(mContext, "两次输入密码不一致", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 try {
                     updatePass();
                 } catch (Exception e) {
