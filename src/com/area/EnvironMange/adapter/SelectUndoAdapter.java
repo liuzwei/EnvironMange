@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.model.MyBuildScore;
 import com.area.EnvironMange.model.SanitationAreaAssessment;
+import com.area.EnvironMange.util.DateUtil;
 
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class SelectUndoAdapter extends BaseAdapter  {
         SanitationAreaAssessment assessment = list.get(position);
         holder.name.setText(assessment.getAreamc());
         holder.score.setText(assessment.getFs());
-        holder.time.setText(assessment.getJcsj());
+        holder.time.setText(DateUtil.getUndoDate(assessment.getJcsj()));
         holder.update.setOnClickListener(new View.OnClickListener() {
            //修改
             @Override
