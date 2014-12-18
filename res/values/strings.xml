@@ -13,6 +13,7 @@
         <item>户外区域</item>
         <item>未提交成绩</item>
         <item>历史成绩</item>
+        <item>联系人</item>
         <item>设置</item>
     </string-array>
     <string name="exit_str">再按一次推出程序</string>

@@ -45,6 +45,8 @@ public class PersonsActivity extends BaseActivity implements View.OnClickListene
     private List<Person> personList = new ArrayList<Person>();
     private ImageView back;
     private EditText content;//搜索框
+    private ImageView deleteContSearch;//删除按钮
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.person);
@@ -61,12 +63,14 @@ public class PersonsActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void initView() {
-        back = (ImageView) this.findViewById(R.id.back);
+        back = (ImageView) this.findViewById(R.id.person_back);
         back.setOnClickListener(this);
         content = (EditText) this.findViewById(R.id.content);
         persons = (ListView) this.findViewById(R.id.persons);
         adapter = new PersonAdapter(PersonsActivity.this, personList);
         persons.setAdapter(adapter);
+        deleteContSearch = (ImageView) this.findViewById(R.id.deleteContSearch);
+        deleteContSearch.setOnClickListener(this);
 
         content.addTextChangedListener(new TextWatcher() {
             @Override
@@ -76,7 +80,11 @@ public class PersonsActivity extends BaseActivity implements View.OnClickListene
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                 if(!StringUtil.isNullOrEmpty(s.toString())){
+                     deleteContSearch.setVisibility(View.VISIBLE);
+                 }else {
+                     deleteContSearch.setVisibility(View.GONE);
+                 }
             }
 
             @Override
@@ -103,13 +111,17 @@ public class PersonsActivity extends BaseActivity implements View.OnClickListene
                 }
             }
         });
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.back:
+            case R.id.person_back:
                 finish();
+                break;
+            case R.id.deleteContSearch:
+                content.setText("");
                 break;
 
         }

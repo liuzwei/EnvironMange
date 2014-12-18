@@ -97,7 +97,11 @@ public class BaseActivity extends Activity implements MainPopMenu.OnItemClickLis
                 Intent chaxun2 = new Intent(this, IndexActivity.class);
                 startActivity(chaxun2);
                 break;
-            case 7://设置
+            case 7://联系人
+                Intent person = new Intent(this, PersonsActivity.class);
+                startActivity(person);
+                break;
+            case 8://设置
                 Intent set = new Intent(this, SettingActivity.class);
                 startActivity(set);
                 break;
