@@ -347,6 +347,7 @@ public class JiaoxuelouActivity extends BaseActivity implements View.OnClickList
                         if ("true".equals(o.toString())){
                             Intent score = new Intent(JiaoxuelouActivity.this, ScoreActivity.class);
                             score.putExtra("areaID", area.getID());
+                            score.putExtra("pbid", area.getPbid());
                             score.putExtra("titleName", buildingName +"  楼层"+floorName +" "+area.getMc()+"  卫生打分");
                             startActivity(score);
                         }else {

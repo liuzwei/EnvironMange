@@ -10,6 +10,7 @@ public class SanitationAreaAssessment implements Comparable{
     private String areamc;//检查区域名称
     private String areaid;//检查区域ID
     private String bz;//备注
+    private String SanitaionreaCleanID;//排班id
 
     public String getID() {
         return ID;
@@ -64,5 +65,13 @@ public class SanitationAreaAssessment implements Comparable{
         SanitationAreaAssessment assessment = (SanitationAreaAssessment) another;
 
         return assessment.getJcsj().compareTo(this.getJcsj());
+    }
+
+    public String getSanitaionreaCleanID() {
+        return SanitaionreaCleanID;
+    }
+
+    public void setSanitaionreaCleanID(String sanitaionreaCleanID) {
+        SanitaionreaCleanID = sanitaionreaCleanID;
     }
 }

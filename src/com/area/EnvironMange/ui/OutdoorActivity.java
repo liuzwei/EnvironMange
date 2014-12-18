@@ -186,6 +186,7 @@ public class OutdoorActivity extends BaseActivity implements View.OnClickListene
                             Intent score = new Intent(OutdoorActivity.this, ScoreActivity.class);
                             score.putExtra("areaID", area.getID());
                             score.putExtra("titleName",   area.getMc() +"  卫生打分");
+                            score.putExtra("pbid", area.getPbid());
                             startActivity(score);
                         }else {
                             Toast.makeText(mContext, R.string.not_df, Toast.LENGTH_SHORT).show();

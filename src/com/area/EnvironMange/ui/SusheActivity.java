@@ -258,6 +258,7 @@ public class SusheActivity extends BaseActivity implements View.OnClickListener{
                         if ("true".equals(o.toString())){
                             Intent score = new Intent(SusheActivity.this, ScoreActivity.class);
                             score.putExtra("areaID", area.getID());
+                            score.putExtra("pbid", area.getPbid());
                             score.putExtra("titleName", buildingName + " " + area.getMc() +"  卫生打分");
                             startActivity(score);
                         }else {

@@ -36,6 +36,7 @@ public class ModifyScoreActivity extends BaseActivity{
     private String assessmentID;
     private String dafenID;
     private String beizhuStr;//备注
+    private String SanitaionreaCleanID;//排班ID
 
 
     @Override
@@ -46,6 +47,7 @@ public class ModifyScoreActivity extends BaseActivity{
         assessmentID = getIntent().getStringExtra("assessmentID");
         dafenID = getIntent().getStringExtra("dafenID");
         beizhuStr = getIntent().getStringExtra("beizhu");
+        SanitaionreaCleanID = getIntent().getStringExtra("SanitaionreaCleanID");
         try {
             getData(dafenID);
         } catch (Exception e) {
@@ -148,6 +150,7 @@ public class ModifyScoreActivity extends BaseActivity{
         object.put("item", array);
         object.put("userid",userid);
         object.put("areaID", assessmentID);
+        object.put("pbid", SanitaionreaCleanID);
         object.put("bz", beizhu.getText().toString());
         object.put("asmentID", list.get(0).getAreaAssementID());
 
