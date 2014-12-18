@@ -194,6 +194,7 @@ public class JiaoxuepublicActivity extends BaseActivity implements View.OnClickL
                                 areaList.add(getGson().fromJson(array.getJSONObject(i).toString(), SanitationArea.class));
                             }
                             areaAdapter.notifyDataSetChanged();
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -258,6 +259,7 @@ public class JiaoxuepublicActivity extends BaseActivity implements View.OnClickL
                         if ("true".equals(o.toString())){
                             Intent score = new Intent(JiaoxuepublicActivity.this, ScoreActivity.class);
                             score.putExtra("areaID", area.getID());
+                            score.putExtra("pbid", area.getPbid());
                             score.putExtra("titleName", buildingName + " " + area.getMc() +"  卫生打分");
                             startActivity(score);
                         }else {

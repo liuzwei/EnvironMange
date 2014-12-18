@@ -10,6 +10,7 @@ public class SanitationArea {
     private String ID;//卫生区域ID
     private String mc;//卫生区域名称
     private String code;//卫生区域编号
+    private String pbid;//排班ID
 
     public String getID() {
         return ID;
@@ -33,5 +34,13 @@ public class SanitationArea {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getPbid() {
+        return pbid;
+    }
+
+    public void setPbid(String pbid) {
+        this.pbid = pbid;
     }
 }

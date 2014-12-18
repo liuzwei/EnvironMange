@@ -110,6 +110,7 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
                 intent.putExtra("assessmentID", asm.getAreaid());
                 intent.putExtra("dafenID", asm.getID());
                 intent.putExtra("beizhu", asm.getBz());
+                intent.putExtra("SanitaionreaCleanID", asm.getSanitaionreaCleanID());
                 startActivityForResult(intent, MODIFY_CODE);
                 break;
             case 2://单个提交数据
@@ -249,6 +250,7 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
         object.put("userid",userid);
         object.put("areaID", assessment.getAreaid());
         object.put("bz", assessment.getBz());
+        object.put("pbid", assessment.getSanitaionreaCleanID());
         object.put("oldAssementID", assessment.getID());
 
         StringEntity entity = new StringEntity(object.toString(), "utf-8");

@@ -38,6 +38,7 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
     private List<SanitaionAreaProject> list  =new ArrayList<SanitaionAreaProject>();
     private String titleName;
     private LinearLayout projectLayout;
+    private String pbid;//排班ID
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,8 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
         setContentView(R.layout.score_layout);
         areaID = getIntent().getStringExtra("areaID");
         titleName = getIntent().getStringExtra("titleName");
+        pbid = getIntent().getStringExtra("pbid");
+
         initView();
 
         try {
@@ -177,6 +180,7 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
         object.put("item", array);
         object.put("userid",userid);
         object.put("areaID", areaID);
+        object.put("pbid", pbid);
         object.put("bz", beizhu.getText().toString());
 
         StringEntity entity = new StringEntity(object.toString(), "utf-8");
@@ -199,6 +203,7 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
                     @Override
                     public void onFailure(Throwable t, int errorNo, String strMsg) {
                         super.onFailure(t, errorNo, strMsg);
+                        Toast.makeText(mContext, R.string.server_error, Toast.LENGTH_SHORT).show();
                     }
                 }
         );
