@@ -58,7 +58,7 @@ public class CenterActivity extends BaseActivity implements View.OnClickListener
             }
             if(i == 2){
                 HashMap<String,Center> map1 = new HashMap<String,Center>();
-                map1.put("image", new Center("宿舍区域", String.valueOf(R.drawable.center2)));
+                map1.put("image", new Center("宿舍区域", String.valueOf(R.drawable.center_sushe)));
                 imagelist.add(map1);
             }
             if(i == 3){
@@ -68,7 +68,7 @@ public class CenterActivity extends BaseActivity implements View.OnClickListener
             }
             if(i == 4){
                 HashMap<String,Center> map1 = new HashMap<String,Center>();
-                map1.put("image", new Center("查询未提交成绩", String.valueOf(R.drawable.center7)));
+                map1.put("image", new Center("未提交成绩", String.valueOf(R.drawable.center7)));
                 imagelist.add(map1);
             }
             if(i == 5){

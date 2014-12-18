@@ -42,6 +42,7 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
     private XCRoundImageView saveall;//一键提交
     private static final int MODIFY_CODE = 102;
     private ProgressDialog progressDialog;
+    private boolean isAll;//是否有数据
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,8 +74,10 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
                 finish();
                 break;
             case R.id.saveall:
-                //todo
-//                Toast.makeText(mContext, "未做", Toast.LENGTH_SHORT).show();
+                if(!isAll){
+                    Toast.makeText(mContext, R.string.no_data_save, Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 progressDialog = new ProgressDialog(SelectUndoActivity.this);
                 progressDialog.setMessage("正在提交");
                 progressDialog.setCanceledOnTouchOutside(false);
@@ -157,6 +160,7 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
                             Collections.sort(list);
                             adapter.notifyDataSetChanged();
                             if (array.length() == 0){
+                                isAll = false;
                                 Toast.makeText(mContext, R.string.no_data_save, Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
