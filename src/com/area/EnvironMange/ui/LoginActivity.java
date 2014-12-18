@@ -12,6 +12,7 @@ import com.area.EnvironMange.base.BaseActivity;
 import com.area.EnvironMange.common.InternetURL;
 import com.area.EnvironMange.util.PhoneEnvUtil;
 import com.area.EnvironMange.util.StringUtil;
+import com.umeng.update.UmengUpdateAgent;
 import net.tsz.afinal.http.AjaxCallBack;
 import org.apache.http.entity.StringEntity;
 import org.json.JSONException;
@@ -31,6 +32,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        UmengUpdateAgent.update(this);
         setContentView(R.layout.login_layout);
         initView();
     }

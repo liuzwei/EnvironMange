@@ -53,7 +53,7 @@
                         android:id="@+id/name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="上午好！、、老师"
+                        android:text="你好"
                         android:layout_marginLeft="18dp"
                         android:layout_weight="1"
                         android:textColor="#ffffff"

@@ -129,7 +129,7 @@ public class CenterActivity extends BaseActivity implements View.OnClickListener
             }
         });
 
-        name.setText("上午好!"+namestr+"老师");
+        name.setText("你好!"+namestr);
 
     }
 

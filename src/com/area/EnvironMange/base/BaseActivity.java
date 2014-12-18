@@ -10,6 +10,7 @@ import android.view.View;
 import com.area.EnvironMange.menu.MainPopMenu;
 import com.area.EnvironMange.ui.*;
 import com.google.gson.Gson;
+import com.umeng.analytics.MobclickAgent;
 import net.tsz.afinal.FinalHttp;
 
 /**
@@ -20,6 +21,7 @@ public class BaseActivity extends Activity implements MainPopMenu.OnItemClickLis
     public SharedPreferences sp;
     public LayoutInflater inflater;
     public static FinalHttp finalHttp = new FinalHttp();
+    private final  String mPageName = "BaseActivity";
 
     private ActivityTack tack= ActivityTack.getInstanse();
 
@@ -34,6 +36,15 @@ public class BaseActivity extends Activity implements MainPopMenu.OnItemClickLis
         sp = getSharedPreferences("environ_manage", Context.MODE_PRIVATE);
         inflater = LayoutInflater.from(mContext);
         tack.addActivity(this);
+
+        MobclickAgent.setDebugMode(true);
+//      SDK在统计Fragment时，需要关闭Activity自带的页面统计，
+//		然后在每个页面中重新集成页面统计的代码(包括调用了 onResume 和 onPause 的Activity)。
+        MobclickAgent.openActivityDurationTrack(false);
+//		MobclickAgent.setAutoLocation(true);
+//		MobclickAgent.setSessionContinueMillis(1000);
+
+        MobclickAgent.updateOnlineConfig(this);
     }
 
     protected Context getContext() {
@@ -118,5 +129,19 @@ public class BaseActivity extends Activity implements MainPopMenu.OnItemClickLis
 
     public Gson getGson() {
         return gson;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart( mPageName );
+        MobclickAgent.onResume(mContext);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd( mPageName );
+        MobclickAgent.onPause(mContext);
     }
 }
