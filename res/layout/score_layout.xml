@@ -30,7 +30,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 />
-        <ImageView android:layout_width="wrap_content" android:layout_height="match_parent"
+        <ImageView android:layout_width="wrap_content"
+                   android:layout_height="match_parent"
                    android:src="@drawable/ceshi_03"
                    android:layout_alignParentRight="true"
                    android:paddingRight="15dp"
@@ -44,19 +45,19 @@
             android:layout_weight="1"
             android:scrollbars="none" >
             <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:orientation="vertical"
 
                     >
-                <LinearLayout android:layout_width="wrap_content"
+                <LinearLayout android:layout_width="fill_parent"
                               android:id="@+id/score_project_layout"
                               android:orientation="vertical"
                               android:layout_height="wrap_content">
 
                 </LinearLayout>
-                <LinearLayout android:layout_width="match_parent"
+                <LinearLayout android:layout_width="fill_parent"
                               android:layout_height="wrap_content"
                               android:orientation="horizontal"
                               android:padding="10dp"
@@ -64,7 +65,7 @@
 
                     <EditText
                             android:id="@+id/score_layout_beizhu"
-                            android:layout_width="match_parent"
+                            android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:textColor="#333333"
                             android:textSize="16sp"
@@ -90,6 +91,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
                             android:textSize="20dip"
+                            android:layout_marginLeft="20dp"
                             android:layout_below="@id/login_password"
                             android:text="保存"
                             android:background="@drawable/login_btn_bg" />

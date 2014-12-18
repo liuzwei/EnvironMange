@@ -185,7 +185,7 @@ public class OutdoorActivity extends BaseActivity implements View.OnClickListene
                         if ("true".equals(o.toString())){
                             Intent score = new Intent(OutdoorActivity.this, ScoreActivity.class);
                             score.putExtra("areaID", area.getID());
-                            score.putExtra("titleName",   area.getMc() +"  卫生打分");
+                            score.putExtra("titleName",   area.getMc() );
                             score.putExtra("pbid", area.getPbid());
                             startActivity(score);
                         }else {

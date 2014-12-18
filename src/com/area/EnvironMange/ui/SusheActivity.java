@@ -259,7 +259,7 @@ public class SusheActivity extends BaseActivity implements View.OnClickListener{
                             Intent score = new Intent(SusheActivity.this, ScoreActivity.class);
                             score.putExtra("areaID", area.getID());
                             score.putExtra("pbid", area.getPbid());
-                            score.putExtra("titleName", buildingName + " " + area.getMc() +"  卫生打分");
+                            score.putExtra("titleName", buildingName + " " + area.getMc());
                             startActivity(score);
                         }else {
                             Toast.makeText(mContext, R.string.not_df, Toast.LENGTH_SHORT).show();

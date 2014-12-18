@@ -260,7 +260,7 @@ public class JiaoxuepublicActivity extends BaseActivity implements View.OnClickL
                             Intent score = new Intent(JiaoxuepublicActivity.this, ScoreActivity.class);
                             score.putExtra("areaID", area.getID());
                             score.putExtra("pbid", area.getPbid());
-                            score.putExtra("titleName", buildingName + " " + area.getMc() +"  卫生打分");
+                            score.putExtra("titleName", buildingName + " " + area.getMc() );
                             startActivity(score);
                         }else {
                             Toast.makeText(mContext, R.string.not_df, Toast.LENGTH_SHORT).show();
