@@ -10,6 +10,7 @@ import com.area.EnvironMange.R;
 import com.area.EnvironMange.model.Building;
 import com.area.EnvironMange.model.MyBuildScore;
 import com.area.EnvironMange.model.SanitationAreaAssessment;
+import com.area.EnvironMange.util.DateUtil;
 
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class MyBuildScoreAdapter extends BaseAdapter  {
         SanitationAreaAssessment assessment = list.get(position);
         holder.name.setText(assessment.getAreamc());
         holder.score.setText(assessment.getFs());
-        holder.time.setText(assessment.getJcsj());
+        holder.time.setText(DateUtil.getUndoDate(assessment.getJcsj()));
         holder.detail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
