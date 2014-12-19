@@ -1,6 +1,8 @@
 package com.area.EnvironMange.ui;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
@@ -85,8 +87,11 @@ public class ScoreDetailActivity extends BaseActivity {
                                 projectLayout.addView(layout);
                             }
                             TextView bz = new TextView(mContext);
-                            bz.setText(beizhuStr);
+                            bz.setTextSize(16);
+                            bz.setText("备注："+beizhuStr);
+                            bz.setTextColor(Color.BLACK);
                             projectLayout.addView(bz);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
