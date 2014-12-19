@@ -334,6 +334,7 @@ public class JiaoxuelouActivity extends BaseActivity implements View.OnClickList
     private void  checkIsScore(final SanitationArea area) throws UnsupportedEncodingException, JSONException {
         JSONObject object = new JSONObject();
         object.put("areaid", area.getID());
+        object.put("pbid", area.getPbid());
         StringEntity entity = new StringEntity(object.toString());
 
         getFinalHttp().post(

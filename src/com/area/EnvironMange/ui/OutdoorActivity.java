@@ -172,6 +172,7 @@ public class OutdoorActivity extends BaseActivity implements View.OnClickListene
     private void  checkIsScore(final SanitationArea area) throws UnsupportedEncodingException, JSONException {
         JSONObject object = new JSONObject();
         object.put("areaid", area.getID());
+        object.put("pbid", area.getPbid());
         StringEntity entity = new StringEntity(object.toString());
 
         getFinalHttp().post(
