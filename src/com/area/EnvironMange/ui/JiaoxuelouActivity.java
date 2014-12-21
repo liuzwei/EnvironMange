@@ -23,6 +23,7 @@ import com.area.EnvironMange.base.Constants;
 import com.area.EnvironMange.common.InternetURL;
 import com.area.EnvironMange.model.Building;
 import com.area.EnvironMange.model.SanitationArea;
+import com.area.EnvironMange.util.StringUtil;
 import com.area.EnvironMange.widget.BeizhuDialog;
 import net.tsz.afinal.http.AjaxCallBack;
 import org.apache.http.entity.StringEntity;
@@ -335,6 +336,9 @@ public class JiaoxuelouActivity extends BaseActivity implements View.OnClickList
         JSONObject object = new JSONObject();
         object.put("areaid", area.getID());
         object.put("pbid", area.getPbid());
+        if (StringUtil.isNullOrEmpty(area.getPbid())){
+            return;
+        }
         StringEntity entity = new StringEntity(object.toString());
 
         getFinalHttp().post(
