@@ -42,7 +42,7 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
     private XCRoundImageView saveall;//一键提交
     private static final int MODIFY_CODE = 102;
     private ProgressDialog progressDialog;
-    private boolean isAll;//是否有数据
+    private boolean isAll = true;//是否有数据
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
