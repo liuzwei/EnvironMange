@@ -100,7 +100,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                         if (progressDialog != null){
                             progressDialog.dismiss();
                         }
-                        if ("-1".equals(o.toString())) {
+                        String result = getGson().fromJson(o.toString(), String.class);
+                        if ("-1".equals(result)) {
                             Toast.makeText(mContext, "用户名或密码错误", Toast.LENGTH_SHORT).show();
                         } else {
                             save("username", username.getText().toString());
