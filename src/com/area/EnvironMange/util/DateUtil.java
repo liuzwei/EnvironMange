@@ -121,19 +121,24 @@ public final class DateUtil implements Serializable {
 	}
 
 	/**
-	 *
+	 * 将时间字符串转化成制定格式
 	 */
 	public static String getUndoDate(String date){
-		if (!StringUtil.isNullOrEmpty(date)) {
-			String year = date.substring(0, 4);
-			String month = date.substring(4, 6);
-			String day = date.substring(6, 8);
-			String hour = date.substring(8, 10);
-			String min = date.substring(10, 12);
-			return year + "年" + Integer.parseInt(month) + "月" + Integer.parseInt(day) + "日 " + hour + ":" + min;
-		}else {
-			return "";
-		}
+        try{
+            if (!StringUtil.isNullOrEmpty(date)) {
+                String year = date.substring(0, 4);
+                String month = date.substring(4, 6);
+                String day = date.substring(6, 8);
+                String hour = date.substring(8, 10);
+                String min = date.substring(10, 12);
+                return year + "年" + Integer.parseInt(month) + "月" + Integer.parseInt(day) + "日 " + hour + ":" + min;
+            }else {
+                return "";
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return "";
+        }
 	}
 
 }
