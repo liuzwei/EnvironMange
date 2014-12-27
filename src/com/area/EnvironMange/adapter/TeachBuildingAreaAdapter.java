@@ -50,8 +50,12 @@ public class TeachBuildingAreaAdapter extends BaseAdapter {
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
-        SanitationArea area = list.get(position);
-        holder.name.setText(area.getMc());
+        try {
+            SanitationArea area = list.get(position);
+            holder.name.setText(area.getMc());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return convertView;
     }
 
