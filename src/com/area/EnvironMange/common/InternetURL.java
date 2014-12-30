@@ -14,6 +14,7 @@ public class InternetURL {
 
     //获得建筑物
     public static String GET_BUILDING_URL = MAIN_URL+"GetJs";
+    public static String GET_BUILDING_URL_PUBLIC = MAIN_URL+"GetJx";
 
     //获取所有宿舍
     public static String GET_SUSHE_URL = MAIN_URL+"GetSS";

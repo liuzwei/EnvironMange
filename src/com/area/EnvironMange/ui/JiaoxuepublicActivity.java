@@ -142,7 +142,7 @@ public class JiaoxuepublicActivity extends BaseActivity implements View.OnClickL
      */
     private void getBuildings(){
         getFinalHttp().post(
-                InternetURL.GET_BUILDING_URL,
+                InternetURL.GET_BUILDING_URL_PUBLIC,
                 new AjaxCallBack<Object>(){
                     @Override
                     public void onSuccess(Object o) {
