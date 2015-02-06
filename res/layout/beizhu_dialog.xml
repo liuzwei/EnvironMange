@@ -4,20 +4,20 @@
               android:orientation="vertical"
               android:layout_width="wrap_content"
               android:layout_height="match_parent"
-              >
+        >
 
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp"
-            android:gravity="center"
+                  android:orientation="horizontal"
+                  android:layout_margin="10dp"
+                  android:gravity="center"
             >
-            <TextView android:layout_width="wrap_content"
-                      android:text="E301 卫生区域"
-                      android:textColor="#000000"
-                      android:id="@+id/title"
-                      android:layout_height="wrap_content"/>
+        <TextView android:layout_width="wrap_content"
+                  android:text="E301 卫生区域"
+                  android:textColor="#000000"
+                  android:id="@+id/title"
+                  android:layout_height="wrap_content"/>
 
-            </LinearLayout>
+    </LinearLayout>
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:orientation="horizontal"
@@ -41,8 +41,8 @@
                   android:orientation="vertical">
 
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                 android:orientation="horizontal"
-                android:padding="5dp">
+                      android:orientation="horizontal"
+                      android:padding="5dp">
 
             <Button android:layout_width="wrap_content" android:layout_height="45dp"
                     android:text="确定"
@@ -53,7 +53,7 @@
                     android:layout_weight="1"/>
 
 
-         </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
 </LinearLayout>

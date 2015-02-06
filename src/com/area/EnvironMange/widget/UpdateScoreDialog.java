@@ -23,7 +23,7 @@ import com.area.EnvironMange.model.SanitationAreaAssessment;
  * Time: 15:39
  * 类的功能、说明写在此处.
  */
-public class UpdateScoreDialog extends Dialog implements View.OnClickListener{
+public class UpdateScoreDialog extends Dialog implements View.OnClickListener {
     private Context context;
     private EditText number;
     private Button sure;
@@ -31,10 +31,10 @@ public class UpdateScoreDialog extends Dialog implements View.OnClickListener{
     private TextView title;
     private RequestQueue mRequestQueue;
     private SanitationAreaAssessment assessment;
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
 
             }
             super.handleMessage(msg);
@@ -42,7 +42,7 @@ public class UpdateScoreDialog extends Dialog implements View.OnClickListener{
     };
 
     public UpdateScoreDialog(SanitationAreaAssessment assessment, Context context, int them) {
-        super(context,them);
+        super(context, them);
         this.context = context;
         this.assessment = assessment;
     }
@@ -52,11 +52,11 @@ public class UpdateScoreDialog extends Dialog implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mobile_dialog);
         initView();
-        title.setText("请给区域："+assessment.getAreamc()+" 重新打分");
+        title.setText("请给区域：" + assessment.getAreamc() + " 重新打分");
 
     }
 
-    private void initView(){
+    private void initView() {
         mRequestQueue = Volley.newRequestQueue(context);
 //        number = (EditText) findViewById(R.id.number);
         title = (TextView) findViewById(R.id.title);
@@ -71,7 +71,7 @@ public class UpdateScoreDialog extends Dialog implements View.OnClickListener{
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.sure:
                 Toast.makeText(context, "修改成功", Toast.LENGTH_SHORT).show();
                 UpdateScoreDialog.this.dismiss();

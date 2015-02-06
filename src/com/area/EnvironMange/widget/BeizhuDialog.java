@@ -22,14 +22,14 @@ import com.area.EnvironMange.model.MyBuildScore;
  * Time: 15:39
  * 类的功能、说明写在此处.
  */
-public class BeizhuDialog extends Dialog implements View.OnClickListener{
+public class BeizhuDialog extends Dialog implements View.OnClickListener {
     private Context context;
 
     private Button sure;
 
 
     public BeizhuDialog(Context context, int them) {
-        super(context,them);
+        super(context, them);
         this.context = context;
 
     }
@@ -41,7 +41,7 @@ public class BeizhuDialog extends Dialog implements View.OnClickListener{
         initView();
     }
 
-    private void initView(){
+    private void initView() {
 
         sure = (Button) this.findViewById(R.id.sure);
         sure.setOnClickListener(this);
@@ -50,7 +50,7 @@ public class BeizhuDialog extends Dialog implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.sure:
                 BeizhuDialog.this.dismiss();
                 break;

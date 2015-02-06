@@ -21,7 +21,7 @@ import com.umeng.update.UpdateStatus;
  * author: ${zhanghailong}
  * Date: 2014/12/10
  * Time: 16:44
- * 类的功能、说明写在此处.
+ * 设置
  */
 public class SettingActivity extends BaseActivity implements View.OnClickListener {
     private ImageView back;
@@ -52,8 +52,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.back:
                 finish();
                 break;
@@ -77,7 +76,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                     @Override
                     public void onUpdateReturned(int i, UpdateResponse updateResponse) {
                         progressDialog.dismiss();
-                        switch (i){
+                        switch (i) {
                             case UpdateStatus.Yes:
                                 Toast.makeText(mContext, "有新版本发现", Toast.LENGTH_SHORT).show();
                                 break;
@@ -93,8 +92,9 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 break;
         }
     }
+
     //弹出顶部主菜单
-    public void onTopMenuPopupButtonClick(View view){
+    public void onTopMenuPopupButtonClick(View view) {
         mainPopMenu.showAsDropDown(view);
     }
 }

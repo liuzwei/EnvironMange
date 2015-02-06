@@ -32,7 +32,7 @@ import java.util.List;
  * author: ${zhanghailong}
  * Date: 2014/12/10
  * Time: 14:29
- * 类的功能、说明写在此处.
+ * 未提交
  */
 public class SelectUndoActivity extends BaseActivity implements View.OnClickListener, OnClickContentItemListener {
     private List<SanitationAreaAssessment> list = new ArrayList<SanitationAreaAssessment>();
@@ -43,6 +43,7 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
     private static final int MODIFY_CODE = 102;
     private ProgressDialog progressDialog;
     private boolean isAll = true;//是否有数据
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,12 +70,12 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.back:
                 finish();
                 break;
             case R.id.saveall:
-                if(!isAll){
+                if (!isAll) {
                     Toast.makeText(mContext, R.string.no_data_save, Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -82,7 +83,7 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
                 progressDialog.setMessage("正在提交");
                 progressDialog.setCanceledOnTouchOutside(false);
                 progressDialog.show();
-                for (int i=0; i<list.size(); i++){
+                for (int i = 0; i < list.size(); i++) {
                     SanitationAreaAssessment asment = list.get(i);
                     try {
                         getData(asment);
@@ -94,19 +95,21 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
 
         }
     }
+
     //弹出顶部主菜单
-    public void onTopMenuPopupButtonClick(View view){
+    public void onTopMenuPopupButtonClick(View view) {
         mainPopMenu.showAsDropDown(view);
     }
 
     SanitationAreaAssessment assessment = null;
+
     @Override
     public void onClickContentItem(int position, int flag, final Object object) {
         assessment = list.get(position);
-        switch (flag){
+        switch (flag) {
             case 1:
                 SanitationAreaAssessment asm = list.get(position);
-                Intent intent = new Intent(SelectUndoActivity.this, ModifyScoreActivity.class );
+                Intent intent = new Intent(SelectUndoActivity.this, ModifyScoreActivity.class);
                 intent.putExtra("assessmentID", asm.getAreaid());
                 intent.putExtra("dafenID", asm.getID());
                 intent.putExtra("beizhu", asm.getBz());
@@ -130,6 +133,7 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
 
     /**
      * 查询保存但没有提交的数据
+     *
      * @throws JSONException
      * @throws UnsupportedEncodingException
      */
@@ -137,7 +141,7 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
         String userid = getGson().fromJson(sp.getString("userid", ""), String.class);
         JSONObject object = new JSONObject();
         object.put("userid", userid);
-        String beginTime = DateUtil.getFormatDateTime(new Date(System.currentTimeMillis()-14*24*60*60*1000), "yyyyMMdd");
+        String beginTime = DateUtil.getFormatDateTime(new Date(System.currentTimeMillis() - 14 * 24 * 60 * 60 * 1000), "yyyyMMdd");
         String endTime = DateUtil.getFormatDateTime(new Date(), "yyyyMMdd");
         object.put("begineTime", beginTime);
         object.put("endtime", endTime);
@@ -154,13 +158,13 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
                         super.onSuccess(o);
                         try {
                             JSONArray array = new JSONArray(o.toString());
-                            for (int i=0; i<array.length(); i++){
+                            for (int i = 0; i < array.length(); i++) {
                                 SanitationAreaAssessment asm = getGson().fromJson(String.valueOf(array.getJSONObject(i)), SanitationAreaAssessment.class);
                                 list.add(asm);
                             }
                             Collections.sort(list);
                             adapter.notifyDataSetChanged();
-                            if (array.length() == 0){
+                            if (array.length() == 0) {
                                 isAll = false;
                                 Toast.makeText(mContext, R.string.no_data_save, Toast.LENGTH_SHORT).show();
                             }
@@ -181,9 +185,9 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode== Activity.RESULT_OK && requestCode == MODIFY_CODE){
+        if (resultCode == Activity.RESULT_OK && requestCode == MODIFY_CODE) {
             boolean isUpdate = data.getBooleanExtra("isUpdate", false);
-            if (isUpdate){
+            if (isUpdate) {
                 Toast.makeText(mContext, "更新成功", Toast.LENGTH_SHORT).show();
                 try {
                     list.clear();
@@ -191,7 +195,7 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }else {
+            } else {
                 Toast.makeText(mContext, "更新失败", Toast.LENGTH_SHORT).show();
             }
         }
@@ -214,11 +218,11 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
                         try {
                             JSONArray array = new JSONArray(o.toString());
                             JSONArray commitAry = new JSONArray();
-                            for (int i=0; i<array.length(); i++){
+                            for (int i = 0; i < array.length(); i++) {
                                 SanitaionAreaAssementItemView itemView = getGson().fromJson(array.getJSONObject(i).toString(), SanitaionAreaAssementItemView.class);
 
                                 SanitaionAreaAssementItem item = new SanitaionAreaAssementItem(
-                                        itemView.getAsItemID(),itemView.getProjectID(), Float.parseFloat(itemView.getProjectfs()), itemView.getKfyy()
+                                        itemView.getAsItemID(), itemView.getProjectID(), Float.parseFloat(itemView.getProjectfs()), itemView.getKfyy()
                                 );
                                 commitAry.put(SanitaionAreaAssementItem.fromObject2Json(item));
                             }
@@ -226,7 +230,7 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
 
                         } catch (Exception e) {
                             e.printStackTrace();
-                            if (progressDialog != null){
+                            if (progressDialog != null) {
                                 progressDialog.dismiss();
                                 Toast.makeText(mContext, R.string.data_error, Toast.LENGTH_SHORT).show();
                             }
@@ -247,7 +251,7 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
         String userid = getGson().fromJson(sp.getString("userid", ""), String.class);
         JSONObject object = new JSONObject();
         object.put("item", array);
-        object.put("userid",userid);
+        object.put("userid", userid);
         object.put("areaID", assessment.getAreaid());
         object.put("bz", assessment.getBz());
         object.put("pbid", assessment.getSanitaionreaCleanID());
@@ -262,8 +266,8 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
                     @Override
                     public void onSuccess(Object o) {
                         super.onSuccess(o);
-                        if (o.toString().equals("true")){
-                            if (progressDialog != null){
+                        if (o.toString().equals("true")) {
+                            if (progressDialog != null) {
                                 progressDialog.dismiss();
                                 Toast.makeText(mContext, R.string.commit_over, Toast.LENGTH_SHORT).show();
                             }
@@ -274,7 +278,7 @@ public class SelectUndoActivity extends BaseActivity implements View.OnClickList
                                 e.printStackTrace();
                             }
 
-                        }else {
+                        } else {
                             Toast.makeText(mContext, "修改失败,请稍后重试", Toast.LENGTH_SHORT).show();
                         }
                     }

@@ -2,7 +2,7 @@ package com.area.EnvironMange.model;
 
 /**
  * Created by liuzwei on 2014/12/15.
- *
+ * <p/>
  * 卫生区域
  */
 

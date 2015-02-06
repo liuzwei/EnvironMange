@@ -19,13 +19,14 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 
 /**
- * Created by liuzwei on 2014/12/16.
+ * 打分详细
  */
 public class ScoreDetailActivity extends BaseActivity {
     private LinearLayout projectLayout;
     private ImageView back;
     private String beizhuStr;
     private String assessmentID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +44,7 @@ public class ScoreDetailActivity extends BaseActivity {
         }
     }
 
-    private void initView(){
+    private void initView() {
         projectLayout = (LinearLayout) this.findViewById(R.id.detail_project);
         back = (ImageView) this.findViewById(R.id.detail_back);
         back.setOnClickListener(this);
@@ -53,7 +54,7 @@ public class ScoreDetailActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
         super.onClick(v);
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.detail_back:
                 finish();
                 break;
@@ -75,7 +76,7 @@ public class ScoreDetailActivity extends BaseActivity {
                         super.onSuccess(o);
                         try {
                             JSONArray array = new JSONArray(o.toString());
-                            for (int i=0; i<array.length(); i++){
+                            for (int i = 0; i < array.length(); i++) {
                                 SanitaionAreaAssementItemView itemView = getGson().fromJson(array.getJSONObject(i).toString(), SanitaionAreaAssementItemView.class);
                                 LinearLayout layout = (LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.detail_item, null);
                                 TextView scoreType = (TextView) layout.findViewById(R.id.detail_item_type);
@@ -88,7 +89,7 @@ public class ScoreDetailActivity extends BaseActivity {
                             }
                             TextView bz = new TextView(mContext);
                             bz.setTextSize(16);
-                            bz.setText("备注："+beizhuStr);
+                            bz.setText("备注：" + beizhuStr);
                             bz.setTextColor(Color.BLACK);
                             projectLayout.addView(bz);
 

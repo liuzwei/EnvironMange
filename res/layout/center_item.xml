@@ -14,11 +14,11 @@
             android:id="@+id/searchLayout"
             >
         <com.area.EnvironMange.util.XCRoundImageView
-                   android:layout_width="50dp"
-                   android:id="@+id/imageView"
-                   android:gravity="center_vertical|center_horizontal"
-                   android:src="@drawable/ic_launcher"
-                   android:layout_height="50dp"/>
+                android:layout_width="50dp"
+                android:id="@+id/imageView"
+                android:gravity="center_vertical|center_horizontal"
+                android:src="@drawable/ic_launcher"
+                android:layout_height="50dp"/>
 
         <TextView
                 android:layout_width="wrap_content"

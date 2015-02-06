@@ -26,13 +26,13 @@ import java.util.List;
  * 修改分数
  * Created by liuzwei on 2014/12/16.
  */
-public class ModifyScoreActivity extends BaseActivity{
+public class ModifyScoreActivity extends BaseActivity {
     private LinearLayout projectLayout;
-    private EditText  beizhu;
+    private EditText beizhu;
     private Button commit;
     private Button save;
     private ImageView back;
-    private List<SanitaionAreaAssementItemView> list  =new ArrayList<SanitaionAreaAssementItemView>();
+    private List<SanitaionAreaAssementItemView> list = new ArrayList<SanitaionAreaAssementItemView>();
     private String assessmentID;
     private String dafenID;
     private String beizhuStr;//备注
@@ -55,8 +55,8 @@ public class ModifyScoreActivity extends BaseActivity{
         }
     }
 
-    private void initView(){
-        projectLayout  = (LinearLayout) this.findViewById(R.id.modify_project_layout);
+    private void initView() {
+        projectLayout = (LinearLayout) this.findViewById(R.id.modify_project_layout);
         beizhu = (EditText) this.findViewById(R.id.modify_layout_beizhu);
         commit = (Button) this.findViewById(R.id.modify_sub);
         back = (ImageView) this.findViewById(R.id.modify_back);
@@ -68,15 +68,15 @@ public class ModifyScoreActivity extends BaseActivity{
     @Override
     public void onClick(View v) {
         super.onClick(v);
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.modify_back:
                 finish();
                 break;
             case R.id.modify_sub:
                 JSONArray array = new JSONArray();
-                for (int i=0; i<list.size(); i++) {
-                    EditText score = (EditText) this.findViewById(1000+i);
-                    EditText reason = (EditText) this.findViewById(2000+i);
+                for (int i = 0; i < list.size(); i++) {
+                    EditText score = (EditText) this.findViewById(1000 + i);
+                    EditText reason = (EditText) this.findViewById(2000 + i);
                     SanitaionAreaAssementItemView itemView = list.get(i);
 //                    if (StringUtil.isNullOrEmpty(score.getText().toString())){
 //                        Toast.makeText(mContext, project.getProjectMC()+" 没有打分", Toast.LENGTH_SHORT).show();
@@ -86,7 +86,7 @@ public class ModifyScoreActivity extends BaseActivity{
 //                        Toast.makeText(mContext, project.getProjectMC()+"不能超过"+"分", Toast.LENGTH_SHORT).show();
 //                        return;
 //                    }
-                    SanitaionAreaAssementItem item = new SanitaionAreaAssementItem(itemView.getAsItemID(),itemView.getProjectID(), Float.parseFloat(score.getText().toString()), reason.getText().toString());
+                    SanitaionAreaAssementItem item = new SanitaionAreaAssementItem(itemView.getAsItemID(), itemView.getProjectID(), Float.parseFloat(score.getText().toString()), reason.getText().toString());
                     array.put(SanitaionAreaAssementItem.fromObject2Json(item));
                 }
                 try {
@@ -114,7 +114,7 @@ public class ModifyScoreActivity extends BaseActivity{
                         super.onSuccess(o);
                         try {
                             JSONArray array = new JSONArray(o.toString());
-                            for (int i=0; i<array.length(); i++){
+                            for (int i = 0; i < array.length(); i++) {
                                 SanitaionAreaAssementItemView itemView = getGson().fromJson(array.getJSONObject(i).toString(), SanitaionAreaAssementItemView.class);
                                 list.add(itemView);
                                 LinearLayout layout = (LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.score_item, null);
@@ -122,10 +122,10 @@ public class ModifyScoreActivity extends BaseActivity{
                                 EditText score = (EditText) layout.findViewById(R.id.score_item_score);
                                 EditText scoreReason = (EditText) layout.findViewById(R.id.score_item_reason);
                                 scoreType.setText(itemView.getProjectMC());
-                                score.setHint("最大分数：" );
+                                score.setHint("最大分数：");
                                 score.setText(itemView.getProjectfs());
-                                score.setId(1000+i);
-                                scoreReason.setId(2000+i);
+                                score.setId(1000 + i);
+                                scoreReason.setId(2000 + i);
                                 scoreReason.setText(itemView.getKfyy());
                                 projectLayout.addView(layout);
                             }
@@ -148,7 +148,7 @@ public class ModifyScoreActivity extends BaseActivity{
         String userid = getGson().fromJson(sp.getString("userid", ""), String.class);
         JSONObject object = new JSONObject();
         object.put("item", array);
-        object.put("userid",userid);
+        object.put("userid", userid);
         object.put("areaID", assessmentID);
         object.put("pbid", SanitaionreaCleanID);
         object.put("bz", beizhu.getText().toString());
@@ -163,12 +163,12 @@ public class ModifyScoreActivity extends BaseActivity{
                     @Override
                     public void onSuccess(Object o) {
                         super.onSuccess(o);
-                        if (o.toString().equals("true")){
+                        if (o.toString().equals("true")) {
                             Intent intent = new Intent(Constants.BROADCAST);
                             intent.putExtra("isUpdate", true);
                             setResult(Activity.RESULT_OK, intent);
                             finish();
-                        }else {
+                        } else {
                             Toast.makeText(mContext, "修改失败,请稍后重试", Toast.LENGTH_SHORT).show();
                         }
                     }

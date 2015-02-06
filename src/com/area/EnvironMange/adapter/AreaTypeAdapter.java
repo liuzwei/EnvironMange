@@ -49,6 +49,7 @@ public class AreaTypeAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
+
     public int getViewTypeCount() {
         return 1;
     }
@@ -73,7 +74,7 @@ public class AreaTypeAdapter extends BaseAdapter {
 //        }
         SanitaionAreaProject project = list.get(position);
         holder.aretype.setText(project.getXmmc());
-        holder.maxScore.setHint("最大分数:"+project.getZdfs());
+        holder.maxScore.setHint("最大分数:" + project.getZdfs());
 
         holder.maxScore.addTextChangedListener(new TextWatcher() {
             @Override
@@ -110,8 +111,8 @@ public class AreaTypeAdapter extends BaseAdapter {
 
         return convertView;
     }
-    class ViewHolder
-    {
+
+    class ViewHolder {
         TextView aretype;//检查项目名称
         EditText maxScore;//最大分数
         EditText reduceReason;//扣分原因

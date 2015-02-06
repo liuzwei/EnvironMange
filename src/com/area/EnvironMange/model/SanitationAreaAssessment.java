@@ -3,7 +3,7 @@ package com.area.EnvironMange.model;
 /**
  * Created by liuzwei on 2014/12/16.
  */
-public class SanitationAreaAssessment implements Comparable{
+public class SanitationAreaAssessment implements Comparable {
     private String ID;//主键
     private String jcsj;//检查时间
     private String fs;//合计分数

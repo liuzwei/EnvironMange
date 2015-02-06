@@ -42,24 +42,24 @@ public class TeachBuildingAreaAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView ==  null){
+        if (convertView == null) {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.jiaoxuelou_item, null);
             holder.name = (TextView) convertView.findViewById(R.id.jiaoxuelou_item_title);
             convertView.setTag(holder);
-        }else {
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
         try {
             SanitationArea area = list.get(position);
             holder.name.setText(area.getMc());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return convertView;
     }
 
-    class ViewHolder{
+    class ViewHolder {
         TextView name;
     }
 }

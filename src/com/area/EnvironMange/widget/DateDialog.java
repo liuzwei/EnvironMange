@@ -11,7 +11,7 @@ import com.area.EnvironMange.R;
 /**
  * Created by liuzwei on 2014/12/17.
  */
-public class DateDialog extends Dialog implements View.OnClickListener{
+public class DateDialog extends Dialog implements View.OnClickListener {
     private DatePicker datePicker;
     private Button close;
     private Button sure;
@@ -38,7 +38,7 @@ public class DateDialog extends Dialog implements View.OnClickListener{
         initView();
     }
 
-    private void initView(){
+    private void initView() {
         datePicker = (DatePicker) findViewById(R.id.date_picker);
         close = (Button) this.findViewById(R.id.close);
         sure = (Button) this.findViewById(R.id.sure);
@@ -49,21 +49,21 @@ public class DateDialog extends Dialog implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.sure:
                 int year = datePicker.getYear();
                 int month = datePicker.getMonth();
                 int day = datePicker.getDayOfMonth();
-                String dateStr = year+"";
-                if (month<9){
-                    dateStr+="0"+month+1;
-                }else {
-                    dateStr+=month+1;
+                String dateStr = year + "";
+                if (month < 9) {
+                    dateStr += "0" + month + 1;
+                } else {
+                    dateStr += month + 1;
                 }
-                if (day<10){
-                    dateStr+="0"+day;
-                }else {
-                    dateStr+=day;
+                if (day < 10) {
+                    dateStr += "0" + day;
+                } else {
+                    dateStr += day;
                 }
                 dateBackListener.backTime(dateStr, isStart);
                 DateDialog.this.dismiss();

@@ -35,7 +35,7 @@ public class MyBuildScore {
         this.score = score;
     }
 
-    public MyBuildScore(String name,String score, String datetime) {
+    public MyBuildScore(String name, String score, String datetime) {
         this.name = name;
         this.datetime = datetime;
         this.score = score;

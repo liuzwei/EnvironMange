@@ -21,9 +21,9 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 
 /**
- * Created by liuzwei on 2014/12/8.
+ * 登陆
  */
-public class LoginActivity extends BaseActivity implements View.OnClickListener{
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
     private EditText username;
     private EditText password;
     private Button loginBtn;
@@ -37,7 +37,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         initView();
     }
 
-    private void initView(){
+    private void initView() {
         username = (EditText) findViewById(R.id.login_username);
         password = (EditText) findViewById(R.id.login_password);
         loginBtn = (Button) findViewById(R.id.login_btn);
@@ -51,13 +51,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.login_btn:
-                if (!PhoneEnvUtil.isNetworkConnected(mContext)){
+                if (!PhoneEnvUtil.isNetworkConnected(mContext)) {
                     Toast.makeText(mContext, R.string.check_network, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (checkParams()){
+                if (checkParams()) {
                     try {
                         progressDialog = new ProgressDialog(LoginActivity.this);
                         progressDialog.setMessage("正在登录...");
@@ -72,12 +72,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         }
     }
 
-    private boolean checkParams(){
-        if (StringUtil.isNullOrEmpty(username.getText().toString())){
+    private boolean checkParams() {
+        if (StringUtil.isNullOrEmpty(username.getText().toString())) {
             Toast.makeText(mContext, "用户名不能为空", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (StringUtil.isNullOrEmpty(password.getText().toString())){
+        if (StringUtil.isNullOrEmpty(password.getText().toString())) {
             Toast.makeText(mContext, "密码不能为空", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -97,7 +97,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                     @Override
                     public void onSuccess(Object o) {
                         super.onSuccess(o);
-                        if (progressDialog != null){
+                        if (progressDialog != null) {
                             progressDialog.dismiss();
                         }
                         String result = getGson().fromJson(o.toString(), String.class);
@@ -114,7 +114,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                     @Override
                     public void onFailure(Throwable t, int errorNo, String strMsg) {
                         super.onFailure(t, errorNo, strMsg);
-                        if (progressDialog != null){
+                        if (progressDialog != null) {
                             progressDialog.dismiss();
                         }
                         Toast.makeText(mContext, "用户名或密码错误", Toast.LENGTH_SHORT).show();

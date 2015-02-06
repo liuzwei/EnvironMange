@@ -20,15 +20,17 @@ import java.util.ArrayList;
  * Time: 10:19
  * 主页面的弹出式按钮
  */
-public class MainPopMenu implements AdapterView.OnItemClickListener{
+public class MainPopMenu implements AdapterView.OnItemClickListener {
     private static MainPopMenu mainMenu;
-    public static MainPopMenu getInstance(Context context){
-        if (mainMenu == null){
+
+    public static MainPopMenu getInstance(Context context) {
+        if (mainMenu == null) {
             mainMenu = new MainPopMenu(context);
         }
         return mainMenu;
     }
-    public interface OnItemClickListener{
+
+    public interface OnItemClickListener {
         public void onItemClick(int index);
     }
 
@@ -49,7 +51,7 @@ public class MainPopMenu implements AdapterView.OnItemClickListener{
         View view = inflater.inflate(R.layout.main_popmenu, null);
 
         listView = (ListView) view.findViewById(R.id.listView1);
-        listView.setAdapter(new MainPopMenuAdapter(itemList,context));
+        listView.setAdapter(new MainPopMenuAdapter(itemList, context));
         listView.setOnItemClickListener(this);
 
         popupWindow = new PopupWindow(view,
@@ -58,12 +60,13 @@ public class MainPopMenu implements AdapterView.OnItemClickListener{
         popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener ){
+    public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (listener != null){
+        if (listener != null) {
             listener.onItemClick(position);
         }
         dismiss();

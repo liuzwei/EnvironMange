@@ -26,7 +26,7 @@ import java.util.List;
  * author: ${zhanghailong}
  * Date: 2014/12/10
  * Time: 12:39
- * 类的功能、说明写在此处.
+ * 打分
  */
 public class ScoreActivity extends BaseActivity implements View.OnClickListener {
     private Button sub;
@@ -35,7 +35,7 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
     private String areaID;
     private EditText beizhu;//备注
     private TextView title;
-    private List<SanitaionAreaProject> list  =new ArrayList<SanitaionAreaProject>();
+    private List<SanitaionAreaProject> list = new ArrayList<SanitaionAreaProject>();
     private String titleName;
     private LinearLayout projectLayout;
     private String pbid;//排班ID
@@ -73,20 +73,19 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.sub:
                 JSONArray array = new JSONArray();
-                for (int i=0; i<list.size(); i++) {
-                    EditText score = (EditText) this.findViewById(1000+i);
-                    EditText reason = (EditText) this.findViewById(2000+i);
+                for (int i = 0; i < list.size(); i++) {
+                    EditText score = (EditText) this.findViewById(1000 + i);
+                    EditText reason = (EditText) this.findViewById(2000 + i);
                     SanitaionAreaProject project = list.get(i);
-                    if (StringUtil.isNullOrEmpty(score.getText().toString())){
-                        Toast.makeText(mContext, project.getXmmc()+" 没有打分", Toast.LENGTH_SHORT).show();
+                    if (StringUtil.isNullOrEmpty(score.getText().toString())) {
+                        Toast.makeText(mContext, project.getXmmc() + " 没有打分", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if (Double.parseDouble(score.getText().toString()) > Double.parseDouble((project.getZdfs()))){
-                        Toast.makeText(mContext, project.getXmmc()+"不能超过"+project.getZdfs()+"分", Toast.LENGTH_SHORT).show();
+                    if (Double.parseDouble(score.getText().toString()) > Double.parseDouble((project.getZdfs()))) {
+                        Toast.makeText(mContext, project.getXmmc() + "不能超过" + project.getZdfs() + "分", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     SanitaionAreaAssementItem item = new SanitaionAreaAssementItem(project.getID(), Float.parseFloat(score.getText().toString()), reason.getText().toString());
@@ -101,16 +100,16 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
                 break;
             case R.id.save:
                 JSONArray array2 = new JSONArray();
-                for (int i=0; i<list.size(); i++) {
-                    EditText score = (EditText) this.findViewById(1000+i);
-                    EditText reason = (EditText) this.findViewById(2000+i);
+                for (int i = 0; i < list.size(); i++) {
+                    EditText score = (EditText) this.findViewById(1000 + i);
+                    EditText reason = (EditText) this.findViewById(2000 + i);
                     SanitaionAreaProject project = list.get(i);
-                    if (StringUtil.isNullOrEmpty(score.getText().toString())){
-                        Toast.makeText(mContext, project.getXmmc()+" 没有打分", Toast.LENGTH_SHORT).show();
+                    if (StringUtil.isNullOrEmpty(score.getText().toString())) {
+                        Toast.makeText(mContext, project.getXmmc() + " 没有打分", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if (Double.parseDouble(score.getText().toString()) > Double.parseDouble((project.getZdfs()))){
-                        Toast.makeText(mContext, project.getXmmc()+"不能超过"+project.getZdfs()+"分", Toast.LENGTH_SHORT).show();
+                    if (Double.parseDouble(score.getText().toString()) > Double.parseDouble((project.getZdfs()))) {
+                        Toast.makeText(mContext, project.getXmmc() + "不能超过" + project.getZdfs() + "分", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     SanitaionAreaAssementItem item = new SanitaionAreaAssementItem(project.getID(), Float.parseFloat(score.getText().toString()), reason.getText().toString());
@@ -128,8 +127,9 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
                 break;
         }
     }
+
     //弹出顶部主菜单
-    public void onTopMenuPopupButtonClick(View view){
+    public void onTopMenuPopupButtonClick(View view) {
         mainPopMenu.showAsDropDown(view);
     }
 
@@ -148,7 +148,7 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
                         super.onSuccess(o);
                         try {
                             JSONArray array = new JSONArray(o.toString());
-                            for (int i=0; i<array.length(); i++){
+                            for (int i = 0; i < array.length(); i++) {
                                 SanitaionAreaProject project = getGson().fromJson(array.getJSONObject(i).toString(), SanitaionAreaProject.class);
                                 list.add(getGson().fromJson(array.getJSONObject(i).toString(), SanitaionAreaProject.class));
                                 LinearLayout layout = (LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.score_item, null);
@@ -156,9 +156,9 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
                                 EditText score = (EditText) layout.findViewById(R.id.score_item_score);
                                 EditText scoreReason = (EditText) layout.findViewById(R.id.score_item_reason);
                                 scoreType.setText(project.getXmmc());
-                                score.setHint("最大分数："+project.getZdfs());
-                                score.setId(1000+i);
-                                scoreReason.setId(2000+i);
+                                score.setHint("最大分数：" + project.getZdfs());
+                                score.setId(1000 + i);
+                                scoreReason.setId(2000 + i);
                                 projectLayout.addView(layout);
                             }
                         } catch (JSONException e) {
@@ -178,7 +178,7 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
         String userid = getGson().fromJson(sp.getString("userid", ""), String.class);
         JSONObject object = new JSONObject();
         object.put("item", array);
-        object.put("userid",userid);
+        object.put("userid", userid);
         object.put("areaID", areaID);
         object.put("pbid", pbid);
         object.put("bz", beizhu.getText().toString());
@@ -192,11 +192,11 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
                     @Override
                     public void onSuccess(Object o) {
                         super.onSuccess(o);
-                        if (o.toString().equals("true")){
+                        if (o.toString().equals("true")) {
                             Intent intent = new Intent(Constants.BROADCAST);
                             intent.putExtra("isSave", isSave);
                             mContext.sendBroadcast(intent);
-                          finish();
+                            finish();
                         }
                     }
 

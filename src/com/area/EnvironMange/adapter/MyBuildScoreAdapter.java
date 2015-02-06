@@ -17,18 +17,22 @@ import java.util.List;
 /**
  * Created by liuzwei on 2014/12/9.
  */
-public class MyBuildScoreAdapter extends BaseAdapter  {
+public class MyBuildScoreAdapter extends BaseAdapter {
     private Context mContext;
     private List<SanitationAreaAssessment> list;
     private ViewHolder holder;
+
     public MyBuildScoreAdapter(Context mContext, List<SanitationAreaAssessment> list) {
         this.mContext = mContext;
         this.list = list;
     }
+
     private OnClickContentItemListener onClickContentItemListener;
+
     public void setOnClickContentItemListener(OnClickContentItemListener onClickContentItemListener) {
         this.onClickContentItemListener = onClickContentItemListener;
     }
+
     @Override
     public int getCount() {
         return list.size();
@@ -46,7 +50,7 @@ public class MyBuildScoreAdapter extends BaseAdapter  {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        if (convertView == null){
+        if (convertView == null) {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.index_item, null);
             holder.name = (TextView) convertView.findViewById(R.id.name);
@@ -54,7 +58,7 @@ public class MyBuildScoreAdapter extends BaseAdapter  {
             holder.time = (TextView) convertView.findViewById(R.id.time);
             holder.detail = (TextView) convertView.findViewById(R.id.detail);
             convertView.setTag(holder);
-        }else {
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
         SanitationAreaAssessment assessment = list.get(position);
@@ -70,7 +74,7 @@ public class MyBuildScoreAdapter extends BaseAdapter  {
         return convertView;
     }
 
-    class ViewHolder{
+    class ViewHolder {
         TextView name;
         TextView score;
         TextView time;

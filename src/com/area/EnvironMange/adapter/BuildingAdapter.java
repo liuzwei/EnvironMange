@@ -14,18 +14,21 @@ import java.util.List;
 /**
  * Created by liuzwei on 2014/12/9.
  */
-public class BuildingAdapter extends BaseAdapter  {
+public class BuildingAdapter extends BaseAdapter {
     private Context mContext;
     private List<Building> list;
     private ViewHolder holder;
     private OnClickContentItemListener onClickContentItemListener;
+
     public BuildingAdapter(Context mContext, List<Building> list) {
         this.mContext = mContext;
         this.list = list;
     }
+
     public void setOnClickContentItemListener(OnClickContentItemListener onClickContentItemListener) {
         this.onClickContentItemListener = onClickContentItemListener;
     }
+
     @Override
     public int getCount() {
         return list.size();
@@ -43,12 +46,12 @@ public class BuildingAdapter extends BaseAdapter  {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null){
+        if (convertView == null) {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.building_item, null);
             holder.content = (TextView) convertView.findViewById(R.id.building_item_text);
             convertView.setTag(holder);
-        }else {
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
         Building building = list.get(position);
@@ -58,7 +61,7 @@ public class BuildingAdapter extends BaseAdapter  {
     }
 
 
-    class ViewHolder{
+    class ViewHolder {
         TextView content;
 
     }

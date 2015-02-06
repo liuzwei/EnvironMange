@@ -32,16 +32,16 @@ import java.util.List;
  * author: ${zhanghailong}
  * Date: 2014/12/12
  * Time: 15:17
- * 类的功能、说明写在此处.
+ * 教学公共区域
  */
-public class JiaoxuepublicActivity extends BaseActivity implements View.OnClickListener{
+public class JiaoxuepublicActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = JiaoxuelouActivity.class.getSimpleName();
 
     private Spinner teachBuilding;//选择教学楼
     private List<Building> buildingList = new ArrayList<Building>();//取回来的建筑物数据存放在这
     private List<String> buildingNames = new ArrayList<String>();//存放建筑物的名字
 
-    ArrayAdapter<String> teachBuildingAdapter ;
+    ArrayAdapter<String> teachBuildingAdapter;
 
     private ListView areaListView;
     private TeachBuildingAreaAdapter areaAdapter;//展示某楼层的区域
@@ -49,6 +49,7 @@ public class JiaoxuepublicActivity extends BaseActivity implements View.OnClickL
     private String buildingName;
     private String buildingID;
     private ImageView back;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.jiaoxuepublic);
@@ -60,7 +61,7 @@ public class JiaoxuepublicActivity extends BaseActivity implements View.OnClickL
     private void initView() {
         back = (ImageView) this.findViewById(R.id.back);
         back.setOnClickListener(this);
-        teachBuildingAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, buildingNames);
+        teachBuildingAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, buildingNames);
         teachBuildingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         teachBuilding = (Spinner) findViewById(R.id.province);
         teachBuilding.setAdapter(teachBuildingAdapter);
@@ -68,10 +69,10 @@ public class JiaoxuepublicActivity extends BaseActivity implements View.OnClickL
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.e(TAG, position + "");
-                if (position>0) {
+                if (position > 0) {
                     areaList.clear();
                     areaAdapter.notifyDataSetChanged();
-                    Building building = buildingList.get(position-1);
+                    Building building = buildingList.get(position - 1);
                     try {
                         //获取选中宿舍楼的区域
                         getArea(building.getID());
@@ -80,7 +81,7 @@ public class JiaoxuepublicActivity extends BaseActivity implements View.OnClickL
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }else {
+                } else {
                     areaList.clear();
                     areaAdapter.notifyDataSetChanged();
                 }
@@ -101,7 +102,7 @@ public class JiaoxuepublicActivity extends BaseActivity implements View.OnClickL
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //获取检查项目
-                SanitationArea area =  areaList.get(position);
+                SanitationArea area = areaList.get(position);
                 try {
                     checkIsScore(area);
                 } catch (Exception e) {
@@ -113,7 +114,7 @@ public class JiaoxuepublicActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.back:
                 finish();
                 break;
@@ -133,25 +134,25 @@ public class JiaoxuepublicActivity extends BaseActivity implements View.OnClickL
     }
 
     //弹出顶部主菜单
-    public void onTopMenuPopupButtonClick(View view){
+    public void onTopMenuPopupButtonClick(View view) {
         mainPopMenu.showAsDropDown(view);
     }
 
     /**
      * 获取建筑物信息
      */
-    private void getBuildings(){
+    private void getBuildings() {
         getFinalHttp().post(
                 InternetURL.GET_BUILDING_URL_PUBLIC,
-                new AjaxCallBack<Object>(){
+                new AjaxCallBack<Object>() {
                     @Override
                     public void onSuccess(Object o) {
                         try {
                             JSONArray array = new JSONArray(o.toString());
-                            for (int i=0; i<array.length(); i++){
+                            for (int i = 0; i < array.length(); i++) {
                                 Building building = getGson().fromJson(String.valueOf(array.getJSONObject(i)), Building.class);
                                 buildingList.add(building);
-                                if (i==0){
+                                if (i == 0) {
                                     buildingNames.add("请选择教学楼楼");
                                 }
                                 buildingNames.add(building.getMC());
@@ -173,8 +174,9 @@ public class JiaoxuepublicActivity extends BaseActivity implements View.OnClickL
     }
 
     /**
-     *  获取某个教学楼的公共卫生区域
-     * @param buildingID  建筑物ID
+     * 获取某个教学楼的公共卫生区域
+     *
+     * @param buildingID 建筑物ID
      */
     private void getArea(String buildingID) throws JSONException, UnsupportedEncodingException {
         JSONObject object = new JSONObject();
@@ -191,7 +193,7 @@ public class JiaoxuepublicActivity extends BaseActivity implements View.OnClickL
                         super.onSuccess(o);
                         try {
                             JSONArray array = new JSONArray(o.toString());
-                            for (int i=0; i<array.length(); i++){
+                            for (int i = 0; i < array.length(); i++) {
                                 areaList.add(getGson().fromJson(array.getJSONObject(i).toString(), SanitationArea.class));
                             }
                             areaAdapter.notifyDataSetChanged();
@@ -210,21 +212,21 @@ public class JiaoxuepublicActivity extends BaseActivity implements View.OnClickL
         );
     }
 
-    public void registerBoradcastReceiver(){
+    public void registerBoradcastReceiver() {
         IntentFilter myIntentFilter = new IntentFilter();
         myIntentFilter.addAction(Constants.BROADCAST);
         registerReceiver(mBroadcastReceiver, myIntentFilter);
     }
 
-    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver(){
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if(action.equals(Constants.BROADCAST)){
+            if (action.equals(Constants.BROADCAST)) {
                 boolean isSave = intent.getBooleanExtra("isSave", true);
                 if (isSave) {
                     Toast.makeText(mContext, "保存成功", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     Toast.makeText(mContext, "提交成功", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -240,15 +242,16 @@ public class JiaoxuepublicActivity extends BaseActivity implements View.OnClickL
 
     /**
      * 检查该区域是否可以打分
+     *
      * @param area
      * @throws UnsupportedEncodingException
      * @throws JSONException
      */
-    private void  checkIsScore(final SanitationArea area) throws UnsupportedEncodingException, JSONException {
+    private void checkIsScore(final SanitationArea area) throws UnsupportedEncodingException, JSONException {
         JSONObject object = new JSONObject();
         object.put("areaid", area.getID());
         object.put("pbid", area.getPbid());
-        if (StringUtil.isNullOrEmpty(area.getPbid())){
+        if (StringUtil.isNullOrEmpty(area.getPbid())) {
             return;
         }
         StringEntity entity = new StringEntity(object.toString());
@@ -261,13 +264,13 @@ public class JiaoxuepublicActivity extends BaseActivity implements View.OnClickL
                     @Override
                     public void onSuccess(Object o) {
                         super.onSuccess(o);
-                        if ("true".equals(o.toString())){
+                        if ("true".equals(o.toString())) {
                             Intent score = new Intent(JiaoxuepublicActivity.this, ScoreActivity.class);
                             score.putExtra("areaID", area.getID());
                             score.putExtra("pbid", area.getPbid());
-                            score.putExtra("titleName", buildingName + " " + area.getMc() );
+                            score.putExtra("titleName", buildingName + " " + area.getMc());
                             startActivity(score);
-                        }else {
+                        } else {
                             Toast.makeText(mContext, R.string.not_df, Toast.LENGTH_SHORT).show();
                         }
                     }

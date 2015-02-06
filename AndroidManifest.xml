@@ -22,15 +22,20 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.MainBuildingsActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation"/>
-        <activity android:name=".ui.FloorSelectActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation"/>
-        <activity android:name=".ui.AreaActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation"/>
-        <activity android:name=".ui.ScoreActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation"/>
+        <activity android:name=".ui.MainBuildingsActivity" android:screenOrientation="portrait"
+                  android:configChanges="keyboardHidden|orientation"/>
+        <activity android:name=".ui.FloorSelectActivity" android:screenOrientation="portrait"
+                  android:configChanges="keyboardHidden|orientation"/>
+        <activity android:name=".ui.AreaActivity" android:screenOrientation="portrait"
+                  android:configChanges="keyboardHidden|orientation"/>
+        <activity android:name=".ui.ScoreActivity" android:screenOrientation="portrait"
+                  android:configChanges="keyboardHidden|orientation"/>
         <activity android:name=".ui.IndexActivity"
                   android:launchMode="singleTask"
                   android:screenOrientation="portrait"
                   android:configChanges="keyboardHidden|orientation"/>
-        <activity android:name=".ui.CenterActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation"/>
+        <activity android:name=".ui.CenterActivity" android:screenOrientation="portrait"
+                  android:configChanges="keyboardHidden|orientation"/>
         <activity android:name=".ui.SettingActivity"
                   android:launchMode="singleTask"
                   android:screenOrientation="portrait"
@@ -58,9 +63,12 @@
                   android:launchMode="singleTask"
                   android:screenOrientation="portrait"
                   android:configChanges="keyboardHidden|orientation"/>
-        <activity android:name=".ui.ModifyScoreActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation"/>
-        <activity android:name=".ui.ScoreDetailActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation"/>
-        <activity android:name=".ui.UpdatePassActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation"/>
+        <activity android:name=".ui.ModifyScoreActivity" android:screenOrientation="portrait"
+                  android:configChanges="keyboardHidden|orientation"/>
+        <activity android:name=".ui.ScoreDetailActivity" android:screenOrientation="portrait"
+                  android:configChanges="keyboardHidden|orientation"/>
+        <activity android:name=".ui.UpdatePassActivity" android:screenOrientation="portrait"
+                  android:configChanges="keyboardHidden|orientation"/>
         <activity android:name=".ui.PersonsActivity"
                   android:launchMode="singleTask"
                   android:screenOrientation="portrait"
@@ -71,7 +79,8 @@
         <!-- 友盟自动更新 -->
         <service android:name="com.umeng.update.net.DownloadingService" android:process=":DownloadingService">
         </service>
-        <activity android:name="com.umeng.update.UpdateDialogActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        <activity android:name="com.umeng.update.UpdateDialogActivity"
+                  android:theme="@android:style/Theme.Translucent.NoTitleBar">
         </activity>
 
     </application>

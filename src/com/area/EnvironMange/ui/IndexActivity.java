@@ -29,7 +29,7 @@ import java.util.List;
  * author: ${zhanghailong}
  * Date: 2014/12/10
  * Time: 14:29
- * 类的功能、说明写在此处.
+ * 已打分
  */
 public class IndexActivity extends BaseActivity implements View.OnClickListener, OnClickContentItemListener, DateBackListener {
     private List<SanitationAreaAssessment> list = new ArrayList<SanitationAreaAssessment>();
@@ -94,16 +94,16 @@ public class IndexActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.back:
                 finish();
                 break;
             case R.id.mybuildscore_search://点击搜索按钮
-                if (StringUtil.isNullOrEmpty(beginET.getText().toString())){
+                if (StringUtil.isNullOrEmpty(beginET.getText().toString())) {
                     Toast.makeText(mContext, "请选择开始时间", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (StringUtil.isNullOrEmpty(endET.getText().toString())){
+                if (StringUtil.isNullOrEmpty(endET.getText().toString())) {
                     Toast.makeText(mContext, "请选择结束时间", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -116,19 +116,21 @@ public class IndexActivity extends BaseActivity implements View.OnClickListener,
                 break;
         }
     }
+
     //弹出顶部主菜单
-    public void onTopMenuPopupButtonClick(View view){
+    public void onTopMenuPopupButtonClick(View view) {
         mainPopMenu.showAsDropDown(view);
     }
 
     SanitationAreaAssessment assessment = null;
+
     @Override
     public void onClickContentItem(int position, int flag, final Object object) {
         assessment = list.get(position);
-        switch (flag){
+        switch (flag) {
             case 1:
                 SanitationAreaAssessment asm = list.get(position);
-                Intent intent = new Intent(IndexActivity.this, ScoreDetailActivity.class );
+                Intent intent = new Intent(IndexActivity.this, ScoreDetailActivity.class);
                 intent.putExtra("assessmentID", asm.getID());
                 intent.putExtra("beizhu", asm.getBz());
                 startActivity(intent);
@@ -156,16 +158,16 @@ public class IndexActivity extends BaseActivity implements View.OnClickListener,
                         super.onSuccess(o);
                         try {
                             JSONArray array = new JSONArray(o.toString());
-                            if (array.length()==0){
+                            if (array.length() == 0) {
                                 Toast.makeText(mContext, "没有查询到数据", Toast.LENGTH_SHORT).show();
-                            }else {
+                            } else {
                                 for (int i = 0; i < array.length(); i++) {
                                     SanitationAreaAssessment asm = getGson().fromJson(String.valueOf(array.getJSONObject(i)), SanitationAreaAssessment.class);
                                     list.add(asm);
                                 }
                             }
                             adapter.notifyDataSetChanged();
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -181,15 +183,15 @@ public class IndexActivity extends BaseActivity implements View.OnClickListener,
     @Override
     public void backTime(String date, boolean isStart) {
 
-        if (isStart){
+        if (isStart) {
             beginTime = date;
-        }else {
+        } else {
             endTime = date;
         }
         beginET.setText(beginTime);
         endET.setText(endTime);
 
-        if (StringUtil.isNullOrEmpty(beginET.getText().toString())){
+        if (StringUtil.isNullOrEmpty(beginET.getText().toString())) {
             Toast.makeText(mContext, "请先选择开始时间", Toast.LENGTH_SHORT).show();
             endET.setText("");
             return;

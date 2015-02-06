@@ -13,12 +13,13 @@ import com.area.EnvironMange.base.BaseActivity;
  * author: ${zhanghailong}
  * Date: 2014/12/10
  * Time: 12:23
- * 类的功能、说明写在此处.
+ * 卫生区域
  */
 public class AreaActivity extends BaseActivity implements View.OnClickListener {
     private LinearLayout areaone;
     private LinearLayout areatwo;
     private ImageView back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,22 +38,22 @@ public class AreaActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-            switch (v.getId())
-            {
-                case R.id.areaone:
-                    Toast.makeText(mContext, "已经打分，请选择下一项", Toast.LENGTH_SHORT).show();
-                    break;
-                case R.id.back:
-                    finish();
-                    break;
-                case R.id.areatwo:
-                    Intent score = new Intent(this, ScoreActivity.class);
-                    startActivity(score);
-                    break;
-            }
+        switch (v.getId()) {
+            case R.id.areaone:
+                Toast.makeText(mContext, "已经打分，请选择下一项", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.back:
+                finish();
+                break;
+            case R.id.areatwo:
+                Intent score = new Intent(this, ScoreActivity.class);
+                startActivity(score);
+                break;
+        }
     }
+
     //弹出顶部主菜单
-    public void onTopMenuPopupButtonClick(View view){
+    public void onTopMenuPopupButtonClick(View view) {
         mainPopMenu.showAsDropDown(view);
     }
 }

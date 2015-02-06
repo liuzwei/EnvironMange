@@ -49,17 +49,15 @@
                   android:id="@+id/areaone"
             >
 
-     <Spinner
-        android:id="@+id/province"
-        android:layout_height="45dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="7px"
-        android:drawSelectorOnTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_width="fill_parent"></Spinner>
-
-
+        <Spinner
+                android:id="@+id/province"
+                android:layout_height="45dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="7px"
+                android:drawSelectorOnTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="fill_parent"></Spinner>
 
 
     </LinearLayout>
@@ -95,106 +93,104 @@
                   android:layout_height="wrap_content">
 
 
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:orientation="horizontal"
+                      android:padding="10dp"
+                      android:id="@+id/areatwo"
+                >
+            <TextView android:layout_width="280dp" android:layout_height="wrap_content"
+                      android:text="E302"
+                      android:id="@+id/titleitem"
+                      android:textSize="20sp"
+                      android:textColor="#999999"/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="备注"
+                      android:textSize="20sp"
+                      android:id="@+id/beizhu"
+                      android:textColor="#999999"/>
+        </LinearLayout>
+        <View android:layout_width="match_parent"
+              android:layout_height="0.1dp"
+              android:background="#d1d1d1"
+              android:layout_marginBottom="10dp"/>
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:orientation="horizontal"
+                      android:padding="10dp"
+                >
+            <TextView android:layout_width="280dp" android:layout_height="wrap_content"
+                      android:text="E303"
+                      android:textSize="20sp"
+                      android:textColor="#999999"/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="备注"
+                      android:textSize="20sp"
+                      android:textColor="#999999"/>
 
+        </LinearLayout>
+        <View android:layout_width="match_parent"
+              android:layout_height="0.1dp"
+              android:background="#d1d1d1"
+              android:layout_marginBottom="10dp"/>
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:orientation="horizontal"
+                      android:padding="10dp"
+                >
+            <TextView android:layout_width="280dp" android:layout_height="wrap_content"
+                      android:text="E304"
+                      android:textSize="20sp"
+                      android:textColor="#999999"/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="备注"
+                      android:textSize="20sp"
+                      android:textColor="#999999"/>
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:orientation="horizontal"
-                  android:padding="10dp"
-                  android:id="@+id/areatwo"
-            >
-        <TextView android:layout_width="280dp" android:layout_height="wrap_content"
-                  android:text="E302"
-                  android:id="@+id/titleitem"
-                  android:textSize="20sp"
-                  android:textColor="#999999"/>
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="备注"
-                  android:textSize="20sp"
-                  android:id="@+id/beizhu"
-                  android:textColor="#999999"/>
-    </LinearLayout>
-    <View android:layout_width="match_parent"
-          android:layout_height="0.1dp"
-          android:background="#d1d1d1"
-          android:layout_marginBottom="10dp"/>
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:orientation="horizontal"
-                  android:padding="10dp"
-            >
-        <TextView android:layout_width="280dp" android:layout_height="wrap_content"
-                  android:text="E303"
-                  android:textSize="20sp"
-                  android:textColor="#999999"/>
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="备注"
-                  android:textSize="20sp"
-                  android:textColor="#999999"/>
+        </LinearLayout>
+        <View android:layout_width="match_parent"
+              android:layout_height="0.1dp"
+              android:background="#d1d1d1"
+              android:layout_marginBottom="10dp"/>
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:orientation="horizontal"
+                      android:padding="10dp"
+                >
+            <TextView android:layout_width="280dp" android:layout_height="wrap_content"
+                      android:text="E305"
+                      android:textSize="20sp"
+                      android:textColor="#999999"/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="备注"
+                      android:textSize="20sp"
+                      android:textColor="#999999"/>
 
-    </LinearLayout>
-    <View android:layout_width="match_parent"
-          android:layout_height="0.1dp"
-          android:background="#d1d1d1"
-          android:layout_marginBottom="10dp"/>
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:orientation="horizontal"
-                  android:padding="10dp"
-            >
-        <TextView android:layout_width="280dp" android:layout_height="wrap_content"
-                  android:text="E304"
-                  android:textSize="20sp"
-                  android:textColor="#999999"/>
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="备注"
-                  android:textSize="20sp"
-                  android:textColor="#999999"/>
+        </LinearLayout>
+        <View android:layout_width="match_parent"
+              android:layout_height="0.1dp"
+              android:background="#d1d1d1"
+              android:layout_marginBottom="10dp"/>
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:orientation="horizontal"
+                      android:padding="10dp"
+                >
+            <TextView android:layout_width="280dp" android:layout_height="wrap_content"
+                      android:text="E306"
+                      android:textSize="20sp"
+                      android:textColor="#999999"/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="备注"
+                      android:textSize="20sp"
+                      android:textColor="#999999"/>
 
-    </LinearLayout>
-    <View android:layout_width="match_parent"
-          android:layout_height="0.1dp"
-          android:background="#d1d1d1"
-          android:layout_marginBottom="10dp"/>
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:orientation="horizontal"
-                  android:padding="10dp"
-            >
-        <TextView android:layout_width="280dp" android:layout_height="wrap_content"
-                  android:text="E305"
-                  android:textSize="20sp"
-                  android:textColor="#999999"/>
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="备注"
-                  android:textSize="20sp"
-                  android:textColor="#999999"/>
-
-    </LinearLayout>
-    <View android:layout_width="match_parent"
-          android:layout_height="0.1dp"
-          android:background="#d1d1d1"
-          android:layout_marginBottom="10dp"/>
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:orientation="horizontal"
-                  android:padding="10dp"
-            >
-        <TextView android:layout_width="280dp" android:layout_height="wrap_content"
-                  android:text="E306"
-                  android:textSize="20sp"
-                  android:textColor="#999999"/>
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="备注"
-                  android:textSize="20sp"
-                  android:textColor="#999999"/>
-
-    </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -25,17 +25,17 @@ import java.util.List;
  * Time: 15:39
  * 类的功能、说明写在此处.
  */
-public class SaveScoreDialog extends Dialog implements View.OnClickListener{
+public class SaveScoreDialog extends Dialog implements View.OnClickListener {
     private Context context;
     private EditText number;
     private Button sure;
     private Button cancle;
     private TextView title;
     List<SanitationAreaAssessment> list;
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
 
             }
             super.handleMessage(msg);
@@ -43,7 +43,7 @@ public class SaveScoreDialog extends Dialog implements View.OnClickListener{
     };
 
     public SaveScoreDialog(List<SanitationAreaAssessment> list, Context context, int them) {
-        super(context,them);
+        super(context, them);
         this.context = context;
         this.list = list;
     }
@@ -55,7 +55,7 @@ public class SaveScoreDialog extends Dialog implements View.OnClickListener{
         initView();
     }
 
-    private void initView(){
+    private void initView() {
         sure = (Button) this.findViewById(R.id.sure);
         sure.setOnClickListener(this);
         cancle = (Button) this.findViewById(R.id.cancle);
@@ -66,7 +66,7 @@ public class SaveScoreDialog extends Dialog implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.sure:
                 Toast.makeText(context, "提交打分成功", Toast.LENGTH_SHORT).show();
                 SaveScoreDialog.this.dismiss();

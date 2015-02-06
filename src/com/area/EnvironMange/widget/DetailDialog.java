@@ -19,15 +19,15 @@ import com.area.EnvironMange.model.SanitationAreaAssessment;
  * Time: 15:39
  * 类的功能、说明写在此处.
  */
-public class DetailDialog extends Dialog implements View.OnClickListener{
+public class DetailDialog extends Dialog implements View.OnClickListener {
     private Context context;
     private Button sure;
     private TextView title;
     private SanitationAreaAssessment assessment;
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
 
             }
             super.handleMessage(msg);
@@ -35,7 +35,7 @@ public class DetailDialog extends Dialog implements View.OnClickListener{
     };
 
     public DetailDialog(SanitationAreaAssessment assessment, Context context, int them) {
-        super(context,them);
+        super(context, them);
         this.context = context;
         this.assessment = assessment;
     }
@@ -48,12 +48,11 @@ public class DetailDialog extends Dialog implements View.OnClickListener{
 
     }
 
-    private void initView(){
+    private void initView() {
 //        number = (EditText) findViewById(R.id.number);
         title = (TextView) findViewById(R.id.title);
         sure = (Button) this.findViewById(R.id.sure);
         sure.setOnClickListener(this);
-
 
 
     }
@@ -61,7 +60,7 @@ public class DetailDialog extends Dialog implements View.OnClickListener{
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.sure:
                 DetailDialog.this.dismiss();
                 break;

@@ -32,15 +32,16 @@ import java.util.List;
  * author: ${zhanghailong}
  * Date: 2014/12/12
  * Time: 15:17
- * 类的功能、说明写在此处.
+ * 户外区域
  */
-public class OutdoorActivity extends BaseActivity implements View.OnClickListener{
+public class OutdoorActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = JiaoxuelouActivity.class.getSimpleName();
 
     private ListView areaListView;
     private TeachBuildingAreaAdapter areaAdapter;//展示某楼层的区域
     private List<SanitationArea> areaList = new ArrayList<SanitationArea>();
     private ImageView back;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.building_layout);
@@ -58,7 +59,6 @@ public class OutdoorActivity extends BaseActivity implements View.OnClickListene
         back.setOnClickListener(this);
 
 
-
         areaListView = (ListView) this.findViewById(R.id.building_lsv);
         areaAdapter = new TeachBuildingAreaAdapter(areaList, mContext);
         areaListView.setAdapter(areaAdapter);
@@ -67,7 +67,7 @@ public class OutdoorActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //获取检查项目
-                SanitationArea area =  areaList.get(position);
+                SanitationArea area = areaList.get(position);
                 try {
                     checkIsScore(area);
                 } catch (Exception e) {
@@ -79,7 +79,7 @@ public class OutdoorActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.back:
                 finish();
                 break;
@@ -99,11 +99,12 @@ public class OutdoorActivity extends BaseActivity implements View.OnClickListene
     }
 
     //弹出顶部主菜单
-    public void onTopMenuPopupButtonClick(View view){
+    public void onTopMenuPopupButtonClick(View view) {
         mainPopMenu.showAsDropDown(view);
     }
+
     /**
-     *  获取户外区域
+     * 获取户外区域
      */
     private void getArea() throws JSONException, UnsupportedEncodingException {
         JSONObject object = new JSONObject();
@@ -119,7 +120,7 @@ public class OutdoorActivity extends BaseActivity implements View.OnClickListene
                         super.onSuccess(o);
                         try {
                             JSONArray array = new JSONArray(o.toString());
-                            for (int i=0; i<array.length(); i++){
+                            for (int i = 0; i < array.length(); i++) {
                                 areaList.add(getGson().fromJson(array.getJSONObject(i).toString(), SanitationArea.class));
                             }
                             areaAdapter.notifyDataSetChanged();
@@ -136,21 +137,21 @@ public class OutdoorActivity extends BaseActivity implements View.OnClickListene
         );
     }
 
-    public void registerBoradcastReceiver(){
+    public void registerBoradcastReceiver() {
         IntentFilter myIntentFilter = new IntentFilter();
         myIntentFilter.addAction(Constants.BROADCAST);
         registerReceiver(mBroadcastReceiver, myIntentFilter);
     }
 
-    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver(){
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if(action.equals(Constants.BROADCAST)){
+            if (action.equals(Constants.BROADCAST)) {
                 boolean isSave = intent.getBooleanExtra("isSave", true);
                 if (isSave) {
                     Toast.makeText(mContext, "保存成功", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     Toast.makeText(mContext, "提交成功", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -166,15 +167,16 @@ public class OutdoorActivity extends BaseActivity implements View.OnClickListene
 
     /**
      * 检查该区域是否可以打分
+     *
      * @param area
      * @throws UnsupportedEncodingException
      * @throws JSONException
      */
-    private void  checkIsScore(final SanitationArea area) throws UnsupportedEncodingException, JSONException {
+    private void checkIsScore(final SanitationArea area) throws UnsupportedEncodingException, JSONException {
         JSONObject object = new JSONObject();
         object.put("areaid", area.getID());
         object.put("pbid", area.getPbid());
-        if (StringUtil.isNullOrEmpty(area.getPbid())){
+        if (StringUtil.isNullOrEmpty(area.getPbid())) {
             return;
         }
         StringEntity entity = new StringEntity(object.toString());
@@ -187,13 +189,13 @@ public class OutdoorActivity extends BaseActivity implements View.OnClickListene
                     @Override
                     public void onSuccess(Object o) {
                         super.onSuccess(o);
-                        if ("true".equals(o.toString())){
+                        if ("true".equals(o.toString())) {
                             Intent score = new Intent(OutdoorActivity.this, ScoreActivity.class);
                             score.putExtra("areaID", area.getID());
-                            score.putExtra("titleName",   area.getMc() );
+                            score.putExtra("titleName", area.getMc());
                             score.putExtra("pbid", area.getPbid());
                             startActivity(score);
-                        }else {
+                        } else {
                             Toast.makeText(mContext, R.string.not_df, Toast.LENGTH_SHORT).show();
                         }
                     }

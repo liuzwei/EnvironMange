@@ -32,18 +32,18 @@
                 android:layout_centerVertical="true"
                 />
         <com.area.EnvironMange.util.XCRoundImageView
-                   android:layout_width="40dp"
-                   android:layout_height="40dp"
-                   android:src="@drawable/selecticon"
-                   android:layout_alignParentRight="true"
-                   android:paddingRight="15dp"
-                   android:paddingLeft="10dp"
-                   android:layout_marginTop="5dp"
-                   android:layout_marginRight="55dp"
-                   android:layout_marginBottom="5dp"
-                   android:id="@+id/saveall"
-                   android:background="@drawable/top_back_select"
-                   />
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/selecticon"
+                android:layout_alignParentRight="true"
+                android:paddingRight="15dp"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="55dp"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/saveall"
+                android:background="@drawable/top_back_select"
+                />
 
         <ImageView android:layout_width="wrap_content" android:layout_height="match_parent"
                    android:src="@drawable/ceshi_03"

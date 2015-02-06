@@ -16,17 +16,18 @@ import net.tsz.afinal.FinalHttp;
 /**
  * Created by liuzwei on 2014/11/11.
  */
-public class BaseActivity extends Activity implements MainPopMenu.OnItemClickListener, View.OnClickListener{
+public class BaseActivity extends Activity implements MainPopMenu.OnItemClickListener, View.OnClickListener {
     public Context mContext;
     public SharedPreferences sp;
     public LayoutInflater inflater;
     public static FinalHttp finalHttp = new FinalHttp();
-    private final  String mPageName = "BaseActivity";
+    private final String mPageName = "BaseActivity";
 
-    private ActivityTack tack= ActivityTack.getInstanse();
+    private ActivityTack tack = ActivityTack.getInstanse();
 
     private Gson gson = new Gson();
     public MainPopMenu mainPopMenu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +53,7 @@ public class BaseActivity extends Activity implements MainPopMenu.OnItemClickLis
     }
 
     //存储sharepreference
-    public void save(String key, Object value){
+    public void save(String key, Object value) {
         SharedPreferences.Editor editor = sp.edit();
         editor.putString(key, gson.toJson(value)).commit();
     }
@@ -62,7 +63,7 @@ public class BaseActivity extends Activity implements MainPopMenu.OnItemClickLis
     }
 
     public static FinalHttp getFinalHttp() {
-        if (finalHttp == null){
+        if (finalHttp == null) {
             finalHttp = new FinalHttp();
         }
         return finalHttp;
@@ -75,19 +76,19 @@ public class BaseActivity extends Activity implements MainPopMenu.OnItemClickLis
 
     @Override
     public void onItemClick(int index) {
-        switch (index){
+        switch (index) {
             case 0://主页
-                Intent myindex = new Intent( this, CenterActivity.class);
+                Intent myindex = new Intent(this, CenterActivity.class);
                 startActivity(myindex);
                 break;
             case 1://教学楼区域
-                Intent vs1 = new Intent(this, cityset.class );
-                vs1.putExtra("name","教学楼区域");
+                Intent vs1 = new Intent(this, cityset.class);
+                vs1.putExtra("name", "教学楼区域");
                 startActivity(vs1);
                 break;
             case 2://教学公共区域
                 Intent vs2 = new Intent(this, cityset.class);
-                vs2.putExtra("name","教学公共区域");
+                vs2.putExtra("name", "教学公共区域");
                 startActivity(vs2);
                 break;
             case 3://宿舍区域
@@ -97,7 +98,7 @@ public class BaseActivity extends Activity implements MainPopMenu.OnItemClickLis
                 break;
             case 4://户外区域
                 Intent vs4 = new Intent(this, cityset.class);
-                vs4.putExtra("name","户外区域");
+                vs4.putExtra("name", "户外区域");
                 startActivity(vs4);
                 break;
             case 5://未提交成绩
@@ -121,9 +122,10 @@ public class BaseActivity extends Activity implements MainPopMenu.OnItemClickLis
 
     /**
      * 根据资源ID
+     *
      * @param resId
      */
-    public void alert(int resId){
+    public void alert(int resId) {
         ToastUtil.show(getApplicationContext(), resId);
     }
 
@@ -134,14 +136,14 @@ public class BaseActivity extends Activity implements MainPopMenu.OnItemClickLis
     @Override
     public void onResume() {
         super.onResume();
-        MobclickAgent.onPageStart( mPageName );
+        MobclickAgent.onPageStart(mPageName);
         MobclickAgent.onResume(mContext);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPageEnd( mPageName );
+        MobclickAgent.onPageEnd(mPageName);
         MobclickAgent.onPause(mContext);
     }
 }

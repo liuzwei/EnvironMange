@@ -35,9 +35,9 @@ import java.util.List;
  * author: ${zhanghailong}
  * Date: 2014/12/12
  * Time: 15:17
- * 类的功能、说明写在此处.
+ * 联系人
  */
-public class PersonsActivity extends BaseActivity implements View.OnClickListener{
+public class PersonsActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = PersonsActivity.class.getSimpleName();
 
     private ListView persons;
@@ -54,7 +54,7 @@ public class PersonsActivity extends BaseActivity implements View.OnClickListene
         try {
             if (PhoneEnvUtil.isNetworkConnected(mContext)) {
                 getPerson();
-            }else {
+            } else {
                 Toast.makeText(mContext, R.string.check_network, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
@@ -80,28 +80,28 @@ public class PersonsActivity extends BaseActivity implements View.OnClickListene
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                 if(!StringUtil.isNullOrEmpty(s.toString())){
-                     deleteContSearch.setVisibility(View.VISIBLE);
-                 }else {
-                     deleteContSearch.setVisibility(View.GONE);
-                 }
+                if (!StringUtil.isNullOrEmpty(s.toString())) {
+                    deleteContSearch.setVisibility(View.VISIBLE);
+                } else {
+                    deleteContSearch.setVisibility(View.GONE);
+                }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 personList.clear();
-                if (!PhoneEnvUtil.isNetworkConnected(mContext)){
+                if (!PhoneEnvUtil.isNetworkConnected(mContext)) {
                     Toast.makeText(mContext, R.string.check_network, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (StringUtil.isNullOrEmpty(s.toString())){
+                if (StringUtil.isNullOrEmpty(s.toString())) {
                     try {
                         //为空的话查询所有人
                         getPerson();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }else {
+                } else {
                     //不为空的话先清空再查找人
                     try {
                         searchByName();
@@ -116,7 +116,7 @@ public class PersonsActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.person_back:
                 finish();
                 break;
@@ -128,9 +128,10 @@ public class PersonsActivity extends BaseActivity implements View.OnClickListene
     }
 
     //弹出顶部主菜单
-    public void onTopMenuPopupButtonClick(View view){
+    public void onTopMenuPopupButtonClick(View view) {
         mainPopMenu.showAsDropDown(view);
     }
+
     /**
      *
      */
@@ -143,7 +144,7 @@ public class PersonsActivity extends BaseActivity implements View.OnClickListene
                         super.onSuccess(o);
                         try {
                             JSONArray array = new JSONArray(o.toString());
-                            for (int i=0; i<array.length(); i++){
+                            for (int i = 0; i < array.length(); i++) {
                                 personList.add(getGson().fromJson(array.getJSONObject(i).toString(), Person.class));
                             }
                             adapter.notifyDataSetChanged();
@@ -179,11 +180,11 @@ public class PersonsActivity extends BaseActivity implements View.OnClickListene
                         super.onSuccess(o);
                         try {
                             JSONArray array = new JSONArray(o.toString());
-                            for (int i=0; i<array.length(); i++){
+                            for (int i = 0; i < array.length(); i++) {
                                 personList.add(getGson().fromJson(array.getJSONObject(i).toString(), Person.class));
                             }
                             adapter.notifyDataSetChanged();
-                            if (array.length() == 0){
+                            if (array.length() == 0) {
                                 Toast.makeText(mContext, R.string.no_person_data, Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {

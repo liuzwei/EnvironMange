@@ -30,7 +30,7 @@ public class Building {
 
     }
 
-    public static Building jsonObject2Object(JSONObject object){
+    public static Building jsonObject2Object(JSONObject object) {
         Building building = new Building();
         try {
             building.setID(object.getString("ID"));

@@ -12,7 +12,9 @@ public class SanitaionAreaAssementItem {
     private float fs;
     private String kfyy;//扣分原因
 
-    public SanitaionAreaAssementItem(){}
+    public SanitaionAreaAssementItem() {
+    }
+
     public SanitaionAreaAssementItem(String projectID, float fs, String kfyy) {
         this.projectID = projectID;
         this.fs = fs;
@@ -58,10 +60,10 @@ public class SanitaionAreaAssementItem {
         this.kfyy = kfyy;
     }
 
-    public static JSONObject fromObject2Json(SanitaionAreaAssementItem sa){
+    public static JSONObject fromObject2Json(SanitaionAreaAssementItem sa) {
         JSONObject object = new JSONObject();
         try {
-            object.put("projectID",sa.getProjectID());
+            object.put("projectID", sa.getProjectID());
             object.put("fs", sa.getFs());
             object.put("kfyy", sa.getKfyy());
             object.put("AsItemID", sa.getAsItemID());

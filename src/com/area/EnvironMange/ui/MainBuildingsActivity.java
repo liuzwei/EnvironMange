@@ -21,13 +21,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by liuzwei on 2014/12/9.
+ * 主建筑物
  */
-public class MainBuildingsActivity extends BaseActivity implements View.OnClickListener{
+public class MainBuildingsActivity extends BaseActivity implements View.OnClickListener {
     private List<Building> list = new ArrayList<Building>();
     private ListView listView;
     private BuildingAdapter adapter;
     private ImageView back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +39,7 @@ public class MainBuildingsActivity extends BaseActivity implements View.OnClickL
         getBuildings();
     }
 
-    private void initView(){
+    private void initView() {
         listView = (ListView) findViewById(R.id.building_lsv);
         adapter = new BuildingAdapter(mContext, list);
         listView.setAdapter(adapter);
@@ -46,7 +47,7 @@ public class MainBuildingsActivity extends BaseActivity implements View.OnClickL
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //点击某一项时触发
-                Intent floor = new Intent(MainBuildingsActivity.this,FloorSelectActivity.class);
+                Intent floor = new Intent(MainBuildingsActivity.this, FloorSelectActivity.class);
                 startActivity(floor);
             }
         });
@@ -54,7 +55,7 @@ public class MainBuildingsActivity extends BaseActivity implements View.OnClickL
         back.setOnClickListener(this);
     }
 
-    private void getBuildings(){
+    private void getBuildings() {
         getFinalHttp().get(
                 InternetURL.GET_BUILDING_URL,
                 new AjaxCallBack<Object>() {
@@ -62,7 +63,7 @@ public class MainBuildingsActivity extends BaseActivity implements View.OnClickL
                     public void onSuccess(Object o) {
                         try {
                             JSONArray array = new JSONArray(o.toString());
-                            for (int i=0; i<array.length(); i++){
+                            for (int i = 0; i < array.length(); i++) {
                                 JSONObject object = array.getJSONObject(i);
                                 list.add(Building.jsonObject2Object(object));
                             }
@@ -81,15 +82,15 @@ public class MainBuildingsActivity extends BaseActivity implements View.OnClickL
                 }
         );
     }
+
     //弹出顶部主菜单
-    public void onTopMenuPopupButtonClick(View view){
+    public void onTopMenuPopupButtonClick(View view) {
         mainPopMenu.showAsDropDown(view);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.back:
                 finish();
                 break;

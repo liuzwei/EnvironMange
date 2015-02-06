@@ -12,7 +12,7 @@ import java.io.UnsupportedEncodingException;
  * Created by liuzwei on 2014/12/9.
  */
 public class Test {
-    public void test(){
+    public void test() {
         String url = "http://222.135.111.86:9009/Service1.svc/SaveProjectFs";
         StringEntity entity = null;
         JSONArray array = new JSONArray();

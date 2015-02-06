@@ -22,7 +22,7 @@ import com.area.EnvironMange.model.MyBuildScore;
  * Time: 15:39
  * 类的功能、说明写在此处.
  */
-public class SelectTimeDialog extends Dialog implements View.OnClickListener{
+public class SelectTimeDialog extends Dialog implements View.OnClickListener {
     private Context context;
     private EditText number;
     private Button sure;
@@ -30,10 +30,10 @@ public class SelectTimeDialog extends Dialog implements View.OnClickListener{
     private TextView title;
     private RequestQueue mRequestQueue;
     private MyBuildScore myBuildScore;
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
 
             }
             super.handleMessage(msg);
@@ -41,7 +41,7 @@ public class SelectTimeDialog extends Dialog implements View.OnClickListener{
     };
 
     public SelectTimeDialog(MyBuildScore myBuildScore, Context context, int them) {
-        super(context,them);
+        super(context, them);
         this.context = context;
         this.myBuildScore = myBuildScore;
     }
@@ -53,7 +53,7 @@ public class SelectTimeDialog extends Dialog implements View.OnClickListener{
         initView();
     }
 
-    private void initView(){
+    private void initView() {
         mRequestQueue = Volley.newRequestQueue(context);
 
         sure = (Button) this.findViewById(R.id.sure);
@@ -66,7 +66,7 @@ public class SelectTimeDialog extends Dialog implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.sure:
                 Toast.makeText(context, "查询成功", Toast.LENGTH_SHORT).show();
                 SelectTimeDialog.this.dismiss();

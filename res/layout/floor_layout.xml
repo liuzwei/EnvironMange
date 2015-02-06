@@ -46,7 +46,7 @@
                   android:orientation="horizontal"
                   android:padding="10dp"
                   android:id="@+id/floorone"
-                  >
+            >
         <TextView android:layout_width="190dp" android:layout_height="wrap_content"
                   android:text="楼层一"
                   android:textSize="20sp"
@@ -61,7 +61,7 @@
                   android:layout_height="wrap_content"
                   android:orientation="horizontal"
                   android:padding="10dp"
-                  >
+            >
         <TextView android:layout_width="190dp" android:layout_height="wrap_content"
                   android:text="楼层二"
                   android:textSize="20sp"
