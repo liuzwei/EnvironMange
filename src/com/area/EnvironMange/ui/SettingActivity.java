@@ -2,6 +2,8 @@ package com.area.EnvironMange.ui;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
@@ -28,6 +30,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     private TextView setting_exit;
     private TextView updatePass;
     private LinearLayout setting_check;//检查更新
+    private LinearLayout check_version;//检查版本
     private ProgressDialog progressDialog;
 
     @Override
@@ -48,6 +51,8 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         updatePass.setOnClickListener(this);
         setting_check = (LinearLayout) this.findViewById(R.id.setting_check);
         setting_check.setOnClickListener(this);
+        check_version = (LinearLayout) this.findViewById(R.id.check_version);
+        check_version.setOnClickListener(this);
     }
 
     @Override
@@ -90,11 +95,28 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                     }
                 });
                 break;
+            case R.id.check_version:
+                try {
+                    String version  = getVersionName();
+                    Toast.makeText(mContext, "当前版本号："+version, Toast.LENGTH_SHORT).show();
+                }catch (Exception e)
+                {
+                }
+                break;
         }
     }
 
     //弹出顶部主菜单
     public void onTopMenuPopupButtonClick(View view) {
         mainPopMenu.showAsDropDown(view);
+    }
+    public String getVersionName() throws Exception
+    {
+        // 获取packagemanager的实例
+        PackageManager packageManager = getPackageManager();
+        // getPackageName()是你当前类的包名，0代表是获取版本信息
+        PackageInfo packInfo = packageManager.getPackageInfo(getPackageName(),0);
+        String version = packInfo.versionName;
+        return version;
     }
 }
