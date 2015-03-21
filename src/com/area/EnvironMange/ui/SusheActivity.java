@@ -251,6 +251,7 @@ public class SusheActivity extends BaseActivity implements View.OnClickListener 
         object.put("areaid", area.getID());
         object.put("pbid", area.getPbid());
         if (StringUtil.isNullOrEmpty(area.getPbid())) {
+            Toast.makeText(mContext, R.string.cannotdf, Toast.LENGTH_SHORT).show();
             return;
         }
         StringEntity entity = new StringEntity(object.toString());
