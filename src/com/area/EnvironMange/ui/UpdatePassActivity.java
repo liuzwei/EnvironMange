@@ -3,10 +3,7 @@ package com.area.EnvironMange.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.*;
 import com.area.EnvironMange.R;
 import com.area.EnvironMange.base.BaseActivity;
 import com.area.EnvironMange.common.InternetURL;
@@ -24,7 +21,7 @@ import java.io.UnsupportedEncodingException;
 public class UpdatePassActivity extends BaseActivity {
     private EditText password;
     private EditText surepass;
-    private Button commit;
+    private TextView commit;
     private ImageView back;
 
     @Override
@@ -36,7 +33,7 @@ public class UpdatePassActivity extends BaseActivity {
 
     private void initView() {
         password = (EditText) this.findViewById(R.id.update_pass_pwd);
-        commit = (Button) this.findViewById(R.id.update_pass_btn);
+        commit = (TextView) this.findViewById(R.id.update_pass_btn);
         commit.setOnClickListener(this);
         back = (ImageView) this.findViewById(R.id.update_back);
         back.setOnClickListener(this);

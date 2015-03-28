@@ -12,6 +12,7 @@ import com.area.EnvironMange.base.Constants;
 import com.area.EnvironMange.common.InternetURL;
 import com.area.EnvironMange.model.SanitaionAreaAssementItem;
 import com.area.EnvironMange.model.SanitaionAreaAssementItemView;
+import com.area.EnvironMange.util.StringUtil;
 import net.tsz.afinal.http.AjaxCallBack;
 import org.apache.http.entity.StringEntity;
 import org.json.JSONArray;
@@ -153,7 +154,10 @@ public class ModifyScoreActivity extends BaseActivity {
         object.put("pbid", SanitaionreaCleanID);
         object.put("bz", beizhu.getText().toString());
         object.put("asmentID", list.get(0).getAreaAssementID());
-
+        if(StringUtil.isNullOrEmpty(SanitaionreaCleanID)){
+            Toast.makeText(mContext, R.string.cannotdf, Toast.LENGTH_SHORT).show();
+            return;
+        }
         StringEntity entity = new StringEntity(object.toString(), "utf-8");
         getFinalHttp().post(
                 url,

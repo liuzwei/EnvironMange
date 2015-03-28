@@ -93,6 +93,7 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
                 }
                 try {
                     //提交分数
+                    sub.setClickable(false);
                     saveProject(array, InternetURL.COMMIT_AREA_SCORE, false);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -182,7 +183,11 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
         object.put("areaID", areaID);
         object.put("pbid", pbid);
         object.put("bz", beizhu.getText().toString());
-
+        if(StringUtil.isNullOrEmpty(pbid)){
+            Toast.makeText(mContext, R.string.cannotdf, Toast.LENGTH_SHORT).show();
+            sub.setClickable(true);
+            return;
+        }
         StringEntity entity = new StringEntity(object.toString(), "utf-8");
         getFinalHttp().post(
                 url,
@@ -197,6 +202,7 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
                             intent.putExtra("isSave", isSave);
                             mContext.sendBroadcast(intent);
                             finish();
+                            sub.setClickable(true);
                         }
                     }
 
@@ -204,6 +210,7 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener 
                     public void onFailure(Throwable t, int errorNo, String strMsg) {
                         super.onFailure(t, errorNo, strMsg);
                         Toast.makeText(mContext, R.string.server_error, Toast.LENGTH_SHORT).show();
+                        sub.setClickable(true);
                     }
                 }
         );
