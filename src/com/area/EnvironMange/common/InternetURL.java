@@ -4,7 +4,7 @@ package com.area.EnvironMange.common;
  * Created by liuzwei on 2014/12/8.
  */
 public class InternetURL {
-    private static String MAIN_URL = "http://222.135.111.86:9009/Service1.svc/";
+    private static String MAIN_URL = "http://123.232.99.156:8082/Service1.svc/";
 
     //登陆接口
     public static String LOGIN_URL = MAIN_URL + "Login";
